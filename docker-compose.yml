@@ -1,0 +1,22 @@
+version: "3"
+services:
+    app:
+        build: ./infrastructure/php
+        volumes: 
+            - ./backend:/work
+
+    web:
+        image: nginx:1.20-alpine
+        ports: 
+            - 8080:80
+        volumes:
+            - ./backend:/work
+            - ./infrastructure/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        working_dir: /work
+
+    db:
+        build: ./infrastructure/mysql
+        volumes:
+            - db-store:/var/lib/mysql
+volumes:
+    db-store:
