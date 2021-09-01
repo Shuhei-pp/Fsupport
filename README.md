@@ -15,6 +15,4 @@ $ docker-compose run app php artisan migrate　# マイグレーション
 
 # 参考にしたサイト
 
-https://qiita.com/ucan-lab/items/56c9dc3cf2e6762672f4  
-  
-https://hsmt-web.com/blog/openweathermap-api/
+https://qiita.com/ucan-lab/items/56c9dc3cf2e6762672f4
