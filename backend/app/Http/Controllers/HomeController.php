@@ -10,7 +10,10 @@ class HomeController extends Controller
     public function index()
     {
         $weather = new GetWeather();
-        $weather->index();
-        return view('home');
+        $weather_info = $weather->index();
+        $current_weather = $weather_info->weather[0]->main;
+        return view('home',[
+            "current_weather" => $current_weather
+        ]);
     }
 }
