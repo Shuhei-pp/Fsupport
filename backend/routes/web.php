@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
 use App\Http\Controllers\HomeController;
-Route::get('/home', [HomeController::class,'index']);
+Route::get('/', [HomeController::class,'index']);
 
 use App\Http\Controllers\AreaController;
 Route::get('/area/{area_zip}',[AreaController::class,'index']);
