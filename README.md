@@ -13,7 +13,7 @@ $ docker-compose run app composer install
 ↓  
 $ docker-compose run app php artisan migrate　# マイグレーション  
   
-# splにデータをダンプ  
+# dbにデータをダンプ  
 $ docker exec -it database_container bash  
 ↓  
 $ mysql -u phper -ppassword laravel_local < /tmp/dmp.sql  
