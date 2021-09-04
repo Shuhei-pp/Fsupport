@@ -11,11 +11,28 @@ $ docker-compose -d up   　　　　　　　　　　 # コンテナの一斉�
 ↓  
 $ docker-compose run app composer install  
 ↓  
-$ docker-compose run app php artisan migrate　# マイグレーション
+$ docker-compose run app php artisan migrate　# マイグレーション  
+  
+# splにデータをダンプ  
+$ docker exec -it database_container bash  
+↓  
+$ mysql -u phper -ppassword laravel_local < /tmp/dmp.sql  
+↓  
+$ exit  
+
 
 # 参考にしたサイト
 
 https://qiita.com/ucan-lab/items/56c9dc3cf2e6762672f4  
 
 # リンク　　
-http://localhost:8080/home
+http://localhost:8080/  
+
+# コマンド集
+
+ログ表示  
+$ docker-compose logs -f 　
+
+コンテナ初期化  
+$ docker-compose down --rmi all --volumes --remove-orphans
+
