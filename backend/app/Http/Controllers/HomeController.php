@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Services\GetWeather;
+
+use App\Models\Area;
 
 use Illuminate\Http\Request;
 
@@ -9,6 +10,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $area_info = Area::all();
+        return view('home',[
+            "area_info" => $area_info
+        ]);
     }
 }
