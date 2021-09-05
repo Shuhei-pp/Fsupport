@@ -7,4 +7,5 @@ ENV MYSQL_DATABASE=laravel_local \
   TZ=Asia/Tokyo
 
 COPY ./my.cnf /etc/my.cnf
+COPY ./dmp.sql /tmp/dmp.sql
 RUN chmod 644 /etc/my.cnf
