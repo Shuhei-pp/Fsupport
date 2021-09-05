@@ -1,4 +1,4 @@
 INSERT INTO `areas` (`bigarea_id`, `middlearea_id`, `area_name`, `area_zip`, `created_at`, `updated_at`) VALUES (1, 1, 'Shinkawa', '950-2102,jp', NOW(), NOW());
 INSERT INTO `areas` (`bigarea_id`, `middlearea_id`, `area_name`, `area_zip`, `created_at`, `updated_at`) VALUES (1, 1, 'Maki', '953-0012,jp', NOW(), NOW());
 INSERT INTO `areas` (`bigarea_id`, `middlearea_id`, `area_name`, `area_zip`, `created_at`, `updated_at`) VALUES (1, 1, 'Seiro', '957-0101,jp', NOW(), NOW());
-INSERT INTO `areas` (`bigarea_id`, `middlearea_id`, `area_name`, `area_zip`, `created_at`, `updated_at`) VALUES (1, 1, 'Murakami', '958-005,jp', NOW(), NOW());
+INSERT INTO `areas` (`bigarea_id`, `middlearea_id`, `area_name`, `area_zip`, `created_at`, `updated_at`) VALUES (1, 1, 'Murakami', '958-0008,jp', NOW(), NOW());
