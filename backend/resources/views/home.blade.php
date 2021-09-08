@@ -1,3 +1,5 @@
+@include('common.head')
+<body>
 @include('common.header')
 <a href="/area/950-2102,jp">Shinkawa</a>
 <?php
@@ -6,3 +8,4 @@
   }
 ?>
 @include('common.footer')
+</body>

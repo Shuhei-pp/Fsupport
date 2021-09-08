@@ -1,3 +1,7 @@
+<head>
+@include('common.head')
+</head>
+
 <body>
   @include('common.header')
   <table border="1px">
