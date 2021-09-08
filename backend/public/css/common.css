@@ -1,3 +1,7 @@
 .header_right{
   float: right;
 }
+
+.header_title{
+  padding: auto 0;
+}

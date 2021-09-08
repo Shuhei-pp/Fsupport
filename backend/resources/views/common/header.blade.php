@@ -1,7 +1,7 @@
 <header>
-  <h1>FI</h1>
+  <h1 class="header_title">FI</h1>
   <div class="header_right">
-    <a><p>Sign in</p></a>
-    <a><p>Sign up</p></a>
-  </div>
+    <button type="button" class="btn btn-primary">Sign in</button>
+    <button type="button" class="btn btn-primary">Sign up</button>
+  </div> 
 </header>
