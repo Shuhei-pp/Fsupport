@@ -16,7 +16,7 @@ class AreaController extends Controller
         $tide = new GetTide();
         $tide_info = $tide->index();
         $Bi = new BiCulculation();
-        $Bi->index($weather_info);
+        $Bi->index($weather_info,$tide_info);
         return view('area_index',[
             "weather_info" => $weather_info
         ]);
