@@ -6,12 +6,12 @@ use App\Models\Area;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class IndexController extends Controller
 {
     public function index()
     {
         $area_info = Area::all();
-        return view('home',[
+        return view('Index',[
             "area_info" => $area_info
         ]);
     }
