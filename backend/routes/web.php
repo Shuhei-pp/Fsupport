@@ -22,3 +22,6 @@ Route::get('/', [HomeController::class,'index']);
 
 use App\Http\Controllers\AreaController;
 Route::get('/area/{area_zip}',[AreaController::class,'index']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
