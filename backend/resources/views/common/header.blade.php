@@ -1,5 +1,5 @@
 <header>
-  <h1 class="header_title">FI</h1>
+  <h1>FI</h1>
   <div class="header_right">
     <button type="button" class="btn btn-primary">Sign in</button>
     <button type="button" class="btn btn-primary">Sign up</button>
