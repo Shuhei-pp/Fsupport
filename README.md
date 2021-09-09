@@ -20,13 +20,13 @@ $ mysql -u phper -ppassword laravel_local < /tmp/dmp.sql
 ↓  
 $ exit  
 
-# 命名規則　　
+# 命名規則　　  
 命名規則にはコーディング規約PSRを使用します。  
 
-クラス名:パスカルケース  
-クラス定数:コンタクトケース  
-関数:キャメルケース  
-それ以外の変数:スネークケース
+>クラス名:パスカルケース  
+>クラス定数:コンタクトケース  
+>関数:キャメルケース  
+>それ以外の変数:スネークケース
   
 ```
 class ClassName
@@ -48,9 +48,13 @@ http://localhost:8080/
 
 # コマンド集
 
-ログ表示  
-$ docker-compose logs -f 　
+>ログ表示  
+>$ docker-compose logs -f 　
 
-コンテナ初期化  
-$ docker-compose down --rmi all --volumes --remove-orphans
+>コンテナ初期化  
+>$ docker-compose down --rmi all --volumes --remove-orphans  
+  
+> PHPStanによる静的解析  
+> (appコンテナ内)  
+> $ vendor/bin/phpstan analyse 'file/dir' 
 
