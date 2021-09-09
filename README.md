@@ -9,7 +9,7 @@ $ docker-compose build 　                  # コンテナをビルド
 ↓  
 $ docker-compose -d up   　　　　　　　　　　 # コンテナの一斉起動  
 ↓  
-$ docker-compose run app composer install  
+$ docker-compose run app composer install # composer install  
 ↓  
 $ docker-compose run app php artisan migrate　# マイグレーション  
   
@@ -20,6 +20,23 @@ $ mysql -u phper -ppassword laravel_local < /tmp/dmp.sql
 ↓  
 $ exit  
 
+# 命名規則　　
+命名規則にはコーディング規約PSRを使用します。　　
+クラス名:パスカルケース　　
+クラス定数:コンタクトケース  
+関数:キャメルケース  
+それ以外の変数:スネークケース
+  
+```
+class ClassName
+{
+  const TEST_STRING = 1;
+  public function testMethod{
+    $test_id = 10;
+    echo $test_id;
+  }
+}
+```
 
 # 参考にしたサイト
 
