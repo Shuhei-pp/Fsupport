@@ -1,0 +1,13 @@
+header{ 
+  height: 50px;
+}
+
+.header_right{
+  float: right;
+  margin:5px 5px 0 0;
+}
+
+header h1{
+  float: left;
+  padding:5px 0 0 5px;
+}
