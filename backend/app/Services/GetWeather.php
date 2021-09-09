@@ -5,7 +5,7 @@ class GetWeather
 {
   public function index($city_zip)
   {
-    $apiid = env('WEATHER_APP_Id');
+    $apiid = config('app.weather_app_id');
     $url = "http://api.openweathermap.org/data/2.5/forecast?zip=".$city_zip."&units=metric&APPID=".$apiid;
 
     $response = file_get_contents($url);
