@@ -8,20 +8,20 @@
     <tr>
       <th>data</th>
       <?php 
-      for($i=0;$i<8;$i++)
+      for($i=3;$i<11;$i++)
         echo "<th>".$weather_info->list[$i]->dt_txt."</th>";
       ?>
     </tr>
     <tr>
       <td>weather</td>
       <?php 
-      for($i=0;$i<8;$i++)
+      for($i=3;$i<11;$i++)
         echo "<td>".$weather_info->list[$i]->weather[0]->main."</td>";
       ?>
     </tr>
     <tr>
       <td>temp</td>
-      <?php 
+      <?php
       for($i=0;$i<8;$i++)
         echo "<td>".$weather_info->list[$i]->main->temp."</td>";
       ?>
