@@ -12,13 +12,11 @@ class AreaController extends Controller
 
         $weather = new GetWeather();
         $weather_info = $weather->index($area_zip); 
-
         $tide = new GetTide();
         $tide_info = $tide->index();
+
         $Bi = new BiCulculation();
-        $Bi->index($weather_info,$tide_info);
-        return view('area_index',[
-            "weather_info" => $weather_info
-        ]);
+        $tide_heights = $Bi->index($weather_info,$tide_info);
+        return view('area',compact('weather_info','tide_heights'));
     }
 }
