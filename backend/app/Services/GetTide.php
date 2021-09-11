@@ -20,7 +20,7 @@ class GetTide
     return $decord_response;
   }
 
-  public function setTide($weather_info,$tide_info)
+  public function setTide($tide_info)
   {
     date_default_timezone_set('Asia/Tokyo');
     $today = date("Y-m-d");

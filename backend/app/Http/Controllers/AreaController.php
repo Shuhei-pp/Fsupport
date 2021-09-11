@@ -15,7 +15,7 @@ class AreaController extends Controller
         $tide = new GetTide();
         $tide_info = $tide->getTideJson();
 
-        $tide_heights = $tide->setTide($weather_info,$tide_info);
+        $tide_heights = $tide->setTide($tide_info);
         return view('area',compact('weather_info','tide_heights'));
     }
 }
