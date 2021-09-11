@@ -11,9 +11,9 @@ class AreaController extends Controller
     public function index($area_zip){
 
         $weather = new GetWeather();
-        $weather_info = $weather->index($area_zip); 
+        $weather_info = $weather->getWeatherJson($area_zip); 
         $tide = new GetTide();
-        $tide_info = $tide->index();
+        $tide_info = $tide->getTideJson();
 
         $Bi = new BiCulculation();
         $tide_heights = $Bi->index($weather_info,$tide_info);

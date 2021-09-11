@@ -3,7 +3,7 @@ namespace App\Services;
 
 class GetWeather
 {
-  public function index($city_zip)
+  public function getWeatherJson($city_zip)
   {
     $apiid = config('app.weather_app_id');
     $url = "http://api.openweathermap.org/data/2.5/forecast?zip=".$city_zip."&units=metric&APPID=".$apiid;

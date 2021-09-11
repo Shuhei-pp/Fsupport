@@ -4,7 +4,7 @@ namespace App\Services;
 
 class GetTide
 {
-  public function index(){
+  public function getTideJson(){
     $prefecture_code = "15";
     $harbor_code = "13";
     $y = date("Y");
@@ -18,6 +18,5 @@ class GetTide
     $response = mb_convert_encoding($response,'UTF8');
     $decord_response = json_decode($response);
     return $decord_response;
-  
   }
 }
