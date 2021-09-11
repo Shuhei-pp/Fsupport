@@ -15,7 +15,9 @@ class BigareasTable extends Migration
     {
         Schema::create('bigareas', function(Blueprint $table){
             $table->id();
+            $table->integer('bigarea_id');
             $table->string('bigarea_name');
+            $table->timestamps();
         });
     }
 

@@ -17,6 +17,7 @@ class HarborsTable extends Migration
             $table->id();
             $table->integer('bigarea_id');
             $table->string('harbor_name');
+            $table->timestamps();
         });
     }
 
