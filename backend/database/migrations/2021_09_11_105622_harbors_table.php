@@ -15,6 +15,7 @@ class HarborsTable extends Migration
     {
         Schema::create('harbors', function (Blueprint $table){
             $table->id();
+            $table->integer('bigarea_id');
             $table->string('harbor_name');
         });
     }
