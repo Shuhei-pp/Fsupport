@@ -10,6 +10,13 @@ use App\Models\Area;
 
 class GetTide
 {
+
+  /**
+   * apiを叩くのに必要なパラメータを用意する
+   * 
+   * @param integer $area_id
+   * return object $decord_response
+   */
   public function getTideJson($area_id){
     $prefecture_code = Area::find($area_id)->bigarea_id;
     $harbor_code = Area::find($area_id)->harbor_id;
@@ -21,9 +28,7 @@ class GetTide
     $url = "https://api.tide736.net/get_tide.php?pc=".$prefecture_code."&hc=".$harbor_code."&yr=".$y."&mn=".$m."&dy=".$d."&rg=".$term;
 
     $response = GetApiContents::tryGetContents($url);
-    $response = mb_convert_encoding($response,'UTF8');
-    $decord_response = json_decode($response);
-    return $decord_response;
+    return $response;
   }
 
   public function setTide($tide_info)
