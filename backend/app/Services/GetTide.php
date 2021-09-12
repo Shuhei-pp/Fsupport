@@ -2,25 +2,27 @@
 
 namespace App\Services;
 
+use App\Models\Area;
+
 class GetTide
 {
-  public function getTideJson(){
-    $prefecture_code = "15";
-    $harbor_code = "13";
+  public function getTideJson($area_id){
+    $prefecture_code = Area::find($area_id)->bigarea_id;
+    $harbor_code = Area::find($area_id)->harbor_id;
     $y = date("Y");
     $m = date("m");
     $d = date("d");
     $term = "week";
  
     $url = "https://api.tide736.net/get_tide.php?pc=".$prefecture_code."&hc=".$harbor_code."&yr=".$y."&mn=".$m."&dy=".$d."&rg=".$term;
-    
+
     $response = file_get_contents($url);
     $response = mb_convert_encoding($response,'UTF8');
     $decord_response = json_decode($response);
     return $decord_response;
   }
 
-  public function setTide($weather_info,$tide_info)
+  public function setTide($tide_info)
   {
     date_default_timezone_set('Asia/Tokyo');
     $today = date("Y-m-d");
