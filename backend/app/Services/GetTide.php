@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+//Services
+use App\Services\GetApiContents;
+
+//Models
 use App\Models\Area;
 
 class GetTide
@@ -16,7 +20,7 @@ class GetTide
  
     $url = "https://api.tide736.net/get_tide.php?pc=".$prefecture_code."&hc=".$harbor_code."&yr=".$y."&mn=".$m."&dy=".$d."&rg=".$term;
 
-    $response = file_get_contents($url);
+    $response = GetApiContents::tryGetContents($url);
     $response = mb_convert_encoding($response,'UTF8');
     $decord_response = json_decode($response);
     return $decord_response;
