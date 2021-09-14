@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+//Models
 use App\Models\Area;
 
 // Services
 use App\Services\GetWeather;
 use App\Services\GetTide;
-use App\Services\BiCulculation;
+use App\Services\FiCulculation;
 
 
 use Illuminate\Http\Request;
@@ -26,6 +27,9 @@ class AreaController extends Controller
         $tide_info = $tide->getTideJson($area_id);
 
         $tide_heights = $tide->setTide($tide_info);
+
+        $fi = FiCulculation::setFi($weather_info,$tide_heights);
+
         return view('area',compact('weather_info','tide_heights'));
     }
 }
