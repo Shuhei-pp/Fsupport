@@ -44,7 +44,12 @@ class ClassName
 https://qiita.com/ucan-lab/items/56c9dc3cf2e6762672f4  
 
 # リンク　　
-http://localhost:8080/  
+>Home  
+>http://localhost:8080/  
+  
+>メールボックス  
+http://localhost:8025/  
+
 
 # コマンド集
 
