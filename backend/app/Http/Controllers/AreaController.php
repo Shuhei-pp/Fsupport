@@ -26,8 +26,7 @@ class AreaController extends Controller
 
         $area = Area::find($area_id);
 
-        $weather = new GetWeather();
-        $weather_info = $weather->getWeatherJson($area->area_zip);
+        $weather_info = GetWeather::getWeatherJson($area->area_zip);
 
 
         $tide = new GetTide();
