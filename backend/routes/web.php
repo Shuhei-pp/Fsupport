@@ -18,8 +18,9 @@ Route::get('/welcome', function () {
 });
 
 // check: routeは->name()で名前をつけられる！　viewのURL修正も楽になるから修正しよう
-Route::post('register/pre_check', 'App\Http\Controllers\Auth\RegisterController@preCheck')->name('register.pre_check');
+Route::post('/register/pre_check', 'App\Http\Controllers\Auth\RegisterController@preCheck')->name('register.pre_check');
 
+Route::get('/register/verify/{token}', 'App\Http\Controllers\Auth\RegisterController@showMyPage');
 
 use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class,'index']);
