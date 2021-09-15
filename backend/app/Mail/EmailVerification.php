@@ -32,6 +32,6 @@ class EmailVerification extends Mailable
         return $this
             ->subject('登録完了のお知らせ')
             ->view('auth.email.pre_register')
-            ->with(['token' => $this->user->email_verified_token,]);
+            ->with(['token' => $this->user->email_verify_token,]);
     }
 }
