@@ -17,7 +17,7 @@ class GetTide
    * @param integer $area_id
    * return object $decord_response
    */
-  public function getTideJson($area_id){
+  public static function getTideJson($area_id){
     $prefecture_code = Area::find($area_id)->bigarea_id;
     $harbor_code = Area::find($area_id)->harbor_id;
     $y = date("Y");
@@ -31,7 +31,7 @@ class GetTide
     return $response;
   }
 
-  public function setTide($tide_info)
+  public static function setTide($tide_info)
   {
     date_default_timezone_set('Asia/Tokyo');
     $today = date("Y-m-d");
