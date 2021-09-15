@@ -8,6 +8,14 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
+
+//Mail
+use App\Mail\EmailVerification;
+use Illuminate\Support\Facades\Mail;
+
+//Request
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -50,24 +58,55 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * 登録後、ユーザーのインスタンスを作成し本登録メールを送信
      *
      * @param  array  $data
      * @return \App\Models\User
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user = User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'email_verify_token' => base64_encode($data['email']),
         ]);
+
+        $email = new EmailVerification($user);
+        Mail::to($user->email)->send($email);
+
+        return $user;
+    }
+
+    /**
+     * 仮登録のメールを送信
+     * 
+     * @param Illuminate\Http\Request $request
+     * return view
+     */
+    public function preCheck(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        //sessionへ一時的に保存
+        $request->flashOnly('email');
+
+        $bridge_request = $request->all();
+
+        $bridge_request['password_mask'] = '******';
+
+        return view('auth.register_check')->with($bridge_request);
+    }
+
+    public function register(Request $request)
+    {
+        event(new Registered($user = $this->create( $request->all() )));
+
+        return view('auth.registered');
     }
 }
