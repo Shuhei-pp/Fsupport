@@ -28,11 +28,9 @@ class AreaController extends Controller
 
         $weather_info = GetWeather::getWeatherJson($area->area_zip);
 
+        $tide_info = GetTide::getTideJson($area_id);
 
-        $tide = new GetTide();
-        $tide_info = $tide->getTideJson($area_id);
-
-        $tide_heights = $tide->setTide($tide_info);
+        $tide_heights = GetTide::setTide($tide_info);
 
         $fi = FiCulculation::setFi($weather_info,$tide_heights);
 
