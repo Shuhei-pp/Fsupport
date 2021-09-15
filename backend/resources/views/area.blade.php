@@ -33,6 +33,13 @@
           echo "<td>".$tide_height."</td>";
       ?>
     </tr>
+    <tr>
+      <td>fi</td>
+      <?php
+        foreach($fi as $fi)
+          echo "<td>".$fi."</td>";
+      ?>
+    </tr>
   </table>
   @include('common.footer')
 </body>
