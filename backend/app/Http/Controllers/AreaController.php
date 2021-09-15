@@ -15,6 +15,13 @@ use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
+
+    /**
+     * エリア別のページを表示
+     *
+     * @param interger $area_id
+     * return view
+     */
     public function index($area_id){
 
         $area = Area::find($area_id);
@@ -30,6 +37,6 @@ class AreaController extends Controller
 
         $fi = FiCulculation::setFi($weather_info,$tide_heights);
 
-        return view('area',compact('weather_info','tide_heights'));
+        return view('area',compact('weather_info','tide_heights','fi'));
     }
 }
