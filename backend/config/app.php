@@ -231,4 +231,7 @@ return [
 
     ],
 
+    /* API Key */
+    'weather_app_id' => env('WEATHER_APP_ID'),
+
 ];
