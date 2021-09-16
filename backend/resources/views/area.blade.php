@@ -1,9 +1,6 @@
-<head>
-@include('common.head')
-</head>
+@extends('layouts.app')
 
-<body>
-  @include('common.header')
+@section('content')
   <table border="1px">
     <tr>
       <th>data</th>
@@ -41,5 +38,4 @@
       ?>
     </tr>
   </table>
-  @include('common.footer')
-</body>
+@endsection
