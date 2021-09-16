@@ -131,13 +131,13 @@ class RegisterController extends Controller
     {
         //テーブルに存在するトークンかチェック
         if( !User::where('email_verify_token', $email_token)->exists() ){
-            return view('user.mypage')->with('message', '無効なトークンです。');
+            return view('auth.notice_registered')->with('message', '無効なトークンです。');
         } else {
             $user = User::where('email_verify_token', $email_token)->first();
             if ( $user->auth_status == config('const.USER_STATUS.REGISTER')){
                 //既に登録されていた場合
                 logger('status'.$user->auth_status);
-                return view('user.mypage')->with('messeage', 'すでに登録されています。ログインしてください');
+                return view('auth.notice_registered')->with('messeage', 'すでに登録されています。ログインしてください');
             }
             //テーブルのstatusを更新
             $user->auth_status = config('const.USER_STATUS.MAIL_AUTHED');
@@ -145,9 +145,9 @@ class RegisterController extends Controller
 
             //saveした時の例外時
             if ($user->save()) { 
-                return view('user.mypage', compact('email_token'));
+                return view('auth.notice_registered');
             } else {
-                return view('user.mypage')->with('message', 'メール認証に失敗しました。');
+                return view('auth.notice_registered')->with('message', 'メール認証に失敗しました。');
             }
         }
     }
