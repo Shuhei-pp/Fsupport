@@ -46,3 +46,8 @@
     </div>
   </div>
 @endsection
+
+@section('script')
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ mix('js/chart.js') }}"></script>
+@endsection
