@@ -42,8 +42,10 @@
         </tbody>
       </table>
     </div>
-    <div>
-      <canvas id="myChart"></canvas>
+  </div>
+  <div class="container">
+    <div class="py-3">
+      <canvas id="myChart" class=""></canvas>
     </div>
   </div>
 @endsection
@@ -52,32 +54,24 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     window.onload = function(){
-      const labels = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      ];
+      const labels = @json($info->times);
       const data = {
-      labels: labels,
-      datasets: [{
-          label: 'My First dataset',
+        labels: labels,
+        datasets: [{
+          label: 'Fi(釣果指数)',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
-          data: [0, 10, 5, 2, 20, 30, 45],
-      }]
+          data: @json($info->fi),
+        }]
       };
       const config = {
       type: 'line',
       data: data,
       options: {}
       };
-      console.log (66);
       var myChart = new Chart(
-          document.getElementById('myChart'),
-          config
+        document.getElementById('myChart'),
+        config
       );
     }
   </script>
