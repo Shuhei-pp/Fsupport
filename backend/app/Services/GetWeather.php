@@ -6,18 +6,35 @@ use App\Services\GetApiContents;
 
 //Models
 use App\Models\Area;
+
 class GetWeather
 {
+  protected $area_id;
+  public $data = [];
+  public $temp = [];
+  public $weather = [];
+  public $tide = [];
+  public $fi = [];
+
+  /**
+   * GetWeather Construction
+   * 
+   * @param int $area_id
+   */
+  public function __construct($area_id){
+    $this->area_id = $area_id;
+  }
+
   /**
    * openweatherjsonを叩くためのパラメータを準備
    * 
-   * @param integer $city_zip
    * return object $response
    */
-  public static function getWeatherJson($city_zip)
+  public function getWeatherJson()
   {
+    $city_zip = Area::find($this->area_id)->area_zip;
     $apiid = config('app.weather_app_id');
-    $url = "http://api.openweathermap.org/data/2.5/forecast?zip=".$city_zip."&units=metric&APPID=".$apiid;
+    $url = "http://api.openweathermap.org/data/2.5/forecast?lang=ja&zip=".$city_zip."&units=metric&APPID=".$apiid;
 
     $response = GetApiContents::tryGetContents($url);
     return $response;
@@ -29,10 +46,10 @@ class GetWeather
    * @param integer $area_id
    * return object $response
    */
-  public static function getTideJson($area_id)
+  public  function getTideJson()
   {
-    $prefecture_code = Area::find($area_id)->bigarea_id;
-    $harbor_code = Area::find($area_id)->harbor_id;
+    $prefecture_code = Area::find($this->area_id)->bigarea_id;
+    $harbor_code = Area::find($this->area_id)->harbor_id;
     $y = date("Y");
     $m = date("m");
     $d = date("d");
@@ -47,10 +64,9 @@ class GetWeather
   /**
    * tideが配列ではなくオブジェクト型になっているので配列に変換
    * 
-   * @param object $tide_info
    * return array $every_3hour_tide
    */
-  public static function tideToArray($tide_info)
+  public function tideToArray($tide_info)
   {
     date_default_timezone_set('Asia/Tokyo');
     $today = date("Y-m-d");
@@ -76,6 +92,29 @@ class GetWeather
       $every_3hour_tide[] = $tide_info->tide->chart->$tomorrow->tide[$i*$factor]->cm;
 
     return $every_3hour_tide;
+  }
+
+  /**
+   * 天気、潮の情報をオブジェクトにセット
+   * 
+   * return $this
+   */
+  public function setInfo()
+  {
+    //api呼び出し関数を呼び出し
+    $weather = $this->getWeatherJson();
+    $tide_json = $this->getTideJson();
+    $tide = $this->tideToArray($tide_json);
+
+    //インスタンスに天気情報を詰めていく
+    for($i=0;$i<8;$i++){
+      $timestamp = strtotime($weather->list[$i]->dt_txt)+32400;;
+      $this->times[] = date("m月d日 H時",$timestamp);
+      $this->weather[] = $weather->list[$i]->weather[0]->description;
+      $this->temp[] = $weather->list[$i]->main->temp;
+      $this->tide[] = $tide[$i];
+    }
+    return $this;
   }
 }
 

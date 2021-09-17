@@ -23,16 +23,10 @@ class AreaController extends Controller
      */
     public function index($area_id){
 
-        $area = Area::find($area_id);
+        $weather = new GetWeather($area_id);
 
-        $weather_info = GetWeather::getWeatherJson($area->area_zip);
+        $info = $weather->setInfo();
 
-        $tide_info = GetWeather::getTideJson($area_id);
-
-        $tide_heights = GetWeather::tideToArray($tide_info);
-
-        $fi = FiCulculation::setFi($weather_info,$tide_heights);
-
-        return view('area',compact('weather_info','tide_heights','fi'));
+        return view('area',compact('info'));
     }
 }
