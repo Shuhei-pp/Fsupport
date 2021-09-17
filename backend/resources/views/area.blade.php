@@ -41,5 +41,8 @@
         </tbody>
       </table>
     </div>
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
   </div>
 @endsection
