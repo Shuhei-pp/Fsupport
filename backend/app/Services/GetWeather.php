@@ -46,6 +46,9 @@ class GetWeather
 
   /**
    * tideが配列ではなくオブジェクト型になっているので配列に変換
+   * 
+   * @param object $tide_info
+   * return array $every_3hour_tide
    */
   public static function tideToArray($tide_info)
   {
