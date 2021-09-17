@@ -8,6 +8,12 @@ use App\Services\GetApiContents;
 use App\Models\Area;
 class GetWeather
 {
+  /**
+   * openweatherjsonを叩くためのパラメータを準備
+   * 
+   * @param integer $city_zip
+   * return object $response
+   */
   public static function getWeatherJson($city_zip)
   {
     $apiid = config('app.weather_app_id');
@@ -21,9 +27,10 @@ class GetWeather
    * apiを叩くのに必要なパラメータを用意する
    * 
    * @param integer $area_id
-   * return object $decord_response
+   * return object $response
    */
-  public static function getTideJson($area_id){
+  public static function getTideJson($area_id)
+  {
     $prefecture_code = Area::find($area_id)->bigarea_id;
     $harbor_code = Area::find($area_id)->harbor_id;
     $y = date("Y");
@@ -37,7 +44,10 @@ class GetWeather
     return $response;
   }
 
-  public static function setTide($tide_info)
+  /**
+   * tideが配列ではなくオブジェクト型になっているので配列に変換
+   */
+  public static function tideToArray($tide_info)
   {
     date_default_timezone_set('Asia/Tokyo');
     $today = date("Y-m-d");

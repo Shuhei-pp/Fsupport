@@ -29,7 +29,7 @@ class AreaController extends Controller
 
         $tide_info = GetWeather::getTideJson($area_id);
 
-        $tide_heights = GetWeather::setTide($tide_info);
+        $tide_heights = GetWeather::tideToArray($tide_info);
 
         $fi = FiCulculation::setFi($weather_info,$tide_heights);
 
