@@ -7,7 +7,6 @@ use App\Models\Area;
 
 // Services
 use App\Services\GetWeather;
-use App\Services\GetTide;
 use App\Services\FiCulculation;
 
 
@@ -24,16 +23,10 @@ class AreaController extends Controller
      */
     public function index($area_id){
 
-        $area = Area::find($area_id);
+        $weather = new GetWeather($area_id);
 
-        $weather_info = GetWeather::getWeatherJson($area->area_zip);
+        $info = $weather->setInfo();
 
-        $tide_info = GetTide::getTideJson($area_id);
-
-        $tide_heights = GetTide::setTide($tide_info);
-
-        $fi = FiCulculation::setFi($weather_info,$tide_heights);
-
-        return view('area',compact('weather_info','tide_heights','fi'));
+        return view('area',compact('info'));
     }
 }

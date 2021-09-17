@@ -18,7 +18,7 @@ class FiCulculation
 
     //apiで得た潮の干満(cm)を$every_3hour_tideにセット
     for($i=0;$i<$repeat_times;$i++)
-      $fi[] = $tide[$i]*$weather->list[$i]->wind->speed;
+      $fi[] = round($tide[$i]*$weather->list[$i]->wind->speed);
 
     return $fi;
   }
