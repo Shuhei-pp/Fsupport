@@ -32,6 +32,12 @@
               <td>{{ $tide }}</td>
             <?php }?>
           </tr>
+          <tr>
+            <th>FI</th>
+            <?php foreach($info->fi as $fi) {?>
+              <td>{{ $fi }}</td>
+            <?php }?>
+          </tr>
           
         </tbody>
       </table>

@@ -3,6 +3,7 @@ namespace App\Services;
 
 //Services
 use App\Services\GetApiContents;
+use App\Services\FiCulculation;
 
 //Models
 use App\Models\Area;
@@ -106,6 +107,8 @@ class GetWeather
     $tide_json = $this->getTideJson();
     $tide = $this->tideToArray($tide_json);
 
+    $fi = FiCulculation::setFi($weather,$tide);
+
     //インスタンスに天気情報を詰めていく
     for($i=0;$i<8;$i++){
       $timestamp = strtotime($weather->list[$i]->dt_txt)+32400;;
@@ -113,6 +116,7 @@ class GetWeather
       $this->weather[] = $weather->list[$i]->weather[0]->description;
       $this->temp[] = $weather->list[$i]->main->temp;
       $this->tide[] = $tide[$i];
+      $this->fi[] = $fi[$i];
     }
     return $this;
   }
