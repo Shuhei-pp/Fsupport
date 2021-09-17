@@ -7,7 +7,6 @@ use App\Models\Area;
 
 // Services
 use App\Services\GetWeather;
-use App\Services\GetTide;
 use App\Services\FiCulculation;
 
 
@@ -28,9 +27,9 @@ class AreaController extends Controller
 
         $weather_info = GetWeather::getWeatherJson($area->area_zip);
 
-        $tide_info = GetTide::getTideJson($area_id);
+        $tide_info = GetWeather::getTideJson($area_id);
 
-        $tide_heights = GetTide::setTide($tide_info);
+        $tide_heights = GetWeather::setTide($tide_info);
 
         $fi = FiCulculation::setFi($weather_info,$tide_heights);
 
