@@ -6,7 +6,8 @@ namespace App\Http\Controllers;
 use App\Models\BigArea;
 use App\Models\Area;
 
-// Services
+//Services
+use App\Services\GetApiContents;
 use App\Services\GetWeather;
 
 //Auth
@@ -27,12 +28,18 @@ class AreaController extends Controller
     public function editArea(Request $request)
     {
 
+        $validated = $request->validate([
+            $harbor_code = 'required|integer|between:1:1000',
+            $area_name = 'required|string|max:10',
+            $area_zip = 'required|string|max:8'
+        ]);
+        
         $area = new Area;
 
         $area->bigarea_id = $request->prefecture;
         $area->harbor_id = $request->harbor_code;
         $area->area_name = $request->area_name;
-        $area->area_zip = $request->area_zip;
+        $area->area_zip = $request->area_zip.",jp";
 
         $area->save();
 
