@@ -22,8 +22,8 @@ Route::post('/register/pre_check', 'App\Http\Controllers\Auth\RegisterController
 
 Route::get('/register/verify/{token}', 'App\Http\Controllers\Auth\RegisterController@showMyPage');
 
-use App\Http\Controllers\HomeController;
-Route::get('/', [HomeController::class,'index']);
+Route::get('/', [App\Http\Controllers\HomeController::class,'index']);
+Route::get('/home/edit', [App\Http\Controllers\HomeController::class,'editArea']);
 
 use App\Http\Controllers\AreaController;
 Route::get('/area/{area_zip}',[AreaController::class,'index']);
