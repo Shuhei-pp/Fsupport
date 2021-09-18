@@ -2,7 +2,19 @@
 
 @section('content')
 
-  <?php foreach($area_info as $info) { ?>
-    <a href="/area/{{ $info->id }}">{{ $info->area_name }}</a></br>
-  <?php } ?>
+<div class="container">
+  <div class="col-6 mx-auto">
+    <?php foreach($bigareas as $bigarea) { ?>
+      <h5>{{ $bigarea->bigarea_name }}</h5>
+      <ul class="list-unstyled">
+        <?php foreach($areas as $area) { ?>
+          <?php if($bigarea->bigarea_id == $area->bigarea_id) { ?>
+            <li><a href="/area/{{ $area->id }}">{{ $area->area_name }}</a></li>
+          <?php } ?>
+        <?php } ?>
+      </ul>
+    <?php } ?>
+  </div>
+</div>
+
 @endsection

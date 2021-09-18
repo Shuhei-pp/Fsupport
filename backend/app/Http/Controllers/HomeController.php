@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+//Models
 use App\Models\Area;
+use App\Models\Bigarea;
 
 use Illuminate\Http\Request;
 
@@ -10,9 +12,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $area_info = Area::all();
-        return view('home',[
-            "area_info" => $area_info
-        ]);
+        $areas = Area::all();
+        $bigareas = Bigarea::all();
+        return view('home',compact('areas','bigareas'));
     }
 }
