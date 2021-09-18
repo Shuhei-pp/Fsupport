@@ -24,6 +24,7 @@ Route::get('/register/verify/{token}', 'App\Http\Controllers\Auth\RegisterContro
 
 Route::get('/', [App\Http\Controllers\HomeController::class,'index']);
 Route::get('/area/edit', [App\Http\Controllers\AreaController::class,'toEditAreaPage']);
+Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'editArea']);
 
 use App\Http\Controllers\AreaController;
 Route::get('/area/{area_zip}',[AreaController::class,'index']);

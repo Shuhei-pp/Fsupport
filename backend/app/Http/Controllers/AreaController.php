@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 //Models
+use App\Models\BigArea;
 use App\Models\Area;
 
 // Services
@@ -11,10 +12,32 @@ use App\Services\GetWeather;
 //Auth
 use Illuminate\Support\Facades\Auth;
 
+//Request
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
+
+    /**
+     * Areastableにデータをプッシュ
+     * 
+     * @param Request $request
+     * return redirect
+     */
+    public function editArea(Request $request)
+    {
+
+        $area = new Area;
+
+        $area->bigarea_id = $request->prefecture;
+        $area->harbor_id = $request->harbor_code;
+        $area->area_name = $request->area_name;
+        $area->area_zip = $request->area_zip;
+
+        $area->save();
+
+        return redirect('area/edit');
+    }
 
     /**
      * 管理者だけeditpageに遷移
@@ -25,7 +48,8 @@ class AreaController extends Controller
     {
         //管理者じゃなかった場合はエラーページを返す
         if(Auth::check() && Auth::user()->admin){
-            return view('area.edit');
+            $bigareas = Bigarea::all();
+            return view('area.edit',compact('bigareas'));
         }
         return view('error.admin');
     }
