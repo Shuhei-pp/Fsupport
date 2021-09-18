@@ -14,6 +14,10 @@
         <?php } ?>
       </ul>
     <?php } ?>
+
+    <?php if (Auth::check() && Auth::user()->admin){ ?>{{--管理者かどうか--}}
+      <button class="btn btn-primary">エリア編集を行う</button>
+    <?php } ?>
   </div>
 </div>
 
