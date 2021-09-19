@@ -27,7 +27,7 @@ Route::get('/area/{area_zip}', [App\Http\Controllers\AreaController::class,'show
 Route::get('/area/edit', [App\Http\Controllers\AreaController::class,'toEditAreaPage']);
 Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'editArea']);
 
-Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage']);
+Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user_edit');
 
 Auth::routes();
 

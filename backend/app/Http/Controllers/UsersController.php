@@ -17,9 +17,9 @@ class UsersController extends Controller
      */
     public function showEditPage()
     {
-        if(Auth::check()){
-            return view('error.admin');
+        if(Auth::check() && Auth::user()->admin){
+            return view('user.edit');
         }
-        return view('user.edit');
+        return view('error.admin');
     }
 }

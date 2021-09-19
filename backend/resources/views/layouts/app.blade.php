@@ -68,7 +68,7 @@
                                     </form>
 
                                     @if(Auth::user()->admin == 1)
-                                        <a class="dropdown-item" href="user/edit">
+                                        <a class="dropdown-item" href="{{ route("user_edit") }}">
                                             ユーザー管理ページ
                                         </a>
                                     @endif
