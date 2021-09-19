@@ -29,7 +29,7 @@ Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'addArea']
 
 Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user_edit');
 
-Route::post('/post/create', [App\Http\Controllers\CatchResultController::class,'post'])->name('create_catch_result');
+Route::post('/post/create', [App\Http\Controllers\FishingRecordController::class,'create'])->name('create_catch_result');
 
 Auth::routes();
 
