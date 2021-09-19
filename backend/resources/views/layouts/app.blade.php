@@ -63,10 +63,15 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
+                                    @if(Auth::user()->admin == 1)
+                                        <a class="dropdown-item" href="{{ route("user_edit") }}">
+                                            ユーザー管理ページ
+                                        </a>
+                                    @endif
                                 </div>
                             </li>
                         @endguest
@@ -74,6 +79,13 @@
                 </div>
             </div>
         </nav>
+
+        <!-- flash -->
+        <?php if (session('flash_message')) {?>
+            <div class="bg-primary text-center py-3 my-0">
+                {{ session('flash_message'); }}
+            </div>
+        <?php } ?>
 
         <main class="py-4">
             @yield('content')
