@@ -63,10 +63,15 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
+                                    @if(Auth::user()->admin == 1)
+                                        <a class="dropdown-item" href="user/edit">
+                                            ユーザー管理ページ
+                                        </a>
+                                    @endif
                                 </div>
                             </li>
                         @endguest

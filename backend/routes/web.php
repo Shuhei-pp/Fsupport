@@ -31,4 +31,4 @@ Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditP
 
 Auth::routes();
 
-Route::get('/user', [App\Http\Controllers\UsersController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

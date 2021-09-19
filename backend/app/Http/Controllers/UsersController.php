@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
+//Auth
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * adminだけをユーザー編集ページに遷移させる
+     * 
+     * return view
      */
-    public function __construct()
+    public function showEditPage()
     {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('user');
+        return view('user.edit');
     }
 }
