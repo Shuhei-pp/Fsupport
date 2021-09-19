@@ -6,22 +6,21 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">エリア追加</div>
-
                 <div class="card-body">
-                    <form method="POST" action="/area/edit">
+                    <form method="POST" action="/area/edit" class="needs-validation" novalidate>
                         @csrf
 
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">エリア名</label>
 
                             <div class="col-md-6">
-                                <input　class="form-control" name="area_name">
+                                <input for="area_name" class="form-control" name="area_name">
 
-                                @error('area_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                <?php if ($errors->has('area_name')) {?>
+                                    <span class="text-danger">
+                                        <strong>{{ $errors->first('area_name') }}</strong>11
                                     </span>
-                                @enderror
+                                <?php }?>
                             </div>
                         </div>
 
@@ -44,7 +43,7 @@
                                 <input　class="form-control" name="area_zip" placeholder="999-9999">
 
                                 @error('area_name')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -58,7 +57,7 @@
                                 <input　class="form-control" name="harbor_code">
 
                                 @error('harbor_code')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-danger">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
