@@ -90,12 +90,20 @@ class AreaController extends Controller
      * @param interger $area_id
      * return view
      */
-    public function index($area_id){
+    public function showArea($area_id){
 
         $weather = new GetWeather($area_id);
 
         $info = $weather->setInfo();
 
         return view('area',compact('info'));
+    }
+
+
+    public function index()
+    {
+        $areas = Area::all();
+        $bigareas = Bigarea::all();
+        return view('home',compact('areas','bigareas'));
     }
 }

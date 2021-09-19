@@ -22,13 +22,12 @@ Route::post('/register/pre_check', 'App\Http\Controllers\Auth\RegisterController
 
 Route::get('/register/verify/{token}', 'App\Http\Controllers\Auth\RegisterController@showMyPage');
 
-Route::get('/', [App\Http\Controllers\HomeController::class,'index']);
+Route::get('/', [App\Http\Controllers\AreaController::class,'index']);
+Route::get('/area/{area_zip}', [App\Http\Controllers\AreaController::class,'showArea']);
 Route::get('/area/edit', [App\Http\Controllers\AreaController::class,'toEditAreaPage']);
 Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'editArea']);
 
-use App\Http\Controllers\AreaController;
-Route::get('/area/{area_zip}',[AreaController::class,'index']);
-
+Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage']);
 
 Auth::routes();
 
