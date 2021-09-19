@@ -75,6 +75,13 @@
             </div>
         </nav>
 
+        <!-- flash -->
+        <?php if (session('flash_message')) {?>
+            <div class="bg-primary text-center py-3 my-0">
+                {{ session('flash_message'); }}
+            </div>
+        <?php } ?>
+
         <main class="py-4">
             @yield('content')
         </main>
