@@ -43,11 +43,54 @@
       </table>
     </div>
   </div>
+
   <div class="container">
     <div class="py-3">
-      <canvas id="myChart" class=""></canvas>
+      <canvas id="chart" class=""></canvas>
     </div>
   </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">釣果登録</div>
+
+      <div class="card-body">
+        <form method="POST" action="{{ route('create_catch_result') }}" enctype="multipart/form-data">
+            @csrf
+
+            <div class="form-group row">
+              <label for="email" class="col-md-4 col-form-label text-md-right">釣果内容</label>
+
+              <div class="col-md-6">
+                <input class="form-control" name="result_content">
+
+                <?php if($errors->has('result_content')) {?>}
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('result_content') }}</strong>
+                  </span>
+                <?php } ?>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">写真</label>
+
+              <div class="col-md-6">
+                <input class="form-control-file" name="result_picture" type="file">
+
+                <?php if ($errors->has('result_picture')) {?>
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('result_picture') }}</strong>
+                  </span>
+                <?php } ?>
+              </div>
+            </div>
+            
+        </form>
+      </div>
+    </div>
+  </div>
+
 @endsection
 
 @section('script')
@@ -70,7 +113,7 @@
       options: {}
       };
       var myChart = new Chart(
-        document.getElementById('myChart'),
+        document.getElementById('chart'),
         config
       );
     }

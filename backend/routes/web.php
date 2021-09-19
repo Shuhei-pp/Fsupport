@@ -29,6 +29,8 @@ Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'editArea'
 
 Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user_edit');
 
+Route::post('/post/create', [App\Http\Controllers\PostController::class,'post'])->name('create_catch_result');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
