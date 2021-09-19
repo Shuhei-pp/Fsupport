@@ -26,7 +26,7 @@ class AreaController extends Controller
      * @param Request $request
      * return redirect
      */
-    public function editArea(Request $request)
+    public function addArea(Request $request)
     {
         $rules = [
             'harbor_code' => 'required|integer|between:1:1000',

@@ -25,11 +25,11 @@ Route::get('/register/verify/{token}', 'App\Http\Controllers\Auth\RegisterContro
 Route::get('/', [App\Http\Controllers\AreaController::class,'index']);
 Route::get('/area/{area_zip}', [App\Http\Controllers\AreaController::class,'showArea']);
 Route::get('/area/edit', [App\Http\Controllers\AreaController::class,'toEditAreaPage']);
-Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'editArea']);
+Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'addArea']);
 
 Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user_edit');
 
-Route::post('/post/create', [App\Http\Controllers\PostController::class,'post'])->name('create_catch_result');
+Route::post('/post/create', [App\Http\Controllers\CatchResultController::class,'post'])->name('create_catch_result');
 
 Auth::routes();
 
