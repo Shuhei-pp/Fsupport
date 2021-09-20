@@ -26,7 +26,7 @@ class AreaController extends Controller
      * @param Request $request
      * return redirect
      */
-    public function editArea(Request $request)
+    public function addArea(Request $request)
     {
         $rules = [
             'harbor_code' => 'required|integer|between:1:1000',
@@ -41,7 +41,7 @@ class AreaController extends Controller
         $url = "http://api.openweathermap.org/data/2.5/forecast?lang=ja&zip=".$request->area_zip."&units=metric&APPID=".$apiid;
         if($data = GetApiContents::tryGetContents($url)){
             if($data->cod != '200'){
-                return redirect('area/edit')->flash('flash_message','住所がopenweatherapiに非対応のもの、または不正です。別の住所で試してください');
+                return redirect('area/edit')->with('flash_message','住所がopenweatherapiに非対応のもの、または不正です。別の住所で試してください');
             }
         } else {
             abort(404);
@@ -51,7 +51,7 @@ class AreaController extends Controller
         $url = "https://api.tide736.net/get_tide.php?pc=".$request->prefecture."&hc=".$request->harbor_code."&yr=2021&mn=10&dy=10&rg=week";
         if($data = GetApiContents::tryGetContents($url)){
             if($data->status != '1'){
-                return redirect('area/edit')->flash('flash_message','県、港コードが正しくありません。tide736で再確認してください');
+                return redirect('area/edit')->with('flash_message','県、港コードが正しくありません。tide736で再確認してください');
             }
         } else {
             abort(404);
@@ -94,9 +94,11 @@ class AreaController extends Controller
 
         $weather = new GetWeather($area_id);
 
+        $areas = Area::all();
+
         $info = $weather->setInfo();
 
-        return view('area',compact('info'));
+        return view('area',compact('info','areas','area_id'));
     }
 
 
