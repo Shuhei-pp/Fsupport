@@ -99,7 +99,31 @@
               <?php } ?>
             </div>
           </div>
-          <div class="form-group row mb-0">
+
+          <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right">釣ったエリア</label>
+            <div class="col-md-6">
+              <select name="prefecture" class="form-control" >
+                <?php foreach($areas as $area) { ?>
+                  <?php if($area->id == $area_id) { ?>
+                    <option value="{{ $area->id }}" selected="selected">{{ $area->area_name }}</option>
+                  <?php }else { ?>
+                    <option value="{{ $area->id }}">{{ $area->area_name }}</option>
+                  <?php } ?>
+
+                <?php } ?>
+              </select>
+            </div>
+
+              <?php if ($errors->has('time')) {?>
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $errors->first('time') }}</strong>
+                </span>
+              <?php } ?>
+            </div>
+          </div>
+
+          <div class="form-group row">
             <div class="col-md-8 offset-md-4">
               <button type="submit" class="btn btn-primary">
                 追加

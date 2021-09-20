@@ -94,9 +94,11 @@ class AreaController extends Controller
 
         $weather = new GetWeather($area_id);
 
+        $areas = Area::all();
+
         $info = $weather->setInfo();
 
-        return view('area',compact('info'));
+        return view('area',compact('info','areas','area_id'));
     }
 
 
