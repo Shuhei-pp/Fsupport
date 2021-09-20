@@ -64,7 +64,7 @@
             <div class="col-md-6">
               <input class="form-control" name="content">
 
-              <?php if($errors->has('content')) {?>}
+              <?php if($errors->has('content')) {?>
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $errors->first('content') }}</strong>
                 </span>
