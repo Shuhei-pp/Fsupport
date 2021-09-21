@@ -59,7 +59,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if(Auth::check())
-                                        <a class="dropdown-item" href="{{ route('user.mypage') }}">
+                                        <a class="dropdown-item" href={{ route('user.mypage',['user_id' => Auth::user()->id]) }}>
                                             マイページ
                                         </a>
                                     @endif

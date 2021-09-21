@@ -11,6 +11,21 @@ class UsersController extends Controller
 {
     
     /**
+     * マイページへ遷移
+     * 
+     * return view
+     */
+    public function showMyPage($user_id)
+    {
+        var_dump($user_id);
+        //ログインしていなかったらログインページへ返す
+        if(Auth::check()){
+            return view('user.mypage');
+        }
+        return redirect(route('login'))->with('flash_message','ログインしてください');
+    }
+
+    /**
      * adminだけをユーザー編集ページに遷移させる
      * 
      * return view
