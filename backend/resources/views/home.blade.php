@@ -11,7 +11,7 @@
       <ul class="list-unstyled">
         <?php foreach($areas as $area) { ?>
           <?php if($bigarea->bigarea_id == $area->bigarea_id) { ?>
-            <li><a href="/area/{{ $area->id }}">{{ $area->area_name }}</a></li>
+            <li><a href={{ route('area.show', ['area_id' => $area->id]); }}>{{ $area->area_name }}</a></li>
           <?php } ?>
         <?php } ?>
       </ul>
@@ -19,7 +19,7 @@
     <?php } ?>
 
     <?php if (Auth::check() && Auth::user()->admin){ ?>{{--管理者かどうか--}}
-      <a href="area/edit"><button class="btn btn-primary">エリア追加を行う</button></a>
+      <a href={{ route('area_edit') }}><button class="btn btn-primary">エリア追加を行う</button></a>
     <?php } ?>
   </div>
 </div>

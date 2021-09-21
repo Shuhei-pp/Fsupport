@@ -23,9 +23,9 @@ Route::post('/register/pre_check', 'App\Http\Controllers\Auth\RegisterController
 Route::get('/register/verify/{token}', 'App\Http\Controllers\Auth\RegisterController@showMyPage');
 
 Route::get('/', [App\Http\Controllers\AreaController::class,'index']);
-Route::get('/area/{area_zip}', [App\Http\Controllers\AreaController::class,'showArea']);
-Route::get('/area/edit', [App\Http\Controllers\AreaController::class,'toEditAreaPage']);
+Route::get('/area/edit', [App\Http\Controllers\AreaController::class,'toEditAreaPage'])->name('area_edit');
 Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'addArea']);
+Route::get('/area/{area_id}', [App\Http\Controllers\AreaController::class,'showArea'])->name('area.show');
 
 Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user_edit');
 
