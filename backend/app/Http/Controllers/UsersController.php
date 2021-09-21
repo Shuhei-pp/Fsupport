@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 //Auth
 use Illuminate\Support\Facades\Auth;
 
+//Models
+use App\Models\FishingRecord;
+
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -17,12 +20,13 @@ class UsersController extends Controller
      */
     public function showMyPage($user_id)
     {
-        var_dump($user_id);
         //ログインしていなかったらログインページへ返す
-        if(Auth::check()){
-            return view('user.mypage');
+        if(!Auth::check()){
+            return redirect(route('login'))->with('flash_message','ログインしてください');
         }
-        return redirect(route('login'))->with('flash_message','ログインしてください');
+        $user = Auth::user();
+        $posts = FishingRecord::where('user_id',$user->id)->get();
+        return view('user.mypage',compact('user','posts'));
     }
 
     /**
