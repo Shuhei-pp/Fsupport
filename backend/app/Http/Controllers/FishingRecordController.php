@@ -34,11 +34,13 @@ class FishingRecordController extends Controller
 
         $this->validate($request,$rules);
 
+        $image_path = $request->file('picture')->store('public/result_images/');
+
         $frecord = new FishingRecord();
         $frecord->user_id = Auth::user()->id;
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;
-        $frecord->image_name = $request->picture;
+        $frecord->image_name = basename($image_path);
         $frecord->time = $request->time;
 
         $frecord->save();
