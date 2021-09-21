@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 //Models
-use App\Models\BigArea;
+use App\Models\Bigarea;
 use App\Models\Area;
 
 //Services
