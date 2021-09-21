@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 //Models
 use App\Models\FishingRecord;
+use App\Models\Area;
 
 use Illuminate\Http\Request;
 
@@ -25,8 +26,9 @@ class UsersController extends Controller
             return redirect(route('login'))->with('flash_message','ログインしてください');
         }
         $user = Auth::user();
+        $areas = Area::all();
         $posts = FishingRecord::where('user_id',$user->id)->get();
-        return view('user.mypage',compact('user','posts'));
+        return view('user.mypage',compact('user','posts','areas'));
     }
 
     /**
