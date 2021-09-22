@@ -23,6 +23,14 @@
                 </div>
               </div>
             </div>
+            <div class="container pt-1">
+              <a href="#">
+                <button class="btn btn-success">釣果修正</button>
+              </a>
+              <a href="#">
+                <button class="btn btn-danger">釣果削除</button>
+              </a>
+            </div>
             <hr />
           <?php } ?>  
         </div>
