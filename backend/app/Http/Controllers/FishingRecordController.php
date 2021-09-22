@@ -7,11 +7,36 @@ use Illuminate\Support\Facades\Auth;
 
 //Models
 use App\Models\FishingRecord;
+use App\Models\Area;
 
 use Illuminate\Http\Request;
 
 class FishingRecordController extends Controller
 {
+    /**
+     * 釣果登録ページに遷移
+     * 
+     * @param $fresult_id
+     * 
+     */
+    public function toEditPage($fresult_id){
+        //非ログインはリダイレクト
+        if(!Auth::check()){
+            return redirect('login')->with('flash_message','ログインしてください');
+        }
+
+        $fresult = FishingRecord::where('id', $fresult_id)->first();
+        $areas = Area::all();
+
+        if(Auth::user()->id != $fresult->user_id){
+            return redirect('login')->with('flash_message','投稿を出しているユーザーとは違うユーザーです。ログインし直してください');
+        }
+
+        return view('fresult.p_edit',compact('fresult','areas'));
+
+    }
+
+
     /**
      * 釣果を登録
      * 

@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="container pt-1">
-              <a href="#">
+              <a href="{{ route('edit.fresult',['fresult_id' => $post->id]) }}">
                 <button class="btn btn-success">釣果修正</button>
               </a>
               <a href="#">
