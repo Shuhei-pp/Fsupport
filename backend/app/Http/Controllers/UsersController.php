@@ -2,27 +2,45 @@
 
 namespace App\Http\Controllers;
 
+//Auth
+use Illuminate\Support\Facades\Auth;
+
+//Models
+use App\Models\FishingRecord;
+use App\Models\Area;
+
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * マイページへ遷移
+     * 
+     * return view
      */
-    public function __construct()
+    public function showMyPage($user_id)
     {
-        $this->middleware('auth');
+        //ログインしていなかったらログインページへ返す
+        if(!Auth::check()){
+            return redirect(route('login'))->with('flash_message','ログインしてください');
+        }
+        $user = Auth::user();
+        $areas = Area::all();
+        $posts = FishingRecord::where('user_id',$user->id)->get();
+        return view('user.mypage',compact('user','posts','areas'));
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * adminだけをユーザー編集ページに遷移させる
+     * 
+     * return view
      */
-    public function index()
+    public function showEditPage()
     {
-        return view('user');
+        if(Auth::check() && Auth::user()->admin){
+            return view('user.edit');
+        }
+        return view('error.admin');
     }
 }
