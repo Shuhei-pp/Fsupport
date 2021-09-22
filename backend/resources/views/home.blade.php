@@ -3,6 +3,16 @@
 @section('content')
 
 <div class="container">
+  <div class="card">
+    <div class="card-header">Fishing Indexとは</div>
+    <div class="card-body">
+      <p>Fishing Indexとは釣果指数のことで風速、潮の動き、日の出、日没等のデータをもとに”釣れる”を指数化したものです。</p>
+      <p>管理人は北陸地方出身なのでこれからそこら辺を中心にエリアを広げていく予定です。</p>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
   <div class="col-6 mx-auto">
 
     <?php foreach($bigareas as $bigarea) { ?>
