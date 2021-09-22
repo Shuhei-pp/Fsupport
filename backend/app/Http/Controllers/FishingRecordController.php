@@ -14,6 +14,33 @@ use Illuminate\Http\Request;
 class FishingRecordController extends Controller
 {
     /**
+     * 釣果レコードを削除
+     * 
+     * @param integer $fresult_id
+     */
+    public function delete($fresult_id){
+        //非ログインはリダイレクト
+        if(!Auth::check()){
+            return redirect('login')->with('flash_message','ログインしてください');
+        }
+
+        $fresult = FishingRecord::where('id', $fresult_id)->first();
+
+        //投稿のuser_idとログインユーザーが一致しない場合もリダイレクト
+        if(Auth::user()->id != $fresult->user_id){
+            return redirect('login')->with('flash_message','投稿しているユーザーとは違うユーザーです。ログインし直してください');
+        }
+
+        $fresult->delete();
+
+        return redirect(
+            route('user.mypage',['user_id' => Auth::user()->id])
+        )
+        ->with('flash_message','釣果レコードを削除しました。');
+    }
+
+
+    /**
      * 釣果編集したものを保存
      * 
      * @param integer $fresult_id

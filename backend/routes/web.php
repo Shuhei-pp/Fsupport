@@ -28,7 +28,7 @@ Route::get('/user/mypage/{user_id}', [App\Http\Controllers\UsersController::clas
 Route::post('/fresult/create', [App\Http\Controllers\FishingRecordController::class,'create'])->name('create.fresult');
 Route::get('/fresult/edit/{fresult_id}', [App\Http\Controllers\FishingRecordController::class, 'toEditPage'])->name('edit.fresult');
 Route::post('/fresult/edit/{fresult_id}', [App\Http\Controllers\FishingRecordController::class, 'edit'])->name('send.edit.fresult');
-Route::post('/fresult/delete/{fresult_id}',[App\Http\Controllers\FishingRecordController::class, 'delete'])->name('delete.fresult');
+Route::get('/fresult/delete/{fresult_id}',[App\Http\Controllers\FishingRecordController::class, 'delete'])->name('delete.fresult');
 
 Route::post('/register/pre_check', 'App\Http\Controllers\Auth\RegisterController@preCheck')->name('register.pre_check');
 Route::get('/register/verify/{token}', 'App\Http\Controllers\Auth\RegisterController@showMyPage');
