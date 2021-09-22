@@ -46,7 +46,7 @@ class FishingRecordController extends Controller
 
         $image_path = $request->file('picture')->store('public/result_images/');
 
-        $frecord = new FishingRecord();
+        $frecord = FishingRecord::find($fresult->id);
         $frecord->user_id = Auth::user()->id;
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;

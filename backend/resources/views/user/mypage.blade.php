@@ -13,7 +13,7 @@
           <?php foreach($posts as $post) {?>
             <div class="media">
               <div class="media-left" href="#">
-                <img class="media-object" src="{{ asset('storage/result_images/'.$post->image_name) }}">
+                <img class="media-object" width="150px" src="{{ asset('storage/result_images/'.$post->image_name) }}">
               </div>
               <div class="media-body">
                 <div class="container">
