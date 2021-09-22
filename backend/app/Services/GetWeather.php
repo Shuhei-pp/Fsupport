@@ -83,10 +83,12 @@ class GetWeather
 
     //apiで得た潮の干満(cm)を$every_3hour_tideにセット
     for($i=$start_tide_time;$i<=$start_tide_time+7;$i++){
+      if($i>8)
+      {
+        break;
+      }
       $every_3hour_tide[] = $tide_info->tide->chart->$today->tide[$i*$factor]->cm;
       $counts_assign++;
-      if($i>7)
-        break;
     }
 
     for($i=1;$i<=8-$counts_assign;$i++)
