@@ -27,8 +27,9 @@
               <a href="{{ route('edit.fresult',['fresult_id' => $post->id]) }}">
                 <button class="btn btn-success">釣果修正</button>
               </a>
-              <a href="#">
-                <button class="btn btn-danger">釣果削除</button>
+              <button class="btn btn-danger delete_button" value="{{ $post->id }}">釣果削除</button>
+              <a href="{{ route('delete.fresult',['fresult_id' => $post->id]) }}">
+                <button id="{{ $post->id }}" style="display: none"></button> 
               </a>
             </div>
             <hr />
@@ -38,4 +39,16 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('script')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+  $(document).on('click','.delete_button',function() {
+    if(window.confirm("本当に削除しますか？")){
+      $fresult_id = "#"+this.value;
+      $($fresult_id).click();
+    }
+  });
+</script>
 @endsection
