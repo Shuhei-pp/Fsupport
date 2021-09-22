@@ -30,7 +30,7 @@ Route::get('/area/{area_id}', [App\Http\Controllers\AreaController::class,'showA
 Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user.edit');
 Route::get('/user/mypage/{user_id}', [App\Http\Controllers\UsersController::class,'showMyPage'])->name('user.mypage');
 
-Route::post('/post/create', [App\Http\Controllers\FishingRecordController::class,'create'])->name('create_catch_result');
+Route::post('/post/create', [App\Http\Controllers\FishingRecordController::class,'create'])->name('create.fresult');
 
 Auth::routes();
 

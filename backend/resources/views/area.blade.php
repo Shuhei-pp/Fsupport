@@ -55,7 +55,7 @@
       <div class="card-header">釣果登録</div>
 
       <div class="card-body">
-        <form method="POST" action="{{ route('create_catch_result') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('create.fresult') }}" enctype="multipart/form-data">
             @csrf
 
           <div class="form-group row">
