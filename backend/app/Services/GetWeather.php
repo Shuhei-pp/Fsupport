@@ -105,9 +105,14 @@ class GetWeather
     //api呼び出し関数を呼び出し
     $weather = $this->getWeatherJson();
     $tide_json = $this->getTideJson();
+
+    //fi計算するインスタンス作成
+    $fi = new FiCulculation($tide_json);
+
     $tide = $this->tideToArray($tide_json);
 
-    $fi = FiCulculation::setFi($weather,$tide);
+    //fi計算
+    $fi = $fi->setFi($weather,$tide);
 
     //インスタンスに天気情報を詰めていく
     for($i=0;$i<8;$i++){

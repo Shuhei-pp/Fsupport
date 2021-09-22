@@ -3,11 +3,24 @@ namespace App\Services;
 
 class FiCulculation
 {
+ 
+  protected static $sunrise;
+  protected static $sunset;
+
+  public function __construct($tide)
+  {
+    $today = date("Y-m-d");
+    self::$sunrise = $tide->tide->chart->$today->sun->rise;
+    self::$sunset = $tide->tide->chart->$today->sun->set;
+  }
 
   /**
    * 風の強さによって点数を返すfiWind関数
+   * 
+   * @param float $wind
+   * return mixed
    */
-  public static function fiWind($wind)
+  private static function fiWind($wind)
   {
     if($wind >= 5)
     {
@@ -44,11 +57,7 @@ class FiCulculation
     //apiで得た潮の干満(cm)を$every_3hour_tideにセット
     for($i=0;$i<$repeat_times;$i++){
       $fi[] = round($tide[$i]*$weather->list[$i]->wind->speed);
-      var_dump($weather->list[$i]->wind->speed);
-      var_dump(round(self::fiWind($weather->list[$i]->wind->speed),2));
-      echo '|';
     }
-
     return $fi;
   }
 }
