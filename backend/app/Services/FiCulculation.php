@@ -18,8 +18,34 @@ class FiCulculation
     self::$sunrise = $tide->tide->chart->$today->sun->rise;
     self::$sunset = $tide->tide->chart->$today->sun->set;
   }
+  /**
+   * 日の出、日没の時間によって点数を返すfiSun関数
+   * 
+   * @param string $time
+   */
+  private static function fiSun($time)
+  {
+    //時刻から日の出と日の入りの時間を引き絶対値を求める
+    $sr_diff = abs(strtotime($time)-strtotime(self::$sunrise));
+    $ss_diff = abs(strtotime($time)-strtotime(self::$sunset));
+    
+    if ($sr_diff <= 3600 || $ss_diff <=3600)
+    {
+      return 1.5;
+    }
+    if ($sr_diff <= 7200 || $ss_diff <=7200)
+    {
+      return 1.2;
+    }
+    return 1;
+  }
 
-
+  /**
+   * 月毎にポイントを返す
+   * 
+   * @param integer $month
+   * return integer mix
+   */
   private static function monthPoint($month)
   {
     if( 5<=$month && 11>$month)
@@ -82,7 +108,11 @@ class FiCulculation
 
       //windpointへ変換
       $wp = self::fiWind($weather->list[$i]->wind->speed);
-      $fi[] = round($mp * $wp,2);
+
+      //月を取り出し、ポイントへと変換
+      $time = date('H:i', strtotime($weather->list[$i]->dt_txt));
+      $sp = self::fiSun($time);
+      $fi[] = round($mp * $wp * $sp,2);
     }
     return $fi;
   }
