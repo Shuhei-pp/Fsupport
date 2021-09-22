@@ -58,6 +58,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if(Auth::check())
+                                        <a class="dropdown-item" href={{ route('user.mypage',['user_id' => Auth::user()->id]) }}>
+                                            マイページ
+                                        </a>
+                                    @endif
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -68,7 +74,7 @@
                                     </form>
 
                                     @if(Auth::user()->admin == 1)
-                                        <a class="dropdown-item" href="{{ route("user_edit") }}">
+                                        <a class="dropdown-item" href="{{ route('user.edit') }}">
                                             ユーザー管理ページ
                                         </a>
                                     @endif

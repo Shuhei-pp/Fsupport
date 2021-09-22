@@ -55,7 +55,7 @@
       <div class="card-header">釣果登録</div>
 
       <div class="card-body">
-        <form method="POST" action="{{ route('create_catch_result') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('create.fresult') }}" enctype="multipart/form-data">
             @csrf
 
           <div class="form-group row">
@@ -65,7 +65,7 @@
               <input class="form-control" name="content">
 
               <?php if($errors->has('content')) {?>
-                <span class="invalid-feedback" role="alert">
+                <span class="text-danger" role="alert">
                   <strong>{{ $errors->first('content') }}</strong>
                 </span>
               <?php } ?>
@@ -78,8 +78,8 @@
             <div class="col-md-6">
               <input class="form-control-file" name="picture" type="file">
 
-              <?php if ($errors->has('result_picture')) {?>
-                <span class="invalid-feedback" role="alert">
+              <?php if ($errors->has('picture')) {?>
+                <span class="text-danger" role="alert">
                   <strong>{{ $errors->first('picture') }}</strong>
                 </span>
               <?php } ?>
@@ -93,7 +93,7 @@
               <input class="form-control" name="time" type="datetime-local">
 
               <?php if ($errors->has('time')) {?>
-                <span class="invalid-feedback" role="alert">
+                <span class="text-danger" role="alert">
                   <strong>{{ $errors->first('time') }}</strong>
                 </span>
               <?php } ?>
