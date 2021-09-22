@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
 //Models
-use App\Models\FishingRecord;
+use App\Models\Fishingrecord;
 use App\Models\Area;
 
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class FishingRecordController extends Controller
             return redirect('login')->with('flash_message','ログインしてください');
         }
 
-        $fresult = FishingRecord::where('id', $fresult_id)->first();
+        $fresult = Fishingrecord::where('id', $fresult_id)->first();
 
         //投稿のuser_idとログインユーザーが一致しない場合もリダイレクト
         if(Auth::user()->id != $fresult->user_id){
@@ -55,7 +55,7 @@ class FishingRecordController extends Controller
             return redirect('login')->with('flash_message','ログインしてください');
         }
 
-        $fresult = FishingRecord::where('id', $fresult_id)->first();
+        $fresult = Fishingrecord::where('id', $fresult_id)->first();
 
         //投稿のuser_idとログインユーザーが一致しない場合もリダイレクト
         if(Auth::user()->id != $fresult->user_id){
@@ -73,7 +73,7 @@ class FishingRecordController extends Controller
 
         $image_path = $request->file('picture')->store('public/result_images/');
 
-        $frecord = FishingRecord::find($fresult->id);
+        $frecord = Fishingrecord::find($fresult->id);
         $frecord->user_id = Auth::user()->id;
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;
@@ -98,7 +98,7 @@ class FishingRecordController extends Controller
             return redirect('login')->with('flash_message','ログインしてください');
         }
 
-        $fresult = FishingRecord::where('id', $fresult_id)->first();
+        $fresult = Fishingrecord::where('id', $fresult_id)->first();
         $areas = Area::all();
 
         //user_idとログインユーザーが一致しない場合もリダイレクト
@@ -132,7 +132,7 @@ class FishingRecordController extends Controller
 
         $image_path = $request->file('picture')->store('public/result_images/');
 
-        $frecord = new FishingRecord();
+        $frecord = new Fishingrecord();
         $frecord->user_id = Auth::user()->id;
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;

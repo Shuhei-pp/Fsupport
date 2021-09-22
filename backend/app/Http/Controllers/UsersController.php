@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
 //Models
-use App\Models\FishingRecord;
+use App\Models\Fishingrecord;
 use App\Models\Area;
 
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class UsersController extends Controller
         }
         $user = Auth::user();
         $areas = Area::all();
-        $posts = FishingRecord::where('user_id',$user->id)->get();
+        $posts = Fishingrecord::where('user_id',$user->id)->get();
         return view('user.mypage',compact('user','posts','areas'));
     }
 
