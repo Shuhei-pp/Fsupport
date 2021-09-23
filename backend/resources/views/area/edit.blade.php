@@ -18,7 +18,7 @@
 
                                 <?php if ($errors->has('area_name')) {?>
                                     <span class="text-danger">
-                                        <strong>{{ $errors->first('area_name') }}</strong>11
+                                        <strong>{{ $errors->first('area_name') }}</strong>
                                     </span>
                                 <?php }?>
                             </div>
@@ -42,7 +42,7 @@
                             <div class="col-md-6">
                                 <input　class="form-control" name="area_zip" placeholder="999-9999">
 
-                                @error('area_name')
+                                @error('area_zip')
                                     <span class="text-danger">
                                         <strong>{{ $message }}</strong>
                                     </span>

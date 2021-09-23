@@ -4,5 +4,9 @@
   "Forgot Your Password?": "パスワードを忘れた場合",
   "Reset Password": "パスワード再設定",
   "Send Password Reset Link":  "パスワード再設定URLを送信",
-  "Logout": "ログアウト"
-  }
+  "Logout": "ログアウト",
+  "E-Mail Address": "メールアドレス",
+  "Password": "パスワード",
+  "Remember Me": "ログイン情報を記憶する",
+  "Confirm Password": "パスワード確認"
+}
