@@ -31,11 +31,19 @@ class FiCulculation
     
     if ($sr_diff <= 3600 || $ss_diff <=3600)
     {
-      return 1.5;
+      return 5;
     }
     if ($sr_diff <= 7200 || $ss_diff <=7200)
     {
-      return 1.2;
+      return 4;
+    }
+    if ($sr_diff <= 10800 || $ss_diff <=10800)
+    {
+      return 3;
+    }
+    if ($sr_diff <= 14400 || $ss_diff <=14400)
+    {
+      return 2;
     }
     return 1;
   }
@@ -109,10 +117,10 @@ class FiCulculation
       //windpointへ変換
       $wp = self::fiWind($weather->list[$i]->wind->speed);
 
-      //月を取り出し、ポイントへと変換
+      //時間を取り出してポイントに変換
       $time = date('H:i', strtotime($weather->list[$i]->dt_txt));
       $sp = self::fiSun($time);
-      $fi[] = round($mp * $wp * $sp,2);
+      $fi[] = round($mp * ($wp + $sp),2);
     }
     return $fi;
   }
