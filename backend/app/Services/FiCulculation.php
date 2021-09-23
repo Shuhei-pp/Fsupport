@@ -167,7 +167,10 @@ class FiCulculation
 
       //cloudpoint
       $cp = self::fiCloud($weather->list[$i]->clouds->all);
-      $fi[] = round(($wp + $sp)* $tp * $mp * $cp,2);
+
+      //81点満点なので100点満点にする
+      $max81_fi = ($wp + $sp)* $tp * $mp * $cp;
+      $fi[] = round($max81_fi*100/81,2);
     }
     return $fi;
   }
