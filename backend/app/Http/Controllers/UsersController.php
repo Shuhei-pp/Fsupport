@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Fishingrecord;
 use App\Models\Area;
 
+//DB
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -27,7 +30,13 @@ class UsersController extends Controller
         }
         $user = Auth::user();
         $areas = Area::all();
-        $posts = Fishingrecord::where('user_id',$user->id)->get();
+
+        //ここにこの処理を書いてもいいのかな...
+        $posts = DB::table('fishingrecords')
+                                ->join('areas', 'fishingrecords.area_id', '=', 'areas.id')
+                                ->where('user_id', '=', $user->id)
+                                ->get();
+
         return view('user.mypage',compact('user','posts','areas'));
     }
 

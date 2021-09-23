@@ -18,7 +18,7 @@
               <div class="media-body">
                 <div class="container">
                   <p>釣果:{{ $post->content }}</p>
-                  <p>エリア:{{ $areas[$post->area_id]->area_name}}</p>
+                  <p>エリア:{{ $post->area_name}}</p>
                   <p>日時:{{ $post->time}}</p>
                 </div>
               </div>
