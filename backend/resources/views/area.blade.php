@@ -16,25 +16,25 @@
         </thead>
         <tbody>
           <tr>
-            <th>weather</th>
+            <th>天気</th>
             <?php for($i=0;$i<8;$i++) {?>
               <td>{{ $info->weather[$i] }}</td>
             <?php } ?>
           </tr>
           <tr>
-            <th>temp</th>
+            <th>気温(°c)</th>
             <?php for($i=0;$i<8;$i++) {?>
               <td>{{ $info->temp[$i] }}</td>
             <?php }?>
           </tr>
           <tr>
-            <th>wind</th>
+            <th>風速(m/s)</th>
             <?php for($i=0;$i<8;$i++) {?>
               <td>{{ $info->wind[$i] }}</td>
             <?php }?>
           </tr>
           <tr>
-            <th>tide</th>
+            <th>潮の高さ(cm)</th>
             <?php foreach($info->tide as $tide) {?>
               <td>{{ $tide }}</td>
             <?php }?>
