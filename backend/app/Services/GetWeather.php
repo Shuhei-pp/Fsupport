@@ -122,6 +122,7 @@ class GetWeather
       $this->times[] = date("m月d日 H時",$timestamp);
       $this->weather[] = $weather->list[$i]->weather[0]->description;
       $this->temp[] = $weather->list[$i]->main->temp;
+      $this->wind[] = $weather->list[$i]->wind->speed;
       $this->tide[] = $tide[$i];
       $this->fi[] = $fi[$i];
     }

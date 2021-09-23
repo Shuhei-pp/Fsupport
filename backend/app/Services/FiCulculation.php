@@ -6,18 +6,56 @@ class FiCulculation
  
   protected static $sunrise;
   protected static $sunset;
+  protected static $ave_tide;
 
   /**
    * FiCulculation constructors
    * 
    * @param object $tide
    */
-  public function __construct($tide)
+  public function __construct($tide_json)
   {
     $today = date("Y-m-d");
-    self::$sunrise = $tide->tide->chart->$today->sun->rise;
-    self::$sunset = $tide->tide->chart->$today->sun->set;
+    self::$sunrise = $tide_json->tide->chart->$today->sun->rise;
+    self::$sunset = $tide_json->tide->chart->$today->sun->set;
   }
+
+  /**
+   * 雲の%からpointを返すfiCloud関数
+   * 
+   * @param $tide
+   */
+  private static function fiCloud($clouds)
+  {
+    if($clouds <= 40){
+      return 1.0;
+    }
+    if($clouds <= 80){
+      return 1.1;
+    }
+    return 1.2;
+  }
+
+  /**
+   * 潮の高さからtidepointを返すfiTide関数
+   * 
+   * @param $tide
+   */
+  private static function fiTide($tide)
+  {
+    $ave = self::$ave_tide;
+    if($tide >= $ave+13){
+      return 1.5;
+    }
+    if($tide >= $ave+6){
+      return 1.2;
+    }
+    if($tide >= $ave){
+      return 1;
+    }
+    return 0.9; 
+  }
+
   /**
    * 日の出、日没の時間によって点数を返すfiSun関数
    * 
@@ -31,11 +69,19 @@ class FiCulculation
     
     if ($sr_diff <= 3600 || $ss_diff <=3600)
     {
-      return 1.5;
+      return 5;
     }
     if ($sr_diff <= 7200 || $ss_diff <=7200)
     {
-      return 1.2;
+      return 4;
+    }
+    if ($sr_diff <= 10800 || $ss_diff <=10800)
+    {
+      return 3;
+    }
+    if ($sr_diff <= 14400 || $ss_diff <=14400)
+    {
+      return 2;
     }
     return 1;
   }
@@ -100,6 +146,9 @@ class FiCulculation
   {
     $repeat_times = count($tide);
 
+    //クラス変数に潮の高さの平均を代入
+    self::$ave_tide = array_sum($tide)/count($tide);
+
     //apiで得た潮の干満(cm)を$every_3hour_tideにセット
     for($i=0;$i<$repeat_times;$i++){
       //月を取り出し、ポイントへと変換
@@ -109,10 +158,16 @@ class FiCulculation
       //windpointへ変換
       $wp = self::fiWind($weather->list[$i]->wind->speed);
 
-      //月を取り出し、ポイントへと変換
+      //時間を取り出してポイントに変換
       $time = date('H:i', strtotime($weather->list[$i]->dt_txt));
       $sp = self::fiSun($time);
-      $fi[] = round($mp * $wp * $sp,2);
+
+      //tidepoint
+      $tp = self::fiTide($tide[$i]);
+
+      //cloudpoint
+      $cp = self::fiCloud($weather->list[$i]->clouds->all);
+      $fi[] = round(($wp + $sp)* $tp * $mp * $cp,2);
     }
     return $fi;
   }
