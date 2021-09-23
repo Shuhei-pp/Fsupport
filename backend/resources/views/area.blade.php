@@ -28,6 +28,12 @@
             <?php }?>
           </tr>
           <tr>
+            <th>wind</th>
+            <?php for($i=0;$i<8;$i++) {?>
+              <td>{{ $info->wind[$i] }}</td>
+            <?php }?>
+          </tr>
+          <tr>
             <th>tide</th>
             <?php foreach($info->tide as $tide) {?>
               <td>{{ $tide }}</td>
