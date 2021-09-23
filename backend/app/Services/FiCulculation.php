@@ -21,7 +21,23 @@ class FiCulculation
   }
 
   /**
-   * 潮の高さからtidepointを返すTide関数
+   * 雲の%からpointを返すfiCloud関数
+   * 
+   * @param $tide
+   */
+  private static function fiCloud($clouds)
+  {
+    if($clouds <= 40){
+      return 1.0;
+    }
+    if($clouds <= 80){
+      return 1.1;
+    }
+    return 1.2;
+  }
+
+  /**
+   * 潮の高さからtidepointを返すfiTide関数
    * 
    * @param $tide
    */
@@ -149,7 +165,9 @@ class FiCulculation
       //tidepoint
       $tp = self::fiTide($tide[$i]);
 
-      $fi[] = round($tp * $mp * ($wp + $sp),2);
+      //cloudpoint
+      $cp = self::fiCloud($weather->list[$i]->clouds->all);
+      $fi[] = round(($wp + $sp)* $tp * $mp * $cp,2);
     }
     return $fi;
   }
