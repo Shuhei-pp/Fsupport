@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container">
-    <h3>{{ $areas[$area_id]->area_name }}エリア</h3>
+    <h3>{{ $area_name }}エリア</h3>
     <div class="table-responsive">
       <table class="table table-bordered">
         <caption>このエリアの天気</caption>
