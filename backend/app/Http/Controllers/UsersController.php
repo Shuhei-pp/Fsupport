@@ -32,8 +32,8 @@ class UsersController extends Controller
         $areas = Area::all();
 
         //ここにこの処理を書いてもいいのかな...
-        $posts = DB::table('fishingrecords')
-                                ->join('areas', 'fishingrecords.area_id', '=', 'areas.id')
+        $posts = DB::table('areas')
+                                ->leftjoin('fishingrecords', 'fishingrecords.area_id', '=', 'areas.id')
                                 ->where('user_id', '=', $user->id)
                                 ->get();
 
