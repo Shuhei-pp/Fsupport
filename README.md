@@ -54,7 +54,7 @@ http://localhost:8025/
 # コマンド集
 
 >ログ表示  
->$ docker-compose logs -f 　
+>$ docker compose logs -f 　
 
 >コンテナ初期化  
 >$ docker-compose down --rmi all --volumes --remove-orphans  
