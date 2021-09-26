@@ -34,6 +34,13 @@
             <?php }?>
           </tr>
           <tr>
+            <th>空における雲の割合(%)</th>
+            <?php foreach($info->clouds as $cloud) {?>
+              <td>{{ $cloud }}</td>
+            <?php }?>
+          </tr>
+          <tr>
+          <tr>
             <th>潮の高さ(cm)</th>
             <?php foreach($info->tide as $tide) {?>
               <td>{{ $tide }}</td>
