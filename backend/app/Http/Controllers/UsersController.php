@@ -52,9 +52,9 @@ class UsersController extends Controller
         if(!(Auth::check() && Auth::user()->admin)){
             return view('error.admin');
         }
-        
+
         $users = User::join('admin_ranks','users.admin','=','admin_ranks.id')->get();
 
-        return view('user.edit', compact('users'));
+        return view('user.list', compact('users'));
     }
 }
