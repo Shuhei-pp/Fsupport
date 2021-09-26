@@ -21,7 +21,8 @@ Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'addArea']
 Route::get('/area/{area_id}', [App\Http\Controllers\AreaController::class,'showArea'])->name('area.show');
 
 //ユーザー系ルーティング
-Route::get('/user/list', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user.list');
+Route::get('/user/list', [App\Http\Controllers\UsersController::class,'showListPage'])->name('user.list');
+Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user.edit');
 Route::get('/user/mypage/{user_id}', [App\Http\Controllers\UsersController::class,'showMyPage'])->name('user.mypage');
 
 //釣果系ルーティング

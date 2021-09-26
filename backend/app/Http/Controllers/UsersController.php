@@ -46,7 +46,7 @@ class UsersController extends Controller
      * 
      * return view
      */
-    public function showEditPage()
+    public function showListPage()
     {
         //違った場合エラーページへ
         if(!(Auth::check() && Auth::user()->admin)){
