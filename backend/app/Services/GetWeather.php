@@ -15,6 +15,7 @@ class GetWeather
   public $temp = [];
   public $weather = [];
   public $tide = [];
+  public $clouds = [];
   public $fi = [];
 
   /**
@@ -123,6 +124,7 @@ class GetWeather
       $this->weather[] = $weather->list[$i]->weather[0]->description;
       $this->temp[] = $weather->list[$i]->main->temp;
       $this->wind[] = $weather->list[$i]->wind->speed;
+      $this->clouds[] = $weather->list[$i]->clouds->all;
       $this->tide[] = $tide[$i];
       $this->fi[] = $fi[$i];
     }
