@@ -65,15 +65,44 @@ class UsersController extends Controller
     }
 
     /**
-     * ユーザー情報の修正内容を保存
+     * ユーザー情報を削除
      * 
      * @param int $user_id
+     * return redirect
+     */
+    public function delete($user_id)
+    {
+        if(!(Auth::check() && Auth::user()->admin >= 1)) {
+            return redirect( route('error.admin') );
+        }
+
+        $user = User::find($user_id);
+
+        //自分は消すことができない
+        if($user_id == Auth::user()->id){
+            return redirect( route('user.list'))->with('flash_message','自分のユーザーデータを消すことはできません。');
+        }
+
+        //自分よりも高い権限or自分と同じ権限は消すことはできない
+        if($user->admin >= Auth::user()->admin){
+            return redirect( route('user.list') )->with('flash_message','自分の権限以上のユーザーは消すことができません');
+        }
+
+        $user->delete();
+
+        return redirect( route('user.list'))->with('flash_message','削除しました');
+    }
+
+    /**
+     * ユーザー情報の修正内容を保存
+     *
+     * @param int $user_id
      * @param Request $request
-     * 
+     *
      * return redirect
      */
     public function edit(Request $request,$user_id){
-        if(!(Auth::user()->admin >= 1)){
+        if(!(Auth::check() && (Auth::user()->admin >= 1))){
             return view('error.admin');
         }
 
@@ -94,7 +123,7 @@ class UsersController extends Controller
             return redirect( route('user.list') )->with('flash_message','自分より高い権限のユーザーを設定することはできません。');
         }
 
-        $user->admin = $request->admin_id; 
+        $user->admin = $request->admin_id;
         $user->save();
 
         return redirect( route('user.list') )->with('flash_message','修正しました');
