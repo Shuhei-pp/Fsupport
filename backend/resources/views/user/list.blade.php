@@ -30,11 +30,11 @@
               </thead>
               <?php  foreach($users as $user) {?>
                 <tr>
-                  <td>{{ $user->id }}</td>
+                  <td>{{ $user->user_id }}</td>
                   <td>{{ $user->email }}</td>
                   <td>{{ $user->rank }}</td>
                   <td>
-                    <a href=" {{ route('user.edit',['user_id' => $user->id]) }} ">
+                    <a href=" {{ route('user.edit',['user_id' => $user->user_id]) }} ">
                       <button class="btn btn-success">編集</button>
                     <a>
                   </td>

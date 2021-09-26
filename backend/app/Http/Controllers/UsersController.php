@@ -42,7 +42,29 @@ class UsersController extends Controller
     }
 
     /**
-     * adminだけをユーザー編集ページに遷移させる
+     * ユーザー編集ページに遷移
+     * 
+     * @param int $user_id
+     * return view
+     */
+    public function showEditPage($user_id)
+    {
+        if(!(Auth::check() && (Auth::user()->admin >= 1))){
+            return view('error.admin');
+        }
+
+        $user = DB::table('users')
+                    ->join('admin_ranks','users.admin','=','admin_ranks.id')
+                    ->where('users.id',$user_id)
+                    ->get();
+
+        var_dump($user);
+
+        //return view('user.edit', compact('user'));
+    }
+
+    /**
+     * adminだけをユーザー一覧ページに遷移させる
      * 
      * return view
      */
@@ -53,7 +75,9 @@ class UsersController extends Controller
             return view('error.admin');
         }
 
-        $users = User::join('admin_ranks','users.admin','=','admin_ranks.id')->get();
+        $users = User::select('users.id as user_id','users.email','admin_ranks.rank')
+                    ->join('admin_ranks','users.admin','=','admin_ranks.id')
+                    ->get();
 
         return view('user.list', compact('users'));
     }

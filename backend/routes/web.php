@@ -22,7 +22,7 @@ Route::get('/area/{area_id}', [App\Http\Controllers\AreaController::class,'showA
 
 //ユーザー系ルーティング
 Route::get('/user/list', [App\Http\Controllers\UsersController::class,'showListPage'])->name('user.list');
-Route::get('/user/edit', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user.edit');
+Route::get('/user/edit/{user_id}', [App\Http\Controllers\UsersController::class,'showEditPage'])->name('user.edit');
 Route::get('/user/mypage/{user_id}', [App\Http\Controllers\UsersController::class,'showMyPage'])->name('user.mypage');
 
 //釣果系ルーティング
