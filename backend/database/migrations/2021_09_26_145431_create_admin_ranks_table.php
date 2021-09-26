@@ -14,7 +14,7 @@ class CreateAdminRanksTable extends Migration
     public function up()
     {
         Schema::create('admin_ranks', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id')->default(0);
             $table->string('rank');
         });
     }
