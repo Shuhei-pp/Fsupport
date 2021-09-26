@@ -73,7 +73,7 @@
                                         @csrf
                                     </form>
 
-                                    @if(Auth::user()->admin == 1)
+                                    @if(Auth::user()->admin >= 1)
                                         <a class="dropdown-item" href="{{ route('user.edit') }}">
                                             ユーザー管理ページ
                                         </a>
