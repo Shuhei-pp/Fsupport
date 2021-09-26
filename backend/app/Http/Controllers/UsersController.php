@@ -58,9 +58,10 @@ class UsersController extends Controller
                     ->where('users.id',$user_id)
                     ->get();
 
-        var_dump($user);
+        $admins = DB::table('admin_ranks')
+                    ->get();
 
-        //return view('user.edit', compact('user'));
+        return view('user.edit', compact('user','user_id','admins'));
     }
 
     /**
