@@ -65,6 +65,42 @@ class UsersController extends Controller
     }
 
     /**
+     * ユーザー情報の修正内容を保存
+     * 
+     * @param int $user_id
+     * @param Request $request
+     * 
+     * return redirect
+     */
+    public function edit(Request $request,$user_id){
+        if(!(Auth::user()->admin >= 1)){
+            return view('error.admin');
+        }
+
+        $user = User::find($user_id);
+
+        //自分の権限は編集できない
+        if($user_id == Auth::id()){
+            return redirect( route('user.list') )->with('flash_message','自分の権限を設定することはできません。');
+        }
+
+        //自分よりも高い権限設定は禁止
+        if($request->admin_id > Auth::user()->admin){
+            return redirect( route('user.list') )->with('flash_message','他のユーザーに自分より高い権限を設定することはできません。');
+        }
+
+        //自分よりも高い権限のユーザーは編集できない
+        if($user->admin > Auth::user()->admin){
+            return redirect( route('user.list') )->with('flash_message','自分より高い権限のユーザーを設定することはできません。');
+        }
+
+        $user->admin = $request->admin_id; 
+        $user->save();
+
+        return redirect( route('user.list') )->with('flash_message','修正しました');
+    }
+
+    /**
      * adminだけをユーザー一覧ページに遷移させる
      * 
      * return view

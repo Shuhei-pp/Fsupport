@@ -5,18 +5,18 @@
     <div class="card">
       <div class="card-header">ユーザー編集 {{ $user[0]->email }}</div>
       <div class="card-body">
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('post.edit.user',['user_id' => $user_id]) }}">
         @csrf
 
           <div class="form-group row">
             <label class="col-md-4 col-form-label text-md-right">権限</label>
             <div class="col-md-6">
-              <select name="area_id" class="form-control" >
+              <select name="admin_id" class="form-control" >
                 <?php foreach($admins as $admin) { ?>
                   <?php if($user[0]->admin == $admin->id) { ?>
-                    <option value="{{ $user_id }}" selected="selected">{{ $admin->rank }}</option>
+                    <option value="{{ $admin->id }}" selected="selected">{{ $admin->rank }}</option>
                   <?php }else { ?>
-                    <option value="{{ $user_id }}">{{ $admin->rank }}</option>
+                    <option value="{{ $admin->id }}">{{ $admin->rank }}</option>
                   <?php } ?>
 
                 <?php } ?>
