@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAdminToUserTable extends Migration
+class CreateAdminRanksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddAdminToUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('admin')->default(0);
+        Schema::create('admin_ranks', function (Blueprint $table) {
+            $table->integer('id')->default(0);
+            $table->string('rank');
         });
     }
 
@@ -25,8 +26,6 @@ class AddAdminToUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('admin');
-        });
+        Schema::dropIfExists('admin_ranks');
     }
 }
