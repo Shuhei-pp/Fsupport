@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 //Models
 use App\Models\Fishingrecord;
 use App\Models\Area;
+use App\Models\User;
 
 //DB
 use Illuminate\Support\Facades\DB;
@@ -47,9 +48,13 @@ class UsersController extends Controller
      */
     public function showEditPage()
     {
-        if(Auth::check() && Auth::user()->admin){
-            return view('user.edit');
+        //違った場合エラーページへ
+        if(!(Auth::check() && Auth::user()->admin)){
+            return view('error.admin');
         }
-        return view('error.admin');
+        
+        $users = User::join('admin_ranks','users.admin','=','admin_ranks.id')->get();
+
+        return view('user.edit', compact('users'));
     }
 }

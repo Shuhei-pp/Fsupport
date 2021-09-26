@@ -14,16 +14,22 @@
                 <tbody>
                   <thead>
                     <th>
-                      i
+                      ユーザーID
                     </th>
                     <th>
-                      j
+                      メールアドレス
+                    </th>
                     <th>
+                      admin
+                    </th>
                   </thead>
-                  <tr>
-                    <td>1</td>
-                    <td>2</td>
-                  </tr>
+                  <?php  foreach($users as $user) {?>
+                    <tr>
+                      <td>{{ $user->id }}</td>
+                      <td>{{ $user->email }}</td>
+                      <td>{{ $user->rank }}</td>
+                    </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </div>
