@@ -22,12 +22,28 @@
                     <th>
                       admin
                     </th>
+                    <th>
+                      編集
+                    </th>
+                    <th>
+                      削除
+                    </th>
                   </thead>
                   <?php  foreach($users as $user) {?>
                     <tr>
                       <td>{{ $user->id }}</td>
                       <td>{{ $user->email }}</td>
                       <td>{{ $user->rank }}</td>
+                      <td>
+                        <a href="#">
+                          <button class="btn btn-success">編集</button>
+                        <a>
+                      </td>
+                      <td>
+                        <a href="#">
+                          <button class="btn btn-danger">削除</button>
+                        <a>
+                      </td>
                     </tr>
                   <?php } ?>
                 </tbody>
