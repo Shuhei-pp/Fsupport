@@ -104,7 +104,8 @@
             <label class="col-md-4 col-form-label text-md-right">釣った時間</label>
 
             <div class="col-md-6">
-              <input class="form-control" name="time" type="datetime-local">
+              <input class="form-control pb-3" name="date" type="date">
+              <input class="form-control" name="time" type="time">
 
               <?php if ($errors->has('time')) {?>
                 <span class="text-danger" role="alert">
