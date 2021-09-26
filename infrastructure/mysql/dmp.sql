@@ -30,7 +30,7 @@ VALUES
   (16,3,'富山',NOW(),NOW());
 
 INSERT INTO 
-  `admin_ranks` (`id`,`admin`) 
+  `admin_ranks` (`id`,`rank`) 
 VALUES 
   (0,'ユーザー'),
   (1,'サイト編集者'),
