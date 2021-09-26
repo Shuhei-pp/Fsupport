@@ -74,7 +74,7 @@
                                     </form>
 
                                     @if(Auth::user()->admin >= 1)
-                                        <a class="dropdown-item" href="{{ route('user.edit') }}">
+                                        <a class="dropdown-item" href="{{ route('user.list') }}">
                                             ユーザー管理ページ
                                         </a>
                                     @endif

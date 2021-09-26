@@ -34,7 +34,7 @@
                   <td>{{ $user->email }}</td>
                   <td>{{ $user->rank }}</td>
                   <td>
-                    <a href="#">
+                    <a href=" {{ route('user.edit',['user_id' => $user->id]) }} ">
                       <button class="btn btn-success">編集</button>
                     <a>
                   </td>
