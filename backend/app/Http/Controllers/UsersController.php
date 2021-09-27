@@ -137,7 +137,7 @@ class UsersController extends Controller
     public function showListPage()
     {
         //違った場合エラーページへ
-        if(!(Auth::check() && Auth::user()->admin)){
+        if(!(Auth::check() && (Auth::user()->admin >= 1))){
             return view('error.admin');
         }
 
