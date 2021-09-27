@@ -125,10 +125,13 @@ class FishingRecordController extends Controller
         $rules = [
             'content' => 'required|string|max:256',
             'picture' => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            'time' => 'required|before:"now"'
+            'date' => 'required|before:"now"',
+            'time' => 'required'
         ];
 
         $this->validate($request,$rules);
+
+        $datetime = $request->date." ".$request->time;
 
         $image_path = $request->file('picture')->store('public/result_images/');
 
@@ -137,7 +140,8 @@ class FishingRecordController extends Controller
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;
         $frecord->image_name = basename($image_path);
-        $frecord->time = $request->time;
+        //$frecord->time = $request->time;
+        $frecord->datetime = $datetime;
 
         $frecord->save();
 
