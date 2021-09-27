@@ -36,6 +36,7 @@ class UsersController extends Controller
         $posts = DB::table('areas')
                                 ->leftjoin('fishingrecords', 'fishingrecords.area_id', '=', 'areas.id')
                                 ->where('user_id', '=', $user->id)
+                                ->orderBy('datetime','desc')
                                 ->get();
 
         return view('user.mypage',compact('user','posts','areas'));
