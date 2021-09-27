@@ -19,7 +19,7 @@
                 <div class="container">
                   <p>釣果:{{ $post->content }}</p>
                   <p>エリア:{{ $post->area_name}}</p>
-                  <p>日時:{{ $post->time}}</p>
+                  <p>日時:{{ $post->datetime}}</p>
                 </div>
               </div>
             </div>

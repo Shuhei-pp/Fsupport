@@ -66,19 +66,23 @@ class FishingRecordController extends Controller
         $rules = [
             'content' => 'required|string|max:256',
             'picture' => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            'time' => 'required|before:"now"'
+            'date' => 'required|before:"now"',
+            'time' => 'required'
         ];
 
         $this->validate($request,$rules);
 
         $image_path = $request->file('picture')->store('public/result_images/');
 
+        $datetime = $request->date." ".$request->time;
+
         $frecord = Fishingrecord::find($fresult->id);
         $frecord->user_id = Auth::user()->id;
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;
         $frecord->image_name = basename($image_path);
-        $frecord->time = $request->time;
+        //$frecord->time = $request->time;
+        $frecord->datetime = $datetime;
 
         $frecord->save();
 
@@ -86,7 +90,7 @@ class FishingRecordController extends Controller
     }
 
     /**
-     * 釣果登録ページに遷移
+     * 釣果編集ページに遷移
      * 
      * @param $fresult_id
      * return view
@@ -101,11 +105,16 @@ class FishingRecordController extends Controller
         $fresult = Fishingrecord::where('id', $fresult_id)->first();
         $areas = Area::all();
 
+        $datetime = explode(' ', $fresult->datetime);
+
+        $date = $datetime[0];
+        $time = $datetime[1];
+
         //user_idとログインユーザーが一致しない場合もリダイレクト
         if(Auth::user()->id != $fresult->user_id){
             return redirect('login')->with('flash_message','投稿しているユーザーとは違うユーザーです。ログインし直してください');
         }
-        return view('fresult.p_edit',compact('fresult','areas'));
+        return view('fresult.p_edit',compact('fresult','areas','date','time'));
     }
 
     /**
@@ -125,10 +134,13 @@ class FishingRecordController extends Controller
         $rules = [
             'content' => 'required|string|max:256',
             'picture' => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            'time' => 'required|before:"now"'
+            'date' => 'required|before:"now"',
+            'time' => 'required'
         ];
 
         $this->validate($request,$rules);
+
+        $datetime = $request->date." ".$request->time;
 
         $image_path = $request->file('picture')->store('public/result_images/');
 
@@ -137,7 +149,8 @@ class FishingRecordController extends Controller
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;
         $frecord->image_name = basename($image_path);
-        $frecord->time = $request->time;
+        //$frecord->time = $request->time;
+        $frecord->datetime = $datetime;
 
         $frecord->save();
 

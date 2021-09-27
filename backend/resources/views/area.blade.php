@@ -104,7 +104,15 @@
             <label class="col-md-4 col-form-label text-md-right">釣った時間</label>
 
             <div class="col-md-6">
-              <input class="form-control" name="time" type="datetime-local">
+              <input class="form-control" name="date" type="date">
+
+              @if ($errors->has('date'))
+                <div class="text-danger" role="alert">
+                  <strong>{{ $errors->first('date') }}</strong>
+                </div>
+              @endif
+
+              <input class="form-control mt-3" name="time" type="time">
 
               <?php if ($errors->has('time')) {?>
                 <span class="text-danger" role="alert">
