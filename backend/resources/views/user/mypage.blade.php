@@ -12,7 +12,7 @@
         <div class="card-body">
 
           <!-- 釣果投稿がない場合 -->
-          @if (count(get_object_vars($posts))==0)
+          @if (count($posts)==0)
             <p>釣果がまだ登録されていません</p>
           @endif
 
