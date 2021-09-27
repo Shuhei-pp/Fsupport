@@ -86,7 +86,7 @@ class FishingRecordController extends Controller
     }
 
     /**
-     * 釣果登録ページに遷移
+     * 釣果ページに遷移
      * 
      * @param $fresult_id
      * return view
@@ -101,11 +101,16 @@ class FishingRecordController extends Controller
         $fresult = Fishingrecord::where('id', $fresult_id)->first();
         $areas = Area::all();
 
+        $datetime = explode(' ', $fresult->datetime);
+
+        $date = $datetime[0];
+        $time = $datetime[1];
+
         //user_idとログインユーザーが一致しない場合もリダイレクト
         if(Auth::user()->id != $fresult->user_id){
             return redirect('login')->with('flash_message','投稿しているユーザーとは違うユーザーです。ログインし直してください');
         }
-        return view('fresult.p_edit',compact('fresult','areas'));
+        return view('fresult.p_edit',compact('fresult','areas','date','time'));
     }
 
     /**
