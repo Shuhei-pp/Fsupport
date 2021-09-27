@@ -66,19 +66,23 @@ class FishingRecordController extends Controller
         $rules = [
             'content' => 'required|string|max:256',
             'picture' => 'required|image|mimes:jpeg,jpg,png|max:2048',
-            'time' => 'required|before:"now"'
+            'date' => 'required|before:"now"',
+            'time' => 'required'
         ];
 
         $this->validate($request,$rules);
 
         $image_path = $request->file('picture')->store('public/result_images/');
 
+        $datetime = $request->date." ".$request->time;
+
         $frecord = Fishingrecord::find($fresult->id);
         $frecord->user_id = Auth::user()->id;
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;
         $frecord->image_name = basename($image_path);
-        $frecord->time = $request->time;
+        //$frecord->time = $request->time;
+        $frecord->datetime = $datetime;
 
         $frecord->save();
 
@@ -86,7 +90,7 @@ class FishingRecordController extends Controller
     }
 
     /**
-     * 釣果ページに遷移
+     * 釣果編集ページに遷移
      * 
      * @param $fresult_id
      * return view
