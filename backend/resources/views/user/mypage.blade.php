@@ -10,6 +10,12 @@
       <div class="card">
         <div class="card-header">釣果一覧</div>
         <div class="card-body">
+
+          <!-- 釣果投稿がない場合 -->
+          @if (count(get_object_vars($posts))==0)
+            <p>釣果がまだ登録されていません</p>
+          @endif
+
           <?php foreach($posts as $post) {?>
             <div class="media">
               <div class="media-left" href="#">
@@ -19,7 +25,7 @@
                 <div class="container">
                   <p>釣果:{{ $post->content }}</p>
                   <p>エリア:{{ $post->area_name}}</p>
-                  <p>日時:{{ $post->time}}</p>
+                  <p>日時:{{ $post->datetime}}</p>
                 </div>
               </div>
             </div>
