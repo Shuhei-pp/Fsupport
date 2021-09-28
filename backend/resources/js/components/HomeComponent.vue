@@ -1,4 +1,6 @@
 <template>
+
+<div>
   <div class="container">
     <div class="card">
       <div class="card-header">Fishing Indexとは</div>
@@ -9,31 +11,52 @@
       </div>
     </div>
   </div>
-<!--
   <div class="container mt-5">
     <div class="col-6 mx-auto">
+      <div v-for="(bigarea, index) in bigareas" :key="index">
+        <h5>{{ bigarea.bigarea_name }}</h5>
 
-      <?php foreach($bigareas as $bigarea) { ?>
-        <h5>{{ $bigarea->bigarea_name }}</h5>
-
-        <ul class="list-unstyled">
-          <?php foreach($areas as $area) { ?>
-            <?php if($bigarea->bigarea_id == $area->bigarea_id) { ?>
-              <li><a href={{ route('area.show', ['area_id' => $area->id]); }}>{{ $area->area_name }}</a></li>
-            <?php } ?>
-          <?php } ?>
+        <ul class="list-unstyled" v-for="(area, index) in areas" :key="index">
+              <li v-if="area.bigarea_id == bigarea.bigarea_id">
+                {{ area.area_name }}
+              </li>
         </ul>
 
-      <?php } ?>
 
+  <!--
       <?php if (Auth::check() && (Auth::user()->admin >= 1)){ ?>{{--管理者かどうか--}}
         <a href={{ route('area_edit') }}><button class="btn btn-primary">エリア追加を行う</button></a>
-      <?php } ?>
+      <?php } ?>-->
+      </div>
     </div>
-  </div>-->
+  </div>
+</div>
   
 </template>
 
 <script>
-  export default {} 
+  export default {
+    data: function() {
+      return {
+        bigareas: [],
+        areas: []
+      }
+    },
+    methods: {
+      getAreas() {
+        $.ajax({
+          type: 'get',
+          url: '/api',
+          datetype: 'json'
+        })
+        .then((res) => {
+          this.bigareas = res.bigareas;
+          this.areas = res.areas;
+        });
+      }
+    },
+    mounted() {
+      this.getAreas();
+    }
+  }
 </script>
