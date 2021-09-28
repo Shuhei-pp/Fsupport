@@ -14,8 +14,8 @@ class CreateDisabledsTable extends Migration
     public function up()
     {
         Schema::create('disableds', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->integer('disabled_id');
+            $table->string('disabled_status_name');
         });
     }
 
