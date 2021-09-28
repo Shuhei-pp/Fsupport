@@ -1,59 +1,46 @@
 <template>
   <div>
     <div class="container">
-      <h3>{{ areaname }}エリア</h3><!--
+      <h3>{{ areaname }}エリア</h3>
       <div class="table-responsive">
         <table class="table table-bordered">
           <caption>このエリアの天気</caption>
           <thead class="table-dark">
             <tr>
-              <th>日付</th>-->
-                <th v-for="(time, index) in times" :key="index">{{ time }}</th>
-              <!--
+              <th>日付</th>
+              <th v-for="time in info.times">{{ time }}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th>天気</th>
-              <?php for($i=0;$i<8;$i++) {?>
-                <td>{{ $info->weather[$i] }}</td>
-              <?php } ?>
+              <td v-for="weather in info.weather">{{ weather }}</td>
             </tr>
             <tr>
               <th>気温(°c)</th>
-              <?php for($i=0;$i<8;$i++) {?>
-                <td>{{ $info->temp[$i] }}</td>
-              <?php }?>
+              <td v-for="temp in info.temp">{{ temp }}</td>
             </tr>
             <tr>
               <th>風速(m/s)</th>
-              <?php for($i=0;$i<8;$i++) {?>
-                <td>{{ $info->wind[$i] }}</td>
-              <?php }?>
+              <td v-for="wind in info.wind">{{ wind }}</td>
             </tr>
             <tr>
               <th>空における雲の割合(%)</th>
-              <?php foreach($info->clouds as $cloud) {?>
-                <td>{{ $cloud }}</td>
-              <?php }?>
+              <td v-for="cloud in info.clouds">{{ cloud }}</td>
             </tr>
             <tr>
             <tr>
               <th>潮の高さ(cm)</th>
-              <?php foreach($info->tide as $tide) {?>
-                <td>{{ $tide }}</td>
-              <?php }?>
+              <td v-for="tide in info.tide">{{ tide }}</td>
             </tr>
             <tr>
               <th>FI</th>
-              <?php foreach($info->fi as $fi) {?>
-                <td>{{ $fi }}</td>
-              <?php }?>
+              <td v-for="fi in info.fi">{{ fi }}</td>
             </tr>
             
           </tbody>
         </table>
-      </div>-->
+      </div>
     </div>
 <!--
     <div class="container">
@@ -159,7 +146,10 @@
     data: function () {
       return {
         areaname: null,
-        times: []
+        times: [],
+        weathers: [],
+        info: {}      
+
       }
     },
     methods: {
@@ -171,7 +161,7 @@
         })
         .then((res) =>{
           this.areaname = res.area_name;
-          this.times = res.info.times;
+          this.info = res.info
         });
       }
     },
