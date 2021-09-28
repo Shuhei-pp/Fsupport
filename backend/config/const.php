@@ -4,4 +4,8 @@
 
 return [
   'USER_STATUS' => ['DEACTIVE' => '0', 'PRE_REGISTER' => '1', 'MAIL_AUTHED' => '2','MANAGER' => '9'],
+
+
+  // 1:利用停止
+  'DISABLED_STATUS' => ['DISABLED' => '1'],
 ];
