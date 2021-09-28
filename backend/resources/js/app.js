@@ -1,3 +1,7 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import HomeComponent from './components/HomeComponent.vue';
+
 //import HeaderComponent from "./components/HeaderComponent.vue"
 
 /**
@@ -9,6 +13,20 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+
+//Vue.js routing
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/vue',
+            name: 'vue.home',
+            component: HomeComponent
+        },
+    ]
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -32,4 +50,5 @@ Vue.component('header-component', require('./components/Layouts/HeaderComponent.
 
 const app = new Vue({
     el: '#app',
+    router
 });
