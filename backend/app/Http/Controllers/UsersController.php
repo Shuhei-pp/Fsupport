@@ -79,19 +79,25 @@ class UsersController extends Controller
 
         $user = User::find($user_id);
 
-        //自分は消すことができない
+        //自分を利用停止にすることはできない
         if($user_id == Auth::user()->id){
-            return redirect( route('user.list'))->with('flash_message','自分のユーザーデータを消すことはできません。');
+            return redirect( route('user.list'))->with('flash_message','自分を利用停止にすることはできません。');
         }
 
-        //自分よりも高い権限or自分と同じ権限は消すことはできない
+        //自分よりも高い権限or自分と同じ権限は利用停止にできない
         if($user->admin >= Auth::user()->admin){
-            return redirect( route('user.list') )->with('flash_message','自分の権限以上のユーザーは消すことができません');
+            return redirect( route('user.list') )->with('flash_message','自分の権限以上のユーザーは利用停止にすることができません');
         }
 
-        $user->delete();
+        //既に利用停止の場合
+        if($user->disabled_status == config('const.DISABLED_STATUS.DISABLED')){
+            return redirect( route('user.list') )->with('flash_message','自分の権限以上のユーザーは利用停止にすることができません');
+        }
 
-        return redirect( route('user.list'))->with('flash_message','削除しました');
+        $user->disabled_status = config('const.DISABLED_STATUS.DISABLED');
+        $user->save();
+
+        return redirect( route('user.list'))->with('flash_message','利用停止にしました。');
     }
 
     /**
