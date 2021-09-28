@@ -29,7 +29,7 @@
 
     <?php } ?>
 
-    <?php if (Auth::check() && (Auth::user()->admin >= 1)){ ?>{{--管理者かどうか--}}
+    <?php if (Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER'))){ ?>{{--管理者かどうか--}}
       <a href={{ route('area_edit') }}><button class="btn btn-primary">エリア追加を行う</button></a>
     <?php } ?>
   </div>
