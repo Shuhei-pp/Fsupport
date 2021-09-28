@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomeComponent from './components/HomeComponent.vue';
+import AreaShowComponent from './components/Areas/AreaShowComponent.vue';
 
 //import HeaderComponent from "./components/HeaderComponent.vue"
 
@@ -24,6 +25,12 @@ const router = new VueRouter({
             path: '/vue',
             name: 'vue.home',
             component: HomeComponent
+        },
+        {
+            path: '/vue/area/:areaId',
+            name: 'area.show',
+            component: AreaShowComponent,
+            props: true
         },
     ]
 });
