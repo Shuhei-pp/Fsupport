@@ -73,7 +73,7 @@
                                         @csrf
                                     </form>
 
-                                    @if(Auth::user()->admin >= 1)
+                                    @if(Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER'))
                                         <a class="dropdown-item" href="{{ route('user.list') }}">
                                             ユーザー管理ページ
                                         </a>

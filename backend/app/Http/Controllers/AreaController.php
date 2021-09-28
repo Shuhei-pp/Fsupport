@@ -77,7 +77,7 @@ class AreaController extends Controller
     public function toEditAreaPage()
     {
         //管理者じゃなかった場合はエラーページを返す
-        if(Auth::check() && (Auth::user()->admin >= 1)){
+        if(Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER'))){
             $bigareas = Bigarea::all();
             return view('area.edit',compact('bigareas'));
         }

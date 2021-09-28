@@ -50,7 +50,7 @@ class UsersController extends Controller
      */
     public function showEditPage($user_id)
     {
-        if(!(Auth::check() && (Auth::user()->admin >= 1))){
+        if(!(Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER')))){
             return view('error.admin');
         }
 
@@ -73,7 +73,7 @@ class UsersController extends Controller
      */
     public function delete($user_id)
     {
-        if(!(Auth::check() && Auth::user()->admin >= 1)) {
+        if(!(Auth::check() && Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER'))) {
             return redirect( route('error.admin') );
         }
 
@@ -109,7 +109,7 @@ class UsersController extends Controller
      * return redirect
      */
     public function edit(Request $request,$user_id){
-        if(!(Auth::check() && (Auth::user()->admin >= 1))){
+        if(!(Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER')))){
             return view('error.admin');
         }
 
@@ -144,7 +144,7 @@ class UsersController extends Controller
     public function showListPage()
     {
         //違った場合エラーページへ
-        if(!(Auth::check() && (Auth::user()->admin >= 1))){
+        if(!(Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER')))){
             return view('error.admin');
         }
 
