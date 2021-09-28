@@ -100,7 +100,7 @@ class AreaController extends Controller
 
         $area_name = Area::find($area_id)->area_name;
 
-        return view('area',compact('info','areas','area_id','area_name'));
+        return compact('info','areas','area_id','area_name');
     }
 
 
