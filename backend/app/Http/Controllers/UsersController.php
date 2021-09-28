@@ -142,8 +142,9 @@ class UsersController extends Controller
             return view('error.admin');
         }
 
-        $users = User::select('users.id as user_id','users.email','admin_ranks.rank')
+        $users = User::select('users.id as user_id','users.email','admin_ranks.rank','disableds.disabled_id','disableds.disabled_status_name')
                     ->join('admin_ranks','users.admin','=','admin_ranks.id')
+                    ->leftjoin('disableds','users.disabled_status','=','disableds.disabled_id')
                     ->get();
 
         return view('user.list', compact('users'));

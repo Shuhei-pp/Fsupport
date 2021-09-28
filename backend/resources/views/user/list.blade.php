@@ -27,6 +27,9 @@
                 <th>
                   削除
                 </th>
+                <th>
+                  利用ステータス
+                </th>
               </thead>
               <?php  foreach($users as $user) {?>
                 <tr>
@@ -43,6 +46,12 @@
                     <a href=" {{ route('user.delete',['user_id' => $user->user_id]) }}">
                       <button id="{{ $user->user_id }}" style="display:none;"></button>
                     </a>
+                  </td>
+
+                  <td>
+                    @if($user->disabled_id)
+                      {{ $user->disabled_status_name }}
+                    @endif
                   </td>
                 </tr>
               <?php } ?>

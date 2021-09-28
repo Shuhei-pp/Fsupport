@@ -19,7 +19,7 @@ class DisabledsTableSeeder extends Seeder
         DB::table('disableds')->insert(
             [
                 'disabled_id' => config('const.DISABLED_STATUS.DISABLED'),
-                'disabled_status_name' => '利用停止'
+                'disabled_status_name' => '利用停止中'
             ]
         );
     }
