@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+/*
 // check: routeは->name()で名前をつけられる！　viewのURL修正も楽になるから修正しよう
 //エリア系ルーティング
 Route::get('/', [App\Http\Controllers\AreaController::class,'index']);
@@ -36,12 +36,12 @@ Route::get('/fresult/delete/{fresult_id}',[App\Http\Controllers\FishingRecordCon
 
 Route::post('/register/pre_check', 'App\Http\Controllers\Auth\RegisterController@preCheck')->name('register.pre_check');
 Route::get('/register/verify/{token}', 'App\Http\Controllers\Auth\RegisterController@showMyPage');
-
+*/
 //Auth
 Auth::routes();
 
 //vue routing
-Route::get('/vue',function(){
+Route::get('/{any}',function(){
     return view('vue.app');
 })->where('any','.*');
 
