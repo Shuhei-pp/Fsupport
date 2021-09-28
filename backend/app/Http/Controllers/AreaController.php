@@ -108,6 +108,6 @@ class AreaController extends Controller
     {
         $areas = Area::all();
         $bigareas = Bigarea::all();
-        return view('home',compact('areas','bigareas'));
+        return compact('areas','bigareas');
     }
 }
