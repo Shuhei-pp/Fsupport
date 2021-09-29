@@ -27,8 +27,12 @@ class MyPageController extends Controller
      *        Area $areas
      *        obj $posts
      */
-    public function apiForMyPage($user_id)
+    public function showMyPage($user_id)
     {
+        //ログインしていなかったらログインページへ返す
+        if(!Auth::check()){
+            return redirect(route('login'))->with('flash_message','ログインしてください');
+        }
         $user = DB::table('users')->find($user_id);
 
         $areas = Area::all();
@@ -40,7 +44,7 @@ class MyPageController extends Controller
                                 ->orderBy('datetime','desc')
                                 ->get();
 
-        return compact('user','posts','areas');
+        return view('user.mypage',compact('user','posts','areas'));
     }
 
 }

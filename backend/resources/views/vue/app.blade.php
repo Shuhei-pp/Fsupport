@@ -69,7 +69,6 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                    {{--
                                     @if(Auth::check())
                                         <a class="dropdown-item" href={{ route('user.mypage',['user_id' => Auth::user()->id]) }}>
                                             マイページ
@@ -81,7 +80,6 @@
                                             ユーザー管理ページ
                                         </a>
                                     @endif
-                                    --}}
                                 </div>
                             </li>
                         @endguest

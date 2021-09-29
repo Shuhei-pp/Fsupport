@@ -2,8 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomeComponent from './components/HomeComponent.vue';
 import AreaShowComponent from './components/Areas/AreaShowComponent.vue';
-import MypageComponent from './components/Users/MypageComponent.vue';
-
 //import HeaderComponent from "./components/HeaderComponent.vue"
 
 /**
@@ -33,12 +31,6 @@ const router = new VueRouter({
             component: AreaShowComponent,
             props: true
         },
-        {
-            path: '/user/mypage/:userId',
-            name: 'user.mypage',
-            component: MypageComponent,
-            props: true
-        }
     ]
 });
 
