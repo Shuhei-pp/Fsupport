@@ -11,23 +11,21 @@
         <div class="card-body">
 
           <!-- 釣果投稿がない場合 -->
-          <!--@if (count($posts)==0)
-            <p>釣果がまだ登録されていません</p>
-          @endif-->
+          <p v-if="frecords.length == 0">釣果がまだ登録されていません</p>
 
-          <!--<?php foreach($posts as $post) {?>
+          <div v-for="frecord in frecords">
             <div class="media">
               <div class="media-left" href="#">
-                <img class="media-object" width="150px" src="{{ asset('storage/result_images/'.$post->image_name) }}">
+                <img class="media-object" width="150px" :src="'/storage/result_images/'+frecord.image_name ">
               </div>
               <div class="media-body">
                 <div class="container">
-                  <p>釣果:{{ $post->content }}</p>
-                  <p>エリア:{{ $post->area_name}}</p>
-                  <p>日時:{{ $post->datetime}}</p>
+                  <p>釣果:{{ frecord.content }}</p>
+                  <p>エリア:{{ frecord.area_name}}</p>
+                  <p>日時:{{ frecord.datetime}}</p>
                 </div>
               </div>
-            </div>
+            </div><!--
             <div class="container pt-1">
               <a href="{{ route('edit.fresult',['fresult_id' => $post->id]) }}">
                 <button class="btn btn-success">釣果修正</button>
@@ -36,9 +34,9 @@
               <a href="{{ route('delete.fresult',['fresult_id' => $post->id]) }}">
                 <button id="{{ $post->id }}" style="display: none"></button> 
               </a>
-            </div>
+            </div>-->
             <hr />
-          <?php } ?>  -->
+          </div>
         </div>
       </div>
     </div>
@@ -66,7 +64,7 @@
     },
     data: function () {
       return {
-        frecord: []
+        frecords: []
       }
     },
     methods: {
