@@ -47,27 +47,26 @@
       <div class="py-3">
         <canvas id="chart" class=""></canvas>
       </div>
-    </div><!--
+    </div>
 
     <div class="container">
       <div class="card">
         <div class="card-header">釣果登録</div>
 
         <div class="card-body">
-          <form method="POST" action="{{ route('create.fresult') }}" enctype="multipart/form-data">
-              @csrf
+          <form v-on:submit.prevent="submit" enctype="multipart/form-data">
 
             <div class="form-group row">
               <label for="email" class="col-md-4 col-form-label text-md-right">釣果内容</label>
 
               <div class="col-md-6">
-                <input class="form-control" name="content">
-
+                <input class="form-control" name="content" v-model="frecord.content">
+<!--
                 <?php if($errors->has('content')) {?>
                   <span class="text-danger" role="alert">
                     <strong>{{ $errors->first('content') }}</strong>
                   </span>
-                <?php } ?>
+                <?php } ?>-->
               </div>
             </div>
 
@@ -75,13 +74,13 @@
               <label class="col-md-4 col-form-label text-md-right">写真</label>
 
               <div class="col-md-6">
-                <input class="form-control-file" name="picture" type="file">
-
+                <input class="form-control-file" name="picture" type="file" @change="onImageUploaded">
+<!--
                 <?php if ($errors->has('picture')) {?>
                   <span class="text-danger" role="alert">
                     <strong>{{ $errors->first('picture') }}</strong>
                   </span>
-                <?php } ?>
+                <?php } ?>-->
               </div>
             </div>
 
@@ -89,36 +88,31 @@
               <label class="col-md-4 col-form-label text-md-right">釣った時間</label>
 
               <div class="col-md-6">
-                <input class="form-control" name="date" type="date">
-
+                <input class="form-control" name="date" type="date" v-model="frecord.date">
+<!--
                 @if ($errors->has('date'))
                   <div class="text-danger" role="alert">
                     <strong>{{ $errors->first('date') }}</strong>
                   </div>
                 @endif
-
-                <input class="form-control mt-3" name="time" type="time">
-
+-->
+                <input class="form-control mt-3" name="time" type="time" v-model="frecord.time">
+<!--
                 <?php if ($errors->has('time')) {?>
                   <span class="text-danger" role="alert">
                     <strong>{{ $errors->first('time') }}</strong>
                   </span>
-                <?php } ?>
+                <?php } ?>-->
               </div>
             </div>
 
             <div class="form-group row">
               <label class="col-md-4 col-form-label text-md-right">釣ったエリア</label>
               <div class="col-md-6">
-                <select name="area_id" class="form-control" >
-                  <?php foreach($areas as $area) { ?>
-                    <?php if($area->id == $area_id) { ?>
-                      <option value="{{ $area->id }}" selected="selected">{{ $area->area_name }}</option>
-                    <?php }else { ?>
-                      <option value="{{ $area->id }}">{{ $area->area_name }}</option>
-                    <?php } ?>
-
-                  <?php } ?>
+                <select name="area_id" class="form-control" v-model="frecord.area_id">
+                  <option v-for="area in areas">
+                    {{ area.area_name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -133,7 +127,7 @@
           </form>
         </div>
       </div>
-    </div>-->
+    </div>
 
   </div>
 </template>
@@ -146,9 +140,10 @@
     data: function () {
       return {
         areaname: null,
-        times: [],
-        info: {}      
-
+        info: {},
+        areas: [],
+        //form送信用の空のfrecord
+        frecord: {}
       }
     },
     methods: {
@@ -161,9 +156,11 @@
         .then((res) =>{
           this.areaname = res.area_name;
           this.info = res.info;
+          this.areas = res.areas;
           this.getChart();
         });
       },
+      //グラフ作成
       getChart(){
         const labels = this.info.times;
         const data = {
@@ -184,6 +181,23 @@
           document.getElementById('chart'),
           config
         );
+      },
+      //form送信
+      submit() {
+        axios.post('/api/fresult/create', this.fresult)
+          .then((res) => {
+            this.$router.push({name: 'vue.home'});
+          });
+      },
+      onImageUploaded(event) {
+        //eventから画像データを取得
+        const image = event.target.files[0];
+        const reader = new FileReader;
+        //imageをurlに
+        reader.readAsDataURL(image);
+        reader.onload = () => {
+          this.frecord.image = reader.result;
+        }
       }
     },
     mounted() {
