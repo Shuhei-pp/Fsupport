@@ -96,8 +96,10 @@
                 {{ session('flash_message'); }}
             </div>
         <?php } ?>
-        <header-component></header-component>
+
+        <!-- vueで表示されるところ -->
         <router-view></router-view>
+
     </div>
 <!-- Scripts -->
 <script src="{{ mix('/js/app.js') }}" defer></script>
