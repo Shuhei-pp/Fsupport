@@ -42,12 +42,12 @@
         </table>
       </div>
     </div>
-<!--
+
     <div class="container">
       <div class="py-3">
         <canvas id="chart" class=""></canvas>
       </div>
-    </div>
+    </div><!--
 
     <div class="container">
       <div class="card">
@@ -147,7 +147,6 @@
       return {
         areaname: null,
         times: [],
-        weathers: [],
         info: {}      
 
       }
@@ -161,8 +160,30 @@
         })
         .then((res) =>{
           this.areaname = res.area_name;
-          this.info = res.info
+          this.info = res.info;
+          this.getChart();
         });
+      },
+      getChart(){
+        const labels = this.info.times;
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'FI(釣果指数)',
+            backgroundColor: 'rgba(255, 99, 132,0)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: this.info.fi
+          }]
+        };
+        const config = {
+          type: 'line',
+          data: data,
+          options: {}
+        };
+        var chart = new Chart(
+          document.getElementById('chart'),
+          config
+        );
       }
     },
     mounted() {
