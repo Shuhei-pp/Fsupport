@@ -18,7 +18,9 @@
 
         <ul class="list-unstyled" v-for="(area, index) in areas" :key="index">
               <li v-if="area.bigarea_id == bigarea.bigarea_id">
+                <router-link v-bind:to="{name: 'area.show', params: {areaId: area.id}}">
                 {{ area.area_name }}
+                </router-link>
               </li>
         </ul>
 
