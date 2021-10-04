@@ -9,18 +9,20 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- ChartJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
 </head>
 <body>
     <div id="app">
+        <!--ヘッダー-->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -58,11 +60,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    @if(Auth::check())
-                                        <a class="dropdown-item" href={{ route('user.mypage',['user_id' => Auth::user()->id]) }}>
-                                            マイページ
-                                        </a>
-                                    @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -72,8 +69,13 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    @if(Auth::check())
+                                        <a class="dropdown-item" href={{ route('user.mypage',['user_id' => Auth::user()->id]) }}>
+                                            マイページ
+                                        </a>
+                                    @endif
 
-                                    @if(Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER'))
+                                    @if(Auth::user()->admin >= 1)
                                         <a class="dropdown-item" href="{{ route('user.list') }}">
                                             ユーザー管理ページ
                                         </a>
@@ -93,10 +95,11 @@
             </div>
         <?php } ?>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <!-- vueで表示されるところ -->
+        <router-view></router-view>
+
     </div>
-    @yield("script")
+<!-- Scripts -->
+<script src="{{ mix('/js/app.js') }}" defer></script>
 </body>
 </html>

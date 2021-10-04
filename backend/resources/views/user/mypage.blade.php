@@ -7,9 +7,92 @@
       <div class="text-center"><h1>マイページ</h1></div>
     </div>
     <div class="col-md-8">
+
+      <div class="card mb-5">
+        <div class="card-header">釣果登録</div>
+
+        <div class="card-body">
+          <form type="POST" action={{ route('create.fresult') }} enctype="multipart/form-data">
+          @csrf
+
+            <div class="form-group row">
+              <label for="email" class="col-md-4 col-form-label text-md-right">釣果内容</label>
+
+              <div class="col-md-6">
+                <input class="form-control" name="content">
+                <?php if($errors->has('content')) {?>
+                  <span class="text-danger" role="alert">
+                    <strong>{{ $errors->first('content') }}</strong>
+                  </span>
+                <?php } ?>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">写真</label>
+
+              <div class="col-md-6">
+                <input class="form-control-file" name="picture" type="file">
+                <?php if ($errors->has('picture')) {?>
+                  <span class="text-danger" role="alert">
+                    <strong>{{ $errors->first('picture') }}</strong>
+                  </span>
+                <?php } ?>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">釣った時間</label>
+
+              <div class="col-md-6">
+                <input class="form-control" name="date" type="date">
+                @if ($errors->has('date'))
+                  <div class="text-danger" role="alert">
+                    <strong>{{ $errors->first('date') }}</strong>
+                  </div>
+                @endif
+                <input class="form-control mt-3" name="time" type="time">
+                <?php if ($errors->has('time')) {?>
+                  <span class="text-danger" role="alert">
+                    <strong>{{ $errors->first('time') }}</strong>
+                  </span>
+                <?php } ?>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">釣ったエリア</label>
+              <div class="col-md-6">
+                <select name="area_id" class="form-control">
+                  <?php foreach($areas as $area) {?>
+                    <option value="{{ $area->id }}">
+                      {{ $area->area_name }}
+                    </option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-8 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                  追加
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-header">釣果一覧</div>
         <div class="card-body">
+
+          <!-- 釣果投稿がない場合 -->
+          @if (count($posts)==0)
+            <p>釣果がまだ登録されていません</p>
+          @endif
+
           <?php foreach($posts as $post) {?>
             <div class="media">
               <div class="media-left" href="#">
@@ -19,7 +102,7 @@
                 <div class="container">
                   <p>釣果:{{ $post->content }}</p>
                   <p>エリア:{{ $post->area_name}}</p>
-                  <p>日時:{{ $post->time}}</p>
+                  <p>日時:{{ $post->datetime}}</p>
                 </div>
               </div>
             </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAdminToUserTable extends Migration
+class AddColumnUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAdminToUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('admin')->default(0);
+            $table->integer('disabled_status')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddAdminToUserTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('admin');
+            $table->dropColumn('disabled_status');
         });
     }
 }

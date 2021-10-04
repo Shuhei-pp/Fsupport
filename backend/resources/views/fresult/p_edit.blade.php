@@ -40,7 +40,15 @@
             <label class="col-md-4 col-form-label text-md-right">釣った時間</label>
 
             <div class="col-md-6">
-              <input class="form-control" name="time" type="datetime-local" value="{{ $fresult->time }}">
+              <input class="form-control" name="date" type="date" value="{{ $date }}">
+
+              <?php if ($errors->has('date')) {?>
+                <span class="text-danger" role="alert">
+                  <strong>{{ $errors->first('date') }}</strong>
+                </span>
+              <?php } ?>
+
+              <input class="form-control mt-3" name="time" type="time" value="{{ $time }}">
 
               <?php if ($errors->has('time')) {?>
                 <span class="text-danger" role="alert">

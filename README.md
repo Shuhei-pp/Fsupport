@@ -1,4 +1,16 @@
-# README
+# README　　
+  
+# アプリケーション概要　　
+エリア別に3時間ごとに釣果指数を表示するアプリケーション。  
+釣果投稿機能もあります。  
+  
+# 使用技術  
+> PHP  
+> version:8.0.10  
+  
+> Laravel  
+> version:8.51.0  
+
 # 環境構築手順
 
 ( *dockerは入っている前提です。* 入ってない場合はダウンロード →https://www.docker.com/)
@@ -54,7 +66,7 @@ http://localhost:8025/
 # コマンド集
 
 >ログ表示  
->$ docker-compose logs -f 　
+>$ docker compose logs -f 　
 
 >コンテナ初期化  
 >$ docker-compose down --rmi all --volumes --remove-orphans  

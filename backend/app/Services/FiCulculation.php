@@ -118,18 +118,14 @@ class FiCulculation
     {
       return 10/$wind;
     }
-    elseif($wind >= 1)
+    elseif($wind >= 0)
     {
-      $wind_p = (10/$wind) + 1;
-      if($wind_p >= 10){
-        return 10;
+      $wind_p = 10 - $wind;
+      if($wind_p <= 2){
+        return 2;
       }
       return $wind_p;
     }
-    elseif ($wind <= 0)
-    {
-      return 0;
-    } 
     else
     return 0;
   }
@@ -167,7 +163,10 @@ class FiCulculation
 
       //cloudpoint
       $cp = self::fiCloud($weather->list[$i]->clouds->all);
-      $fi[] = round(($wp + $sp)* $tp * $mp * $cp,2);
+
+      //81点満点なので100点満点にする
+      $max81_fi = ($wp + $sp)* $tp * $mp * $cp;
+      $fi[] = round($max81_fi*100/81,2);
     }
     return $fi;
   }
