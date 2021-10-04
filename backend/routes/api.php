@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+//Auth
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,5 +26,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //エリア系ルーティング
 Route::get('/', 'App\Http\Controllers\AreaController@index');
 Route::get('/area/{area_id}', 'App\Http\Controllers\AreaController@showArea');
+
+Route::group(['middleware' => 'api'], function() {
+    Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+    Route::get('/current_user', function (){
+        return Auth::user();
+    });
+});
 
 
