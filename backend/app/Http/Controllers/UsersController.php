@@ -17,31 +17,6 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    
-    /**
-     * マイページへ遷移
-     * 
-     * return view
-     */
-    public function showMyPage($user_id)
-    {
-        //ログインしていなかったらログインページへ返す
-        if(!Auth::check()){
-            return redirect(route('login'))->with('flash_message','ログインしてください');
-        }
-        $user = Auth::user();
-        $areas = Area::all();
-
-        //ここにこの処理を書いてもいいのかな...
-        $posts = DB::table('areas')
-                                ->leftjoin('fishingrecords', 'fishingrecords.area_id', '=', 'areas.id')
-                                ->where('user_id', '=', $user->id)
-                                ->orderBy('datetime','desc')
-                                ->get();
-
-        return view('user.mypage',compact('user','posts','areas'));
-    }
-
     /**
      * ユーザー編集ページに遷移
      * 

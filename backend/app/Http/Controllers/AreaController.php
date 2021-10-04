@@ -100,7 +100,7 @@ class AreaController extends Controller
 
         $area_name = Area::find($area_id)->area_name;
 
-        return view('area',compact('info','areas','area_id','area_name'));
+        return compact('info','areas','area_id','area_name');
     }
 
 
@@ -108,6 +108,6 @@ class AreaController extends Controller
     {
         $areas = Area::all();
         $bigareas = Bigarea::all();
-        return view('home',compact('areas','bigareas'));
+        return compact('areas','bigareas');
     }
 }
