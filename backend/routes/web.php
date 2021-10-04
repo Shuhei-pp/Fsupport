@@ -27,7 +27,7 @@ Route::get('/area/{area_id}',function(){
 // check: routeは->name()で名前をつけられる！　viewのURL修正も楽になるから修正しよう
 //エリア系ルーティング
 //Route::get('/', [App\Http\Controllers\AreaController::class,'index']);
-Route::get('/area/edit', [App\Http\Controllers\AreaController::class,'toEditAreaPage'])->name('area_edit');
+Route::get('/area/new/edit', [App\Http\Controllers\AreaController::class,'toEditAreaPage'])->name('area_edit');
 Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'addArea']);
 //Route::get('/area/{area_id}', [App\Http\Controllers\AreaController::class,'showArea'])->name('area.show');
 

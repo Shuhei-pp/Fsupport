@@ -25,11 +25,8 @@
         </ul>
 
 
-  <!--
-      <?php if (Auth::check() && (Auth::user()->admin >= 1)){ ?>{{--管理者かどうか--}}
-        <a href={{ route('area_edit') }}><button class="btn btn-primary">エリア追加を行う</button></a>
-      <?php } ?>-->
       </div>
+        <a href="/area/new/edit"><button class="btn btn-primary">エリア追加を行う</button></a>
     </div>
   </div>
 </div>
