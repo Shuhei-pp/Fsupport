@@ -67,7 +67,7 @@
       </div>
 
       <div class="form-check">
-        <input class="form-check-input" @click="changeGraph" type="checkbox" id="check_fi">
+        <input class="form-check-input" @click="changeGraph" type="checkbox" id="check_fi" checked>
         <label class="form-check-label">
           FI
         </label>
