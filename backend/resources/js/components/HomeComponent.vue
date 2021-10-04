@@ -29,6 +29,29 @@
         <a href="/area/new/edit"><button class="btn btn-primary">エリア追加を行う</button></a>
     </div>
   </div>
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-header">
+        最近の釣果投稿
+      </div>
+      <div class="card-body">
+        <div class="media">
+          <div class="media-left" href="#">
+            <img class="media-object" width="150px" src="#">
+          </div>
+          <div class="media-body">
+            <div class="container">
+              <p>釣果:</p>
+              <p>エリア:</p>
+              <p>日時:</p>
+              <p>ユーザー名: 匿名さん</p>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
   
 </template>
