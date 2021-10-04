@@ -27,6 +27,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/', 'App\Http\Controllers\AreaController@index');
 Route::get('/area/{area_id}', 'App\Http\Controllers\AreaController@showArea');
 
+//釣果系APIルーティング
+Route::get('/home/frecord/list', 'App\Http\Controllers\FishingRecordController@frecordList');
+
+//ログイン中のユーザーをAPIで取得
 Route::group(['middleware' => 'api'], function() {
     Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
     Route::get('/current_user', function (){

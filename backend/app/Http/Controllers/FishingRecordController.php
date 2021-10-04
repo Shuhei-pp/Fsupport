@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Fishingrecord;
 use App\Models\Area;
 
+//DB
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 
 class FishingRecordController extends Controller
@@ -155,5 +158,17 @@ class FishingRecordController extends Controller
         $frecord->save();
 
         return redirect('/')->with('flash_message','釣果登録が完了しました');
+    }
+
+    /**
+     * homeで最近の釣果を一覧表示
+     */
+    public function frecordList() {
+        $frecords = DB::table('fishingrecords')
+                        ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*')
+                        ->join('areas','fishingrecords.area_id','=','areas.id')
+                        ->orderBy('datetime','desc')
+                        ->get();
+        return $frecords;
     }
 }
