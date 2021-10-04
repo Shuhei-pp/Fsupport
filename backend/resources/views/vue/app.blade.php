@@ -98,6 +98,12 @@
         <!-- vueで表示されるところ -->
         <router-view></router-view>
 
+        <footer class="border-top bg-white mt-5">
+            <p class="footer-text">
+                @2021 Shuhei Kota
+            </p>
+        </footer>
+
     </div>
 <!-- Scripts -->
 <script src="{{ mix('/js/app.js') }}" defer></script>

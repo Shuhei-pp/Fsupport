@@ -13,25 +13,36 @@
   </div>
 </div>
 
-<div class="container mt-5">
-  <div class="col-6 mx-auto">
+<div class="container pt-5">
+  <div class="card">
+    <div class="card-header">エリア一覧</div>
+    <div class="card-body">
+      <div class="col-6">
 
-    <?php foreach($bigareas as $bigarea) { ?>
-      <h5>{{ $bigarea->bigarea_name }}</h5>
+        <?php foreach($bigareas as $bigarea) { ?>
+          <h5>{{ $bigarea->bigarea_name }}</h5>
 
-      <ul class="list-unstyled">
-        <?php foreach($areas as $area) { ?>
-          <?php if($bigarea->bigarea_id == $area->bigarea_id) { ?>
-            <li><a href={{ route('area.show', ['area_id' => $area->id]); }}>{{ $area->area_name }}</a></li>
-          <?php } ?>
+          <ul class="list-unstyled">
+            <?php foreach($areas as $area) { ?>
+              <?php if($bigarea->bigarea_id == $area->bigarea_id) { ?>
+                <li><a href={{ route('area.show', ['area_id' => $area->id]); }}>{{ $area->area_name }}</a></li>
+              <?php } ?>
+            <?php } ?>
+          </ul>
+
         <?php } ?>
-      </ul>
 
-    <?php } ?>
-
+<<<<<<< HEAD
+        <?php if (Auth::check() && Auth::user()->admin){ ?>{{--管理者かどうか--}}
+          <a href={{ route('area_edit') }}><button class="btn btn-primary">エリア追加を行う</button></a>
+        <?php } ?>
+      </div>
+    </div>
+=======
     <?php if (Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER'))){ ?>{{--管理者かどうか--}}
       <a href={{ route('area_edit') }}><button class="btn btn-primary">エリア追加を行う</button></a>
     <?php } ?>
+>>>>>>> b7e4900586e8f77ba5b36736596c6fb506eff4b4
   </div>
 </div>
 
