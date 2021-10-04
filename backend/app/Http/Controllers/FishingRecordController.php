@@ -162,12 +162,15 @@ class FishingRecordController extends Controller
 
     /**
      * homeで最近の釣果を一覧表示
+     * 
+     * return mix
      */
     public function frecordList() {
         $frecords = DB::table('fishingrecords')
                         ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*')
                         ->join('areas','fishingrecords.area_id','=','areas.id')
                         ->orderBy('datetime','desc')
+                        ->limit(10)
                         ->get();
         return $frecords;
     }
