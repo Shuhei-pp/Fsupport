@@ -41,7 +41,6 @@
           </div>
           <div class="media-body">
             <div class="container">
-              <p>釣果:{{ frecord.content }}</p>
               <p>エリア:{{ frecord.area_name }}</p>
               <p>日時:{{ frecord.datetime }}</p>
               <p>ユーザー名: 匿名さん</p>
