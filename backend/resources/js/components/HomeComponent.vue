@@ -61,7 +61,8 @@
     data: function() {
       return {
         bigareas: [],
-        areas: []
+        areas: [],
+        frecords: []
       }
     },
     methods: {
@@ -75,10 +76,17 @@
           this.bigareas = res.bigareas;
           this.areas = res.areas;
         });
+      },
+      getFrecords() {
+        axios.get('/api/home/frecord/list')
+        .then((res) => {
+          this.frecords = res.data;
+        });
       }
     },
     mounted() {
       this.getAreas();
+      this.getFrecords();
     }
   }
 </script>
