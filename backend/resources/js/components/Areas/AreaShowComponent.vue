@@ -54,77 +54,11 @@
         <div class="card-header">釣果登録</div>
 
         <div class="card-body">
-          <form v-on:submit.prevent="submit" enctype="multipart/form-data">
-
-            <div class="form-group row">
-              <label for="email" class="col-md-4 col-form-label text-md-right">釣果内容</label>
-
-              <div class="col-md-6">
-                <input class="form-control" name="content" v-model="frecord.content">
-<!--
-                <?php if($errors->has('content')) {?>
-                  <span class="text-danger" role="alert">
-                    <strong>{{ $errors->first('content') }}</strong>
-                  </span>
-                <?php } ?>-->
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-md-4 col-form-label text-md-right">写真</label>
-
-              <div class="col-md-6">
-                <input class="form-control-file" name="picture" type="file" @change="onImageUploaded">
-<!--
-                <?php if ($errors->has('picture')) {?>
-                  <span class="text-danger" role="alert">
-                    <strong>{{ $errors->first('picture') }}</strong>
-                  </span>
-                <?php } ?>-->
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-md-4 col-form-label text-md-right">釣った時間</label>
-
-              <div class="col-md-6">
-                <input class="form-control" name="date" type="date" v-model="frecord.date">
-<!--
-                @if ($errors->has('date'))
-                  <div class="text-danger" role="alert">
-                    <strong>{{ $errors->first('date') }}</strong>
-                  </div>
-                @endif
--->
-                <input class="form-control mt-3" name="time" type="time" v-model="frecord.time">
-<!--
-                <?php if ($errors->has('time')) {?>
-                  <span class="text-danger" role="alert">
-                    <strong>{{ $errors->first('time') }}</strong>
-                  </span>
-                <?php } ?>-->
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-md-4 col-form-label text-md-right">釣ったエリア</label>
-              <div class="col-md-6">
-                <select name="area_id" class="form-control" v-model="frecord.area_id">
-                  <option v-for="area in areas">
-                    {{ area.area_name }}
-                  </option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <div class="col-md-8 offset-md-4">
-                <button type="submit" class="btn btn-primary">
-                  追加
-                </button>
-              </div>
-            </div>
-          </form>
+          <p>マイページで釣果を登録することができます。</p>
+          <!--<a :href="route('gotomypage')"> 本番用 -->
+          <a href="/user/gotomypage">
+            <button class ="btn btn-primary">マイページへ</button>
+          </a>
         </div>
       </div>
     </div>

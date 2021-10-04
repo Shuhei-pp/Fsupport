@@ -1,5 +1,13 @@
 import Vue from 'vue';
+
+//ziggy
+import route from 'ziggy';
+import { Ziggy } from './Ziggy';
+
+//vue-router
 import VueRouter from 'vue-router';
+
+//components
 import HomeComponent from './components/HomeComponent.vue';
 import AreaShowComponent from './components/Areas/AreaShowComponent.vue';
 //import HeaderComponent from "./components/HeaderComponent.vue"
@@ -32,6 +40,13 @@ const router = new VueRouter({
             props: true
         },
     ]
+});
+
+//ziggy
+Vue.mixin({
+    methods: {
+        route: (name, params, absolute, config = Ziggy) => route(name, params, absolute , config),
+    },
 });
 
 /**
