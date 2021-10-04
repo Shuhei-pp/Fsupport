@@ -34,7 +34,7 @@
               <td v-for="tide in info.tide">{{ tide }}</td>
             </tr>
             <tr>
-              <th>FI</th>
+              <th>FI(Max:100)</th>
               <td v-for="fi in info.fi">{{ fi }}</td>
             </tr>
             
@@ -44,6 +44,35 @@
     </div>
 
     <div class="container">
+
+      <div class="form-check">
+        <input class="form-check-input" @click="changeGraph" type="checkbox" id="check_wind">
+        <label class="form-check-label">
+          風速
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" @click="changeGraph" type="checkbox" id="check_temp">
+        <label class="form-check-label">
+          気温
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" @click="changeGraph" type="checkbox" id="check_tide">
+        <label class="form-check-label">
+          潮の高さ
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" @click="changeGraph" type="checkbox" id="check_fi" checked>
+        <label class="form-check-label">
+          FI
+        </label>
+      </div>
+
       <div class="py-3">
         <canvas id="chart" class=""></canvas>
       </div>
@@ -76,11 +105,56 @@
         areaname: null,
         info: {},
         areas: [],
-        //form送信用の空のfrecord
-        frecord: {}
+        chartdata: [],
+
       }
     },
     methods: {
+      changeGraph() {
+        this.chartdata = [];
+        if(document.getElementById("check_wind").checked){
+          this.chartdata.push(
+            {
+              label: '風速',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
+              borderColor: 'rgb(255, 99, 0)',
+              data: this.info.wind
+            }
+          ); 
+        }
+        if(document.getElementById("check_temp").checked){
+          this.chartdata.push(
+            {
+              label: '気温',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
+              borderColor: 'rgb(100, 230, 132)',
+              data: this.info.temp
+            }
+          ); 
+        }
+        if(document.getElementById("check_tide").checked){
+          this.chartdata.push(
+            {
+              label: '潮の高さ',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
+              borderColor: 'rgb(0, 99, 132)',
+              data: this.info.tide
+            }
+          ); 
+        }
+        if(document.getElementById("check_fi").checked){
+          this.chartdata.push(
+            {
+              label: 'FI',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: this.info.fi
+            }
+          ); 
+        }
+        
+        this.getChart();
+      },
       getArea() {
         $.ajax({
           type: 'get',
@@ -91,22 +165,23 @@
           this.areaname = res.area_name;
           this.info = res.info;
           this.areas = res.areas;
+          this.chartdata.push({
+            label: 'FI(釣果指数)',
+            backgroundColor: 'rgba(255, 99, 132,0)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: this.info.fi
+          });
           this.getChart();
         });
       },
       //グラフ作成
       getChart(){
         const labels = this.info.times;
-        const data = {
+        var data = {
           labels: labels,
-          datasets: [{
-            label: 'FI(釣果指数)',
-            backgroundColor: 'rgba(255, 99, 132,0)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: this.info.fi
-          }]
+          datasets: this.chartdata
         };
-        const config = {
+        var config = {
           type: 'line',
           data: data,
           options: {}
@@ -116,23 +191,6 @@
           config
         );
       },
-      //form送信
-      submit() {
-        axios.post('/api/fresult/create', this.fresult)
-          .then((res) => {
-            this.$router.push({name: 'vue.home'});
-          });
-      },
-      onImageUploaded(event) {
-        //eventから画像データを取得
-        const image = event.target.files[0];
-        const reader = new FileReader;
-        //imageをurlに
-        reader.readAsDataURL(image);
-        reader.onload = () => {
-          this.frecord.image = reader.result;
-        }
-      }
     },
     mounted() {
       this.getArea();

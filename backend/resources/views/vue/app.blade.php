@@ -96,7 +96,9 @@
         <?php } ?>
 
         <!-- vueで表示されるところ -->
-        <router-view></router-view>
+        <main class="py-4">
+            <router-view></router-view>
+        </main>
 
         <footer class="border-top bg-white mt-5">
             <p class="footer-text">
