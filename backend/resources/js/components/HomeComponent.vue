@@ -35,15 +35,15 @@
         最近の釣果投稿
       </div>
       <div class="card-body">
-        <div class="media">
+        <div class="media" v-for="(frecord, index) in frecords" :key="index">
           <div class="media-left" href="#">
-            <img class="media-object" width="150px" src="#">
+            <img class="media-object" width="150px" :src="'storage/result_images/'+frecord.image_name">
           </div>
           <div class="media-body">
             <div class="container">
-              <p>釣果:</p>
-              <p>エリア:</p>
-              <p>日時:</p>
+              <p>釣果:{{ frecord.content }}</p>
+              <p>エリア:{{ frecord.area_name }}</p>
+              <p>日時:{{ frecord.datetime }}</p>
               <p>ユーザー名: 匿名さん</p>
               <hr>
             </div>
