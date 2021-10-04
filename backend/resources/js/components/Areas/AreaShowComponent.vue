@@ -55,7 +55,8 @@
 
         <div class="card-body">
           <p>マイページで釣果を登録することができます。</p>
-          <a href= "{{ route(login)}}">
+          <!--<a :href="route('gotomypage')"> 本番用 -->
+          <a href="/user/gotomypage">
             <button class ="btn btn-primary">マイページへ</button>
           </a>
         </div>

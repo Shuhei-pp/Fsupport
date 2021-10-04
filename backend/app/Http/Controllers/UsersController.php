@@ -18,6 +18,20 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     /**
+     * vueのエリアページからマイページへ遷移
+     * 
+     * return redirect
+     */
+    public function goToMyPage()
+    {
+        if(!(Auth::check())){
+            return redirect(route('login'))->with('flash_message','ログインしてください');
+        }
+
+        return redirect( route('user.mypage',['user_id' => Auth::id()] ));
+    }
+
+    /**
      * ユーザー編集ページに遷移
      * 
      * @param int $user_id
