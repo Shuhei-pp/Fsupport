@@ -41,9 +41,9 @@ const router = new VueRouter({
         {
             path: '/frecord/detail/:frecordId',
             name: 'frecord.detail',
-            compnent: FrecordsDetailComponent,
+            component: FrecordsDetailComponent,
             props: true
-        }
+        },
     ]
 });
 

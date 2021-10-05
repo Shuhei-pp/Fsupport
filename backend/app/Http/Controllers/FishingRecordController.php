@@ -182,7 +182,11 @@ class FishingRecordController extends Controller
      * return mix
      */
     public function frecordApi($frecord_id){
-        $frecord = Fishingrecord::find($frecord_id);
+        $frecord = DB::table('fishingrecords')
+                                ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*')
+                                ->join('areas','fishingrecords.area_id','=','areas.id')
+                                ->where('fishingrecords.id', '=', $frecord_id)
+                                ->get();
         return $frecord;
     }
 }

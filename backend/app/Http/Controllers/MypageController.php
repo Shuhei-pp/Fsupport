@@ -19,7 +19,7 @@ class MyPageController extends Controller
 {
 
     /**
-     * マイページに遷移する際のAPI
+     * マイページに遷移する
      * 
      * @param int $user_id
      * 

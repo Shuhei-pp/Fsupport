@@ -23,7 +23,7 @@ Route::get('/area/{area_id}',function(){
     return view('vue.app');
 })->where('any','.*');
 
-Route::get('/frecord/detail/{any}/', function(){
+Route::get('/frecord/detail/{any}', function(){
     return view('vue.app');
 })->where('any','.*');
 
