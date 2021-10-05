@@ -36,7 +36,7 @@
       </div>
       <div class="card-body">
         <div class="media" v-for="(frecord, index) in frecords" :key="index">
-          <router-link v-bind:to="{name: 'frecord.detail', params: {frecordId: frecord.id}}">
+          <router-link v-bind:to="{name: 'frecord.detail', params: {frecordId: frecord.frecord_id}}">
             <div class="media-left" href="#">
               <img class="media-object" width="150px" :src="'storage/result_images/'+frecord.image_name">
             </div>

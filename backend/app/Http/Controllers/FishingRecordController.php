@@ -174,4 +174,15 @@ class FishingRecordController extends Controller
                         ->get();
         return $frecords;
     }
+
+    /**
+     * apiで1つの釣果を取得
+     * 
+     * int frecordid
+     * return mix
+     */
+    public function frecordApi($frecord_id){
+        $frecord = Fishingrecord::find($frecord_id);
+        return $frecord;
+    }
 }

@@ -29,6 +29,7 @@ Route::get('/area/{area_id}', 'App\Http\Controllers\AreaController@showArea');
 
 //釣果系APIルーティング
 Route::get('/home/frecord/list', 'App\Http\Controllers\FishingRecordController@frecordList');
+Route::get('/frecord/{frecord_id}', 'App\Http\Controllers\FishingRecordController@frecordApi');
 
 //ログイン中のユーザーをAPIで取得
 Route::group(['middleware' => 'api'], function() {

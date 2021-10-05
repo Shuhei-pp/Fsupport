@@ -23,6 +23,10 @@ Route::get('/area/{area_id}',function(){
     return view('vue.app');
 })->where('any','.*');
 
+Route::get('/frecord/detail/{any}/', function(){
+    return view('vue.app');
+})->where('any','.*');
+
 
 // check: routeは->name()で名前をつけられる！　viewのURL修正も楽になるから修正しよう
 //エリア系ルーティング
