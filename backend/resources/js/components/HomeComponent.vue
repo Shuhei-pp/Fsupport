@@ -36,17 +36,19 @@
       </div>
       <div class="card-body">
         <div class="media" v-for="(frecord, index) in frecords" :key="index">
-          <div class="media-left" href="#">
-            <img class="media-object" width="150px" :src="'storage/result_images/'+frecord.image_name">
-          </div>
-          <div class="media-body">
-            <div class="container">
-              <p>エリア:{{ frecord.area_name }}</p>
-              <p>日時:{{ frecord.datetime }}</p>
-              <p>ユーザー名: 匿名さん</p>
-              <hr>
+          <router-link v-bind:to="{name: 'frecord.detail', params: {frecordId: frecord.id}}">
+            <div class="media-left" href="#">
+              <img class="media-object" width="150px" :src="'storage/result_images/'+frecord.image_name">
             </div>
-          </div>
+            <div class="media-body">
+              <div class="container">
+                <p>エリア:{{ frecord.area_name }}</p>
+                <p>日時:{{ frecord.datetime }}</p>
+                <p>ユーザー名: 匿名さん</p>
+                <hr>
+              </div>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>

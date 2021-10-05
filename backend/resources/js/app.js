@@ -10,8 +10,7 @@ import VueRouter from 'vue-router';
 //components
 import HomeComponent from './components/HomeComponent.vue';
 import AreaShowComponent from './components/Areas/AreaShowComponent.vue';
-//import HeaderComponent from "./components/HeaderComponent.vue"
-
+import FrecordsDetailComponent from './components/Frecords/FrecordsDetailComponent.vue';
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -39,6 +38,12 @@ const router = new VueRouter({
             component: AreaShowComponent,
             props: true
         },
+        {
+            path: '/frecord/detail/:frecordId',
+            name: 'frecord.detail',
+            compnent: FrecordsDetailComponent,
+            props: true
+        }
     ]
 });
 
