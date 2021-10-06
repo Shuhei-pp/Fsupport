@@ -18,8 +18,8 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('name');
-            $table->string('profile_text');
-            $table->string('profile_image_name');
+            $table->string('profile_text')->nullable();
+            $table->string('profile_image_name')->nullable();
             $table->timestamps();
         });
     }

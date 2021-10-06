@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
 //Models
-use App\Models\Fishingrecord;
 use App\Models\Area;
-use App\Models\User;
+use App\Models\Profile;
+
 
 //DB
 use Illuminate\Support\Facades\DB;
@@ -56,12 +56,55 @@ class MyPageController extends Controller
     public function toEditProfile($user_id)
     {
         //ログインチェック
-        if(!(Auth::check())){
-            return redirect( route('login') );
+        if(!(Auth::check() && (Auth::user()->id == $user_id))){
+            return redirect( route('login') )->with('flash_message','ログインしてください');
         }
 
-        $profile = DB::table('profiles')->where('user_id','=',$user_id)->get();
+        $profile = DB::table('profiles')->where('user_id','=',$user_id)->first();
 
         return view('user.editprofile', compact('user_id','profile'));
+    }
+
+    /**
+     * プロフィールを編集
+     * 
+     * @param int $user_id
+     * @param Request $request
+     */
+    public function editProfile($user_id, Request $request)
+    {
+        //ログインチェック
+        if(!(Auth::check() && (Auth::user()->id == $user_id))){
+            return redirect( route('login') )->with('flash_message','ログインしてください');
+        }
+
+        //バリデーションルール
+        $rules = [
+            'name' => 'required|string|max:128',
+            'text' => 'max:256',
+            'picture' => 'image|mimes:jpeg,jpg,png|max:2048'
+        ];
+
+        $this->validate($request, $rules);
+
+        $profile = Profile::where('user_id', '=', $user_id)->first();
+
+        if(!$profile){
+        //新規登録時
+            $profile = new Profile();
+        }
+
+
+        $profile->user_id = $user_id;
+        $profile->name = $request->name;
+        $profile->profile_text = $request->text;
+        if($request->picture){
+            $image_path = $request->file('picture')->store('public/profile_image');
+            $profile->profile_image_name = basename($image_path);
+        }
+
+        $profile->save();
+
+        return redirect( route('user.mypage',['user_id' => $user_id]) )->with('flash_message','プロフィールを編集しました。');
     }
 }
