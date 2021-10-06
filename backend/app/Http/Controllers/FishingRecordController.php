@@ -167,8 +167,9 @@ class FishingRecordController extends Controller
      */
     public function frecordList() {
         $frecords = DB::table('fishingrecords')
-                        ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*')
+                        ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name','profiles.profile_image_name')
                         ->join('areas','fishingrecords.area_id','=','areas.id')
+                        ->leftjoin('profiles','fishingrecords.user_id', '=','profiles.user_id')
                         ->orderBy('datetime','desc')
                         ->limit(10)
                         ->get();
@@ -183,10 +184,11 @@ class FishingRecordController extends Controller
      */
     public function frecordApi($frecord_id){
         $frecord = DB::table('fishingrecords')
-                                ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*')
+                                ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name')
                                 ->join('areas','fishingrecords.area_id','=','areas.id')
+                                ->leftjoin('profiles','fishingrecords.user_id', '=','profiles.user_id')
                                 ->where('fishingrecords.id', '=', $frecord_id)
-                                ->get();
+                                ->first();
         return $frecord;
     }
 }

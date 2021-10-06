@@ -84,6 +84,17 @@
         </div>
       </div>
 
+      <div class="card mb-5">
+        <div class="card-header">
+          マイプロフィール
+        </div>
+        <div class="card-body">
+          <a href="{{ route('user.editprofile',['user_id' => Auth::id()])}}">
+            profile
+          </a>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-header">釣果一覧</div>
         <div class="card-body">

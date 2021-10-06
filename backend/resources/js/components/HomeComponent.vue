@@ -12,22 +12,28 @@
       </div>
     </div>
     <div class="container mt-5">
-      <div class="col-6 mx-auto">
-        <div v-for="(bigarea, index) in bigareas" :key="index">
-          <h5>{{ bigarea.bigarea_name }}</h5>
+      <h3 class="mb-2">エリア一覧</h3>
+      <table class="mx-auto table table-info">
+        <thead>
+          <tr>
+            <th scope="col">都道府県</th>
+            <th scope="col">エリア名</th>
+          </tr>
+        </thead>
+        <tbody v-for="(bigarea, index) in bigareas" :key="index">
+          <tr v-for="(area, index) in areas" :key="index">
+            <th scope="row" v-if="area.bigarea_id == bigarea.bigarea_id">{{ bigarea.bigarea_name }}</th>
 
-          <ul class="list-unstyled" v-for="(area, index) in areas" :key="index">
-            <li v-if="area.bigarea_id == bigarea.bigarea_id">
+            <td v-if="area.bigarea_id == bigarea.bigarea_id">
               <router-link v-bind:to="{name: 'area.show', params: {areaId: area.id}}">
               {{ area.area_name }}
               </router-link>
-            </li>
-          </ul>
+            </td>
 
-
-        </div>
-          <a href="/area/new/edit"><button class="btn btn-primary">エリア追加を行う</button></a>
-      </div>
+          </tr>
+        </tbody>
+      </table>
+    <a href="/area/new/edit"><button class="btn btn-primary">エリア追加を行う</button></a>
     </div>
     <div class="container mt-5">
       <div class="card">
@@ -35,20 +41,32 @@
           最近の釣果投稿
         </div>
         <div class="card-body">
-          <div class="media" v-for="(frecord, index) in frecords" :key="index">
+          <div class="" v-for="(frecord, index) in frecords" :key="index">
             <router-link v-bind:to="{name: 'frecord.detail', params: {frecordId: frecord.frecord_id}}">
-              <div class="media-left" href="#">
-                <img class="media-object" width="150px" :src="'/storage/result_images/'+frecord.image_name">
-              </div>
-              <div class="media-body">
-                <div class="container">
+              <div class="row">
+                <div class="col-md-auto">
+                  <img class="media-object" width="150px" :src="'/storage/result_images/'+frecord.image_name">
+                </div>
+                <div class="col-md-auto">
                   <p>エリア:{{ frecord.area_name }}</p>
                   <p>日時:{{ frecord.datetime }}</p>
-                  <p>ユーザー名: 匿名さん</p>
-                  <hr>
+                </div>
+                <div class="col-md-auto">
+                  <label>ひとこと</label>
+                  <p>{{ frecord.content }}</p>
                 </div>
               </div>
             </router-link>
+            <div class="row pt-2 ">
+              <div class="col-md-auto">
+                <img class="media-object" width="50px" height="50px" :src="'/storage/profile_image/'+frecord.profile_image_name">
+              </div>
+              <div class="col pt-2 col-md-auto">
+                <p v-if="frecord.name">ユーザー名:{{ frecord.name }}</p>
+                <p v-if="!frecord.name">ユーザー名: 匿名さん</p>
+              </div>
+            </div>
+            <hr>
           </div>
         </div>
       </div>
@@ -58,7 +76,7 @@
 </template>
 
 <script>
-  export default {
+  export default {  
     data: function() {
       return {
         bigareas: [],

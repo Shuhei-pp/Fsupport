@@ -1,14 +1,24 @@
 <template>
   <div class="container">
-    <div class="media-left">
-      <img class="media-object" width="150px" :src="'/storage/result_images/'+frecord[0].image_name">
-    </div>
-    <div class="media-body">
-      <div class="container">
-        <p>エリア: {{ frecord[0].area_name }}</p>
-        <p>日時: {{ frecord[0].datetime }}</p>
-        <p>ユーザー名: 匿名さん</p>
-        <hr>
+    <div class="card">
+      <div class="card-header">
+        <div v-if="frecord.name">{{ frecord.name }}さんの釣果</div>
+        <div v-if="!frecord.name">匿名さんの釣果</div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-auto">
+            <img class="media-object" width="150px" :src="'/storage/result_images/'+frecord.image_name">
+          </div>
+          <div class="col-md-auto">
+            <p>エリア:{{ frecord.area_name }}</p>
+            <p>日時:{{ frecord.datetime }}</p>
+          </div>
+          <div class="col-md-auto">
+            <label>ひとこと</label>
+            <p>{{ frecord.content }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -21,7 +31,7 @@
     },
     data: function(){
       return {
-        frecord: [],
+        frecord: {},
       }
     },
     methods: {
