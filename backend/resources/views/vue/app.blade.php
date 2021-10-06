@@ -80,6 +80,12 @@
                                             ユーザー管理ページ
                                         </a>
                                     @endif
+
+                                    @if (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER'))
+                                        <a class="dropdown-item" href="{{ route('fish.list') }}">
+                                            魚テーブル編集ページ
+                                        </a>
+                                    @endif 
                                 </div>
                             </li>
                         @endguest
