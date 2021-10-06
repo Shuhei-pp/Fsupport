@@ -47,4 +47,17 @@ class MyPageController extends Controller
         return view('user.mypage',compact('user','posts','areas'));
     }
 
+    /**
+     * プロフィール編集ページへ
+     * 
+     * @param int $user_id
+     * return view
+     */
+    public function toEditProfile($user_id)
+    {
+        if(!(Auth::check())){
+            return redirect( route('login') );
+        }
+        return view('user.editprofile', compact('user_id'));
+    }
 }

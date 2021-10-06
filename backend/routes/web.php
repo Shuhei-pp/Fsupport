@@ -42,6 +42,7 @@ Route::post('/user/edit/{user_id}', [App\Http\Controllers\UsersController::class
 Route::get('/user/delete/{user_id}', [App\Http\Controllers\UsersController::class,'delete'])->name('user.delete');
 Route::get('/user/gotomypage', [App\Http\Controllers\UsersController::class,'goToMyPage'])->name('gotomypage');
 Route::get('/user/mypage/{user_id}', [App\Http\Controllers\MyPageController::class,'showMyPage'])->name('user.mypage');
+Route::get('/user/profile/edit/{user_id}', [App\Http\Controllers\MyPageController::class,'toEditProfile'])->name('user.editprofile');
 
 //釣果系ルーティング
 Route::post('/fresult/create', [App\Http\Controllers\FishingRecordController::class,'create'])->name('create.fresult');
