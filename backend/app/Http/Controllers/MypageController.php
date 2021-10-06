@@ -55,9 +55,13 @@ class MyPageController extends Controller
      */
     public function toEditProfile($user_id)
     {
+        //ログインチェック
         if(!(Auth::check())){
             return redirect( route('login') );
         }
-        return view('user.editprofile', compact('user_id'));
+
+        $profile = DB::table('profiles')->where('user_id','=',$user_id)->get();
+
+        return view('user.editprofile', compact('user_id','profile'));
     }
 }
