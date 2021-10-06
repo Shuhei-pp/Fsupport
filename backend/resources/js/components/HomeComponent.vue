@@ -46,7 +46,7 @@
                   <p>日時:{{ frecord.datetime }}</p>
                 </div>
                 <div class="col-md-auto">
-                  <label>コメント</label>
+                  <label>ひとこと</label>
                   <p>{{ frecord.content }}</p>
                 </div>
               </div>
