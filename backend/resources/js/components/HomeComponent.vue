@@ -12,22 +12,28 @@
       </div>
     </div>
     <div class="container mt-5">
-      <div class="col-6 mx-auto">
-        <div v-for="(bigarea, index) in bigareas" :key="index">
-          <h5>{{ bigarea.bigarea_name }}</h5>
+      <h3 class="mb-2">エリア一覧</h3>
+      <table class="mx-auto table table-info">
+        <thead>
+          <tr>
+            <th scope="col">都道府県</th>
+            <th scope="col">エリア名</th>
+          </tr>
+        </thead>
+        <tbody v-for="(bigarea, index) in bigareas" :key="index">
+          <tr v-for="(area, index) in areas" :key="index">
+            <th scope="row" v-if="area.bigarea_id == bigarea.bigarea_id">{{ bigarea.bigarea_name }}</th>
 
-          <ul class="list-unstyled" v-for="(area, index) in areas" :key="index">
-            <li v-if="area.bigarea_id == bigarea.bigarea_id">
+            <td v-if="area.bigarea_id == bigarea.bigarea_id">
               <router-link v-bind:to="{name: 'area.show', params: {areaId: area.id}}">
               {{ area.area_name }}
               </router-link>
-            </li>
-          </ul>
+            </td>
 
-
-        </div>
-          <a href="/area/new/edit"><button class="btn btn-primary">エリア追加を行う</button></a>
-      </div>
+          </tr>
+        </tbody>
+      </table>
+    <a href="/area/new/edit"><button class="btn btn-primary">エリア追加を行う</button></a>
     </div>
     <div class="container mt-5">
       <div class="card">
