@@ -35,20 +35,32 @@
           最近の釣果投稿
         </div>
         <div class="card-body">
-          <div class="media" v-for="(frecord, index) in frecords" :key="index">
+          <div class="" v-for="(frecord, index) in frecords" :key="index">
             <router-link v-bind:to="{name: 'frecord.detail', params: {frecordId: frecord.frecord_id}}">
-              <div class="media-left" href="#">
-                <img class="media-object" width="150px" :src="'/storage/result_images/'+frecord.image_name">
-              </div>
-              <div class="media-body">
-                <div class="container">
+              <div class="row">
+                <div class="col-md-auto">
+                  <img class="media-object" width="150px" :src="'/storage/result_images/'+frecord.image_name">
+                </div>
+                <div class="col-md-auto">
                   <p>エリア:{{ frecord.area_name }}</p>
                   <p>日時:{{ frecord.datetime }}</p>
-                  <p>ユーザー名: 匿名さん</p>
-                  <hr>
+                </div>
+                <div class="col-md-auto">
+                  <label>コメント</label>
+                  <p>{{ frecord.content }}</p>
                 </div>
               </div>
             </router-link>
+            <div class="row pt-2 ">
+              <div class="col-md-auto">
+                <img class="media-object" width="50px" height="50px" :src="'/storage/profile_image/'+frecord.profile_image_name">
+              </div>
+              <div class="col pt-2 col-md-auto">
+                <p v-if="frecord.name">ユーザー名:{{ frecord.name }}</p>
+                <p v-if="!frecord.name">ユーザー名: 匿名さん</p>
+              </div>
+            </div>
+            <hr>
           </div>
         </div>
       </div>
@@ -58,7 +70,7 @@
 </template>
 
 <script>
-  export default {
+  export default {  
     data: function() {
       return {
         bigareas: [],
