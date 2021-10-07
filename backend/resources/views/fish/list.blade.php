@@ -36,7 +36,7 @@
                   </td>
                   <td>
                     <button class="btn btn-danger delete_button" value="{{ $fish->fish_id }}">削除</button>
-                    <a href=" {{-- route('fish.delete',['fish_id' => $fish->fish_id]) --}}">
+                    <a href=" {{ route('fish.delete',['fish_id' => $fish->fish_id]) }}">
                       <button id="{{ $fish->fish_id }}" style="display:none;"></button>
                     </a>
                   </td>
@@ -55,4 +55,16 @@
   </div>
 </div>
 
+@endsection
+
+@section('script')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+  $(document).on('click','.delete_button',function() {
+    if(window.confirm("{{ $fish->fish_name }}を削除しても大丈夫ですか？")){
+      $fish_id = "#"+this.value;
+      $($fish_id).click();
+    }
+  });
+</script>
 @endsection

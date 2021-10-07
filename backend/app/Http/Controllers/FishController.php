@@ -107,13 +107,30 @@ class FishController extends Controller
 
         $this->validate($request,[ 'fish_name' => 'required|string|max:16' ]);
 
-        $fish = FishKind::where('fish_id',$fish_id)
+        FishKind::where('fish_id',$fish_id)
                         ->update([
                             'fish_name' => $request->fish_name,
                             'create_user_id' => Auth::id()
                         ]
         );
 
-        return redirect( route('fish.list'))->with('flash_message','魚を編集しました。');
+        return redirect(route('fish.list'))->with('flash_message','魚を編集しました。');
+    }
+
+    /**
+     * 魚レコードを削除
+     * 
+     * @param int $fish_id
+     */
+    public function delete($fish_id)
+    {
+        //編集者以上でない場合エラーページへ
+        if(!(Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER')))){
+            return view('error.admin');
+        }
+
+        FishKind::where('fish_id',$fish_id)->delete();
+
+        return redirect(route('fish.list'))->with('flash_message','魚を削除しました');
     }
 }

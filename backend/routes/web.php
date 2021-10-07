@@ -47,6 +47,7 @@ Route::get('/fish/create', [App\Http\Controllers\FishController::class, 'showCre
 Route::post('/fish/create', [App\Http\Controllers\FishController::class, 'create'])->name('fish.post');
 Route::get('/fish/edit/{fish_id}', [App\Http\Controllers\FishController::class, 'toEditPage'])->name('fish.edit');
 Route::post('/fish/edit/{fish_id}', [App\Http\Controllers\FishController::class, 'edit'])->name('fish.edit.post');
+Route::get('/fish/delete/{fish_id}', [App\Http\Controllers\FishController::class, 'delete'])->name('fish.delete');
 
 //マイページ系ルーティング
 Route::get('/user/gotomypage', [App\Http\Controllers\UsersController::class,'goToMyPage'])->name('gotomypage');
