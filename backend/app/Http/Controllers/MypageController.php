@@ -47,7 +47,9 @@ class MyPageController extends Controller
                                 ->orderBy('datetime','desc')
                                 ->get();
 
-        return view('user.mypage',compact('user','posts','areas'));
+        $fishes = DB::table('fish_kinds')->get();
+
+        return view('user.mypage',compact('user','posts','areas','fishes'));
     }
 
     /**

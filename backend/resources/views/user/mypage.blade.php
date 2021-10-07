@@ -74,6 +74,32 @@
             </div>
 
             <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">釣った魚</label>
+              <div class="col-md-6">
+                <select name="fish_id" class="form-control">
+                  <?php foreach($fishes as $fish) {?>
+                    <option value="{{ $fish->fish_id }}">
+                      {{ $fish->fish_name }}
+                    </option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">数量</label>
+              <div class="col-md-6">
+                <select name="fish_id" class="form-control">
+                  <?php for($i=1;$i<30;$i++) {?>
+                    <option value="{{ $i }}">
+                      {{ $i }}
+                    </option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
               <div class="col-md-8 offset-md-4">
                 <button type="submit" class="btn btn-primary">
                   追加
