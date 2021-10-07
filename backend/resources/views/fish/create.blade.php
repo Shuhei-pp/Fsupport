@@ -6,7 +6,7 @@
     <div class="card">
       <div class="card-header">魚追加</div>
           <div class="card-body">
-              <form method="POST" action="{{ route('fish.create') }}">
+              <form method="POST" action="{{ route('fish.post') }}">
                   @csrf
 
                   <div class="form-group row">

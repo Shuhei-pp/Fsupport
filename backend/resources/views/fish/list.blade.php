@@ -30,13 +30,13 @@
                   <td>{{ $fish->fish_id }}</td>
                   <td>{{ $fish->fish_name }}</td>
                   <td>
-                    <a href=" {{ route('fish.edit',['fish_id' => $fish->fish_id]) }} ">
+                    <a href=" {{-- route('fish.edit',['fish_id' => $fish->fish_id]) --}} ">
                       <button class="btn btn-success">編集</button>
                     <a>
                   </td>
                   <td>
                     <button class="btn btn-danger delete_button" value="{{ $fish->fish_id }}">削除</button>
-                    <a href=" {{ route('fish.delete',['fish_id' => $fish->fish_id]) }}">
+                    <a href=" {{-- route('fish.delete',['fish_id' => $fish->fish_id]) --}}">
                       <button id="{{ $fish->fish_id }}" style="display:none;"></button>
                     </a>
                   </td>
