@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 //Models
 use App\Models\Fishingrecord;
 use App\Models\Area;
+use App\Models\FrecordFishs;
 
 //DB
 use Illuminate\Support\Facades\DB;
@@ -152,12 +153,17 @@ class FishingRecordController extends Controller
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;
         $frecord->image_name = basename($image_path);
-        //$frecord->time = $request->time;
         $frecord->datetime = $datetime;
 
         $frecord->save();
 
-        return redirect('/')->with('flash_message','釣果登録が完了しました');
+        $fish_amount = new FrecordFishs();
+        $fish_amount->frecord_id = $frecord->id;
+        $fish_amount->fish_id = $request->fish_id;
+        $fish_amount->fish_amount = $request->fish_amount;
+        $fish_amount->save();  
+
+        return redirect(route('user.mypage'))->with('flash_message','釣果登録が完了しました');
     }
 
     /**

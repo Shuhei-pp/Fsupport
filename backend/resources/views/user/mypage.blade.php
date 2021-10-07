@@ -12,7 +12,7 @@
         <div class="card-header">釣果登録</div>
 
         <div class="card-body">
-          <form type="POST" action={{ route('create.fresult') }} enctype="multipart/form-data">
+          <form method="POST" enctype='multipart/form-data' action={{ route('create.fresult') }}>
           @csrf
 
             <div class="form-group row">
@@ -32,7 +32,7 @@
               <label class="col-md-4 col-form-label text-md-right">写真</label>
 
               <div class="col-md-6">
-                <input class="form-control-file" name="picture" type="file">
+                <input class="form-control-file" name="picture" type="file" accept="image/jpeg, image/png, image/jpg">
                 <?php if ($errors->has('picture')) {?>
                   <span class="text-danger" role="alert">
                     <strong>{{ $errors->first('picture') }}</strong>
@@ -89,7 +89,7 @@
             <div class="form-group row">
               <label class="col-md-4 col-form-label text-md-right">数量</label>
               <div class="col-md-6">
-                <select name="fish_id" class="form-control">
+                <select name="fish_amount" class="form-control">
                   <?php for($i=1;$i<30;$i++) {?>
                     <option value="{{ $i }}">
                       {{ $i }}
