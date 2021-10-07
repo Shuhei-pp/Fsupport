@@ -33,11 +33,14 @@ class MyPageController extends Controller
         if(!Auth::check()){
             return redirect(route('login'))->with('flash_message','ログインしてください');
         }
-        $user = DB::table('users')->find($user_id);
+        $user = DB::table('users')
+                ->select('users.*','profiles.name','profiles.profile_image_name','profiles.profile_text',)
+                ->join('profiles','profiles.user_id','=','users.id')
+                ->where('users.id',$user_id)
+                ->first();
 
         $areas = Area::all();
 
-        //ここにこの処理を書いてもいいのかな...
         $posts = DB::table('areas')
                                 ->leftjoin('fishingrecords', 'fishingrecords.area_id', '=', 'areas.id')
                                 ->where('user_id', '=', $user_id)

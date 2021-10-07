@@ -89,9 +89,32 @@
           マイプロフィール
         </div>
         <div class="card-body">
-          <a href="{{ route('user.editprofile',['user_id' => Auth::id()])}}">
-            profile
-          </a>
+          <div class="media">
+            <div class="media-left">
+              <img class="media-object" width="150px" src="{{ asset('storage/profile_image/'.$user->profile_image_name) }}">
+            </div>
+            <div class="media-body">
+              <div class="container">
+                <p>ニックネーム:</p>
+                @if($user->name)
+                  <p>{{ $user->name }}</p>
+                @else
+                  <p>まだ設定されていません</p>
+                @endif
+                <p>ひとこと:</p>
+                @if($user->profile_text)
+                  <p>{{ $user->profile_text}}</p>
+                @else
+                  <p>一言はありません</p>
+                @endif
+              </div>
+            </div>
+          </div>
+          <div class="media mt-3">
+            <a href="{{ route('user.editprofile',['user_id' => Auth::id()])}}">
+              <button class="btn btn-primary">プロフィール編集</button>
+            </a>
+          </div>
         </div>
       </div>
 
