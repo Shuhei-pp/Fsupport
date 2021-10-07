@@ -41,6 +41,14 @@ Route::get('/user/edit/{user_id}', [App\Http\Controllers\UsersController::class,
 Route::post('/user/edit/{user_id}', [App\Http\Controllers\UsersController::class,'edit'])->name('post.edit.user');
 Route::get('/user/delete/{user_id}', [App\Http\Controllers\UsersController::class,'delete'])->name('user.delete');
 
+//管理系ルーティング
+Route::get('/fish/list', [App\Http\Controllers\FishController::class,'showListPage'])->name('fish.list');
+Route::get('/fish/create', [App\Http\Controllers\FishController::class, 'showCreatePage'])->name('fish.create');
+Route::post('/fish/create', [App\Http\Controllers\FishController::class, 'create'])->name('fish.post');
+Route::get('/fish/edit/{fish_id}', [App\Http\Controllers\FishController::class, 'toEditPage'])->name('fish.edit');
+Route::post('/fish/edit/{fish_id}', [App\Http\Controllers\FishController::class, 'edit'])->name('fish.edit.post');
+Route::get('/fish/delete/{fish_id}', [App\Http\Controllers\FishController::class, 'delete'])->name('fish.delete');
+
 //マイページ系ルーティング
 Route::get('/user/gotomypage', [App\Http\Controllers\UsersController::class,'goToMyPage'])->name('gotomypage');
 Route::get('/user/mypage/{user_id}', [App\Http\Controllers\MyPageController::class,'showMyPage'])->name('user.mypage');

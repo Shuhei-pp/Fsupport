@@ -39,7 +39,6 @@
         axios.get('/api/frecord/'+this.frecordId)
           .then((res) => {
             this.frecord = res.data;
-            console.log(this.frecord);
           });
       }
     },
