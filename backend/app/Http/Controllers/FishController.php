@@ -27,4 +27,18 @@ class FishController extends Controller
 
         return view('fish.list', compact('fishes'));
     }
+
+
+    /**
+     * 管理者用の魚追加ページへ遷移
+     */
+    public function showCreatePage()
+    {
+        //編集者以上でない場合エラーページへ
+        if(!(Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER')))){
+            return view('error.admin');
+        }
+
+        return view('fish.create');
+    }
 }

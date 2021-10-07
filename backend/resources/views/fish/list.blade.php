@@ -44,6 +44,11 @@
               <?php } ?>
             </tbody>
           </table>
+          <div class="container">
+            <a href={{ route('fish.create') }}>
+              <button class="btn btn-primary">魚追加</button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
