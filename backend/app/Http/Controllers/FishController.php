@@ -43,6 +43,27 @@ class FishController extends Controller
     }
 
     /**
+     * 管理者用の魚追加ページへ遷移
+     * 
+     * @param int $fish_id
+     */
+    public function toEditPage($fish_id)
+    {
+        //編集者以上でない場合エラーページへ
+        if(!(Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER')))){
+            return view('error.admin');
+        }
+
+        $fish = DB::table('fish_kinds')
+                        ->select('fish_kinds.*','users.email')
+                        ->where('fish_id','=',$fish_id)
+                        ->join('users','fish_kinds.create_user_id','=','users.id')
+                        ->first();
+
+        return view('fish.edit',compact('fish') );
+    }
+
+    /**
      * 魚テーブルにpost
      * 
      * @param Request $request

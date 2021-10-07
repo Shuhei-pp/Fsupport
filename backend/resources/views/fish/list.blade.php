@@ -30,7 +30,7 @@
                   <td>{{ $fish->fish_id }}</td>
                   <td>{{ $fish->fish_name }}</td>
                   <td>
-                    <a href=" {{-- route('fish.edit',['fish_id' => $fish->fish_id]) --}} ">
+                    <a href=" {{ route('fish.edit',[ 'fish_id' => $fish->fish_id ]) }}">
                       <button class="btn btn-success">編集</button>
                     <a>
                   </td>
