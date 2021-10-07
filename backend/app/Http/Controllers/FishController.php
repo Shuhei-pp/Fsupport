@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 //Auth
 use Illuminate\Support\Facades\Auth;
 
+//model 
+use App\Models\FishKind;
+
 //DB
 use Illuminate\Support\Facades\DB;
 
@@ -86,5 +89,31 @@ class FishController extends Controller
         );
 
         return redirect( route('fish.list'))->with('flash_message','魚を追加しました。');
+    }
+
+
+    /**
+     * 魚レコードを編集
+     * 
+     * @param Request $request
+     * @param int $fish_id
+     */
+    public function edit(Request $request,$fish_id)
+    {
+        //編集者以上でない場合エラーページへ
+        if(!(Auth::check() && (Auth::user()->admin >= config('const.ADMIN_RANK.PRE_ADMINER')))){
+            return view('error.admin');
+        }
+
+        $this->validate($request,[ 'fish_name' => 'required|string|max:16' ]);
+
+        $fish = FishKind::where('fish_id',$fish_id)
+                        ->update([
+                            'fish_name' => $request->fish_name,
+                            'create_user_id' => Auth::id()
+                        ]
+        );
+
+        return redirect( route('fish.list'))->with('flash_message','魚を編集しました。');
     }
 }

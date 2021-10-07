@@ -6,7 +6,7 @@
     <div class="card">
       <div class="card-header">魚追加</div>
           <div class="card-body">
-              <form method="POST" action="{{-- route('fish.edit') --}}">
+              <form method="POST" action="{{ route('fish.edit',[ 'fish_id' => $fish->fish_id ]) }}">
                   @csrf
 
                   <div class="form-group row">
@@ -38,7 +38,7 @@
                   <div class="form-group row mb-0">
                       <div class="col-md-8 offset-md-4">
                           <button type="submit" class="btn btn-primary">
-                              追加
+                              完了
                           </button>
                       </div>
                   </div>
