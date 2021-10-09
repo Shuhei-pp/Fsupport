@@ -33,18 +33,26 @@ class MyPageController extends Controller
         if(!Auth::check()){
             return redirect(route('login'))->with('flash_message','ログインしてください');
         }
-        $user = DB::table('users')->find($user_id);
+        $user = DB::table('users')
+                ->select('users.*','profiles.name','profiles.profile_image_name','profiles.profile_text',)
+                ->join('profiles','profiles.user_id','=','users.id')
+                ->where('users.id',$user_id)
+                ->first();
 
         $areas = Area::all();
 
-        //ここにこの処理を書いてもいいのかな...
         $posts = DB::table('areas')
+                                ->select('areas.*','fishingrecords.*','fishingrecords.id as id', 'frecord_fishs.fish_amount', 'fish_kinds.fish_name')
                                 ->leftjoin('fishingrecords', 'fishingrecords.area_id', '=', 'areas.id')
+                                ->leftjoin('frecord_fishs', 'fishingrecords.id', '=','frecord_fishs.frecord_id')
+                                ->leftjoin('fish_kinds', 'frecord_fishs.fish_id', '=', 'fish_kinds.fish_id')
                                 ->where('user_id', '=', $user_id)
                                 ->orderBy('datetime','desc')
                                 ->get();
 
-        return view('user.mypage',compact('user','posts','areas'));
+        $fishes = DB::table('fish_kinds')->get();
+
+        return view('user.mypage',compact('user','posts','areas','fishes'));
     }
 
     /**

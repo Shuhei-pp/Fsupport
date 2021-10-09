@@ -12,7 +12,7 @@
         <div class="card-header">釣果登録</div>
 
         <div class="card-body">
-          <form type="POST" action={{ route('create.fresult') }} enctype="multipart/form-data">
+          <form method="POST" enctype='multipart/form-data' action={{ route('create.fresult') }}>
           @csrf
 
             <div class="form-group row">
@@ -32,7 +32,7 @@
               <label class="col-md-4 col-form-label text-md-right">写真</label>
 
               <div class="col-md-6">
-                <input class="form-control-file" name="picture" type="file">
+                <input class="form-control-file" name="picture" type="file" accept="image/jpeg, image/png, image/jpg">
                 <?php if ($errors->has('picture')) {?>
                   <span class="text-danger" role="alert">
                     <strong>{{ $errors->first('picture') }}</strong>
@@ -74,6 +74,32 @@
             </div>
 
             <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">釣った魚</label>
+              <div class="col-md-6">
+                <select name="fish_id" class="form-control">
+                  <?php foreach($fishes as $fish) {?>
+                    <option value="{{ $fish->fish_id }}">
+                      {{ $fish->fish_name }}
+                    </option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">数量</label>
+              <div class="col-md-6">
+                <select name="fish_amount" class="form-control">
+                  <?php for($i=1;$i<30;$i++) {?>
+                    <option value="{{ $i }}">
+                      {{ $i }}
+                    </option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
               <div class="col-md-8 offset-md-4">
                 <button type="submit" class="btn btn-primary">
                   追加
@@ -89,9 +115,32 @@
           マイプロフィール
         </div>
         <div class="card-body">
-          <a href="{{ route('user.editprofile',['user_id' => Auth::id()])}}">
-            profile
-          </a>
+          <div class="media">
+            <div class="media-left">
+              <img class="media-object" width="150px" src="{{ asset('storage/profile_image/'.$user->profile_image_name) }}">
+            </div>
+            <div class="media-body">
+              <div class="container">
+                <p>ニックネーム:</p>
+                @if($user->name)
+                  <p>{{ $user->name }}</p>
+                @else
+                  <p>まだ設定されていません</p>
+                @endif
+                <p>ひとこと:</p>
+                @if($user->profile_text)
+                  <p>{{ $user->profile_text}}</p>
+                @else
+                  <p>一言はありません</p>
+                @endif
+              </div>
+            </div>
+          </div>
+          <div class="media mt-3">
+            <a href="{{ route('user.editprofile',['user_id' => Auth::id()])}}">
+              <button class="btn btn-primary">プロフィール編集</button>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -114,6 +163,8 @@
                   <p>釣果:{{ $post->content }}</p>
                   <p>エリア:{{ $post->area_name}}</p>
                   <p>日時:{{ $post->datetime}}</p>
+                  <p>魚種:{{ $post->fish_name }}</p>
+                  <p>釣った数:{{ $post->fish_amount }}</p>
                 </div>
               </div>
             </div>

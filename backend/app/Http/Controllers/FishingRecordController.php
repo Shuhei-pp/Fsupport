@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 //Models
 use App\Models\Fishingrecord;
 use App\Models\Area;
+use App\Models\FrecordFishs;
 
 //DB
 use Illuminate\Support\Facades\DB;
@@ -152,12 +153,17 @@ class FishingRecordController extends Controller
         $frecord->content = $request->content;
         $frecord->area_id = $request->area_id;
         $frecord->image_name = basename($image_path);
-        //$frecord->time = $request->time;
         $frecord->datetime = $datetime;
 
         $frecord->save();
 
-        return redirect('/')->with('flash_message','釣果登録が完了しました');
+        $fish_amount = new FrecordFishs();
+        $fish_amount->frecord_id = $frecord->id;
+        $fish_amount->fish_id = $request->fish_id;
+        $fish_amount->fish_amount = $request->fish_amount;
+        $fish_amount->save();
+
+        return redirect(route('user.mypage'))->with('flash_message','釣果登録が完了しました');
     }
 
     /**
@@ -167,9 +173,11 @@ class FishingRecordController extends Controller
      */
     public function frecordList() {
         $frecords = DB::table('fishingrecords')
-                        ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name','profiles.profile_image_name')
+                        ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name','profiles.profile_image_name','frecord_fishs.fish_amount','fish_kinds.fish_name')
                         ->join('areas','fishingrecords.area_id','=','areas.id')
                         ->leftjoin('profiles','fishingrecords.user_id', '=','profiles.user_id')
+                        ->leftjoin('frecord_fishs', 'fishingrecords.id', '=','frecord_fishs.frecord_id')
+                        ->leftjoin('fish_kinds', 'frecord_fishs.fish_id', '=', 'fish_kinds.fish_id')
                         ->orderBy('datetime','desc')
                         ->limit(10)
                         ->get();
@@ -184,9 +192,11 @@ class FishingRecordController extends Controller
      */
     public function frecordApi($frecord_id){
         $frecord = DB::table('fishingrecords')
-                                ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name')
+                                ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name','frecord_fishs.fish_amount','fish_kinds.fish_name')
                                 ->join('areas','fishingrecords.area_id','=','areas.id')
                                 ->leftjoin('profiles','fishingrecords.user_id', '=','profiles.user_id')
+                                ->leftjoin('frecord_fishs', 'fishingrecords.id', '=','frecord_fishs.frecord_id')
+                                ->leftjoin('fish_kinds', 'frecord_fishs.fish_id', '=', 'fish_kinds.fish_id')
                                 ->where('fishingrecords.id', '=', $frecord_id)
                                 ->first();
         return $frecord;

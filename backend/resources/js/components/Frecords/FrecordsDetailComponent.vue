@@ -13,6 +13,8 @@
           <div class="col-md-auto">
             <p>エリア:{{ frecord.area_name }}</p>
             <p>日時:{{ frecord.datetime }}</p>
+            <p>魚種:{{ frecord.fish_name}}</p>
+            <p>釣った数:{{ frecord.fish_amount }}</p>
           </div>
           <div class="col-md-auto">
             <label>ひとこと</label>
