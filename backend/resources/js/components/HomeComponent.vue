@@ -56,12 +56,10 @@
                   <p>{{ frecord.content }}</p>
                 </div>
                 <div class="col-md-auto">
-                  <label>魚種</label>
-                  <p>{{ frecord.fish_name }}</p>
+                  <p>魚種:{{ frecord.fish_name }}</p>
                 </div>
                 <div class="col-md-auto">
-                  <label>釣った数</label>
-                  <p>{{ frecord.fish_count }}</p>
+                  <p>釣った数:{{ frecord.fish_amount }}</p>
                 </div>
               </div>
             </router-link>

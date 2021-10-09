@@ -173,7 +173,7 @@ class FishingRecordController extends Controller
      */
     public function frecordList() {
         $frecords = DB::table('fishingrecords')
-                        ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name','profiles.profile_image_name','fish_kinds.fish_name')
+                        ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name','profiles.profile_image_name','frecord_fishs.fish_amount','fish_kinds.fish_name')
                         ->join('areas','fishingrecords.area_id','=','areas.id')
                         ->leftjoin('profiles','fishingrecords.user_id', '=','profiles.user_id')
                         ->leftjoin('frecord_fishs', 'fishingrecords.id', '=','frecord_fishs.frecord_id')
@@ -192,9 +192,11 @@ class FishingRecordController extends Controller
      */
     public function frecordApi($frecord_id){
         $frecord = DB::table('fishingrecords')
-                                ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name')
+                                ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name','frecord_fishs.fish_amount','fish_kinds.fish_name')
                                 ->join('areas','fishingrecords.area_id','=','areas.id')
                                 ->leftjoin('profiles','fishingrecords.user_id', '=','profiles.user_id')
+                                ->leftjoin('frecord_fishs', 'fishingrecords.id', '=','frecord_fishs.frecord_id')
+                                ->leftjoin('fish_kinds', 'frecord_fishs.fish_id', '=', 'fish_kinds.fish_id')
                                 ->where('fishingrecords.id', '=', $frecord_id)
                                 ->first();
         return $frecord;
