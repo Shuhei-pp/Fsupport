@@ -163,7 +163,7 @@ class FishingRecordController extends Controller
         $fish_amount->fish_amount = $request->fish_amount;
         $fish_amount->save();
 
-        return redirect(route('user.mypage'))->with('flash_message','釣果登録が完了しました');
+        return redirect(route('user.mypage',['user_id' => Auth::user()->id]))->with('flash_message','釣果登録が完了しました');
     }
 
     /**
