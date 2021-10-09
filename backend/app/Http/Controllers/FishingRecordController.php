@@ -161,7 +161,7 @@ class FishingRecordController extends Controller
         $fish_amount->frecord_id = $frecord->id;
         $fish_amount->fish_id = $request->fish_id;
         $fish_amount->fish_amount = $request->fish_amount;
-        $fish_amount->save();  
+        $fish_amount->save();
 
         return redirect(route('user.mypage'))->with('flash_message','釣果登録が完了しました');
     }
@@ -173,9 +173,11 @@ class FishingRecordController extends Controller
      */
     public function frecordList() {
         $frecords = DB::table('fishingrecords')
-                        ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name','profiles.profile_image_name')
+                        ->select('fishingrecords.id as frecord_id','fishingrecords.*','areas.*','profiles.name','profiles.profile_image_name','fish_kinds.fish_name')
                         ->join('areas','fishingrecords.area_id','=','areas.id')
                         ->leftjoin('profiles','fishingrecords.user_id', '=','profiles.user_id')
+                        ->leftjoin('frecord_fishs', 'fishingrecords.id', '=','frecord_fishs.frecord_id')
+                        ->leftjoin('fish_kinds', 'frecord_fishs.fish_id', '=', 'fish_kinds.fish_id')
                         ->orderBy('datetime','desc')
                         ->limit(10)
                         ->get();

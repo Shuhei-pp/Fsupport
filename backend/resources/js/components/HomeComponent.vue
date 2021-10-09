@@ -55,6 +55,14 @@
                   <label>ひとこと</label>
                   <p>{{ frecord.content }}</p>
                 </div>
+                <div class="col-md-auto">
+                  <label>魚種</label>
+                  <p>{{ frecord.fish_name }}</p>
+                </div>
+                <div class="col-md-auto">
+                  <label>釣った数</label>
+                  <p>{{ frecord.fish_count }}</p>
+                </div>
               </div>
             </router-link>
             <div class="row pt-2 ">
