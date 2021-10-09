@@ -42,7 +42,10 @@ class MyPageController extends Controller
         $areas = Area::all();
 
         $posts = DB::table('areas')
+                                ->select('areas.*','fishingrecords.*','fishingrecords.id as id', 'frecord_fishs.fish_amount', 'fish_kinds.fish_name')
                                 ->leftjoin('fishingrecords', 'fishingrecords.area_id', '=', 'areas.id')
+                                ->leftjoin('frecord_fishs', 'fishingrecords.id', '=','frecord_fishs.frecord_id')
+                                ->leftjoin('fish_kinds', 'frecord_fishs.fish_id', '=', 'fish_kinds.fish_id')
                                 ->where('user_id', '=', $user_id)
                                 ->orderBy('datetime','desc')
                                 ->get();

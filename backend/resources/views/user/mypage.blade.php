@@ -163,6 +163,8 @@
                   <p>釣果:{{ $post->content }}</p>
                   <p>エリア:{{ $post->area_name}}</p>
                   <p>日時:{{ $post->datetime}}</p>
+                  <p>魚種:{{ $post->fish_name }}</p>
+                  <p>釣った数:{{ $post->fish_amount }}</p>
                 </div>
               </div>
             </div>
