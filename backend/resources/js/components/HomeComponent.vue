@@ -65,7 +65,8 @@
             </router-link>
             <div class="row pt-2 ">
               <div class="col-md-auto">
-                <img class="media-object" width="50px" height="50px" :src="'/storage/profile_image/'+frecord.profile_image_name">
+                <img v-if="frecord.profile_image_name" class="media-object" width="50px" height="50px" :src="'/storage/profile_image/'+frecord.profile_image_name">
+                <img v-if="!frecord.profile_image_name" class="media-object" width="50px" height="50px" :src="'/storage/default_profile.jpg'">
               </div>
               <div class="col pt-2 col-md-auto">
                 <p v-if="frecord.name">ユーザー名:{{ frecord.name }}</p>
