@@ -23,9 +23,9 @@ Route::get('/area/{area_id}',function(){
     return view('vue.app');
 });
 
-Route::get('/frecord/detail/{any}', function(){
+Route::get('/frecord/detail/{frecord_id}', function(){
     return view('vue.app');
-});
+})->name('frecord.detail');
 
 Route::post('/comment/post',function(){
     return view('vue.app');
