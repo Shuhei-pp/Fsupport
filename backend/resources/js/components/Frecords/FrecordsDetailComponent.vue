@@ -21,6 +21,27 @@
             <p>{{ frecord.content }}</p>
           </div>
         </div>
+        <!--コメント-->
+        <hr>
+        <h2>コメント</h2>
+        <div class="" v-for="(comment, index) in comments" :key="index">
+          <div class="row pt-2 ">
+            <div class="col-md-auto">
+              <img v-if="comment.profile_image_name" class="media-object" width="50px" height="50px" :src="'/storage/profile_image/'+comment.profile_image_name">
+              <img v-if="!comment.profile_image_name" class="media-object" width="50px" height="50px" :src="'/storage/default_profile.jpg'">
+            </div>
+            <div class="col col-md-auto">
+              <p v-if="comment.name">ユーザー名:{{ comment.name }}</p>
+              <p v-if="!comment.name">ユーザー名: 匿名さん</p>
+            </div>
+          </div>
+          <div class="row pt-2 ">
+            <div class="col-md-auto">
+              {{ comment.comment_text }}
+            </div>
+          </div>
+          <hr>
+        </div>
 
         <!-- コメント投稿 -->
         <div class="mt-3 border p-3">
@@ -51,6 +72,7 @@
         errors: [],
         frecord: {},
         comment: {},
+        comments: []
       }
     },
     methods: {
@@ -59,6 +81,10 @@
           .then((res) => {
             this.frecord = res.data;
             this.comment.frecord_id = this.frecordId;
+          });
+        axios.get('/api/comment/'+this.frecordId)
+          .then((res) => {
+            this.comments = res.data;
           });
       },
       submitComment(){

@@ -33,6 +33,7 @@ Route::get('/frecord/{frecord_id}', 'App\Http\Controllers\FishingRecordControlle
 
 //コメント系APIルーティング
 Route::post('/comment/post', 'App\Http\Controllers\CommentController@post');
+Route::get('/comment/{frecord_id}', 'App\Http\Controllers\CommentController@getCommentList');
 
 //ログイン中のユーザーをAPIで取得
 Route::group(['middleware' => 'api'], function() {
