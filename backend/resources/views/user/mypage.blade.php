@@ -155,18 +155,20 @@
 
           <?php foreach($posts as $post) {?>
             <div class="media">
-              <div class="media-left" href="#">
-                <img class="media-object" width="150px" src="{{ asset('storage/result_images/'.$post->image_name) }}">
-              </div>
-              <div class="media-body">
-                <div class="container">
-                  <p>釣果:{{ $post->content }}</p>
-                  <p>エリア:{{ $post->area_name}}</p>
-                  <p>日時:{{ $post->datetime}}</p>
-                  <p>魚種:{{ $post->fish_name }}</p>
-                  <p>釣った数:{{ $post->fish_amount }}</p>
+              <a href="{{ route('frecord.detail',['frecord_id' => $post->id])}}">
+                <div class="media-left" href="#">
+                  <img class="media-object" width="150px" src="{{ asset('storage/result_images/'.$post->image_name) }}">
                 </div>
-              </div>
+                <div class="media-body">
+                  <div class="container">
+                    <p>釣果:{{ $post->content }}</p>
+                    <p>エリア:{{ $post->area_name}}</p>
+                    <p>日時:{{ $post->datetime}}</p>
+                    <p>魚種:{{ $post->fish_name }}</p>
+                    <p>釣った数:{{ $post->fish_amount }}</p>
+                  </div>
+                </div>
+              </a>
             </div>
             <div class="container pt-1">
               <a href="{{ route('edit.fresult',['fresult_id' => $post->id]) }}">
