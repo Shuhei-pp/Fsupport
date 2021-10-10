@@ -23,9 +23,10 @@
         </div>
 
         <!-- コメント -->
-        <div class="mt-3">
-          <label>コメント</label>
-          <input v-model="comment" placeholder="コメント">
+        <div class="mt-3 border p-3">
+          <p>コメントを書く:</p>
+          <textarea v-model="comment" placeholder="" style="resize:none;width:100%;height:100px;"></textarea>
+          <input type="submit" class="btn btn-primary">
         </div>
 
       </div>
