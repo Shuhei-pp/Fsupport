@@ -31,6 +31,9 @@ Route::get('/area/{area_id}', 'App\Http\Controllers\AreaController@showArea');
 Route::get('/home/frecord/list', 'App\Http\Controllers\FishingRecordController@frecordList');
 Route::get('/frecord/{frecord_id}', 'App\Http\Controllers\FishingRecordController@frecordApi');
 
+//コメント系APIルーティング
+Route::post('/comment/post', 'App\Http\Controllers\CommentController@post');
+
 //ログイン中のユーザーをAPIで取得
 Route::group(['middleware' => 'api'], function() {
     Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');

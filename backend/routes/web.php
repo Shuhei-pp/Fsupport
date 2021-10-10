@@ -16,16 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 //vue routing
 Route::get('/',function(){
-    return view('vue.app');
-})->where('any','.*');
+return view('vue.app');
+});
 
 Route::get('/area/{area_id}',function(){
     return view('vue.app');
-})->where('any','.*');
+});
 
 Route::get('/frecord/detail/{any}', function(){
     return view('vue.app');
-})->where('any','.*');
+});
+
+Route::post('/comment/post',function(){
+    return view('vue.app');
+});
 
 
 // check: routeは->name()で名前をつけられる！　viewのURL修正も楽になるから修正しよう
