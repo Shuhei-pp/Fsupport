@@ -22,11 +22,14 @@
           </div>
         </div>
 
-        <!-- コメント -->
+        <!-- コメント投稿 -->
         <div class="mt-3 border p-3">
-          <form @submit.prevent="submitComment">
+          <form @submit.prevent="preparateForm">
             <p>コメントを書く:</p>
             <textarea v-model="comment.text" placeholder="" style="resize:none;width:100%;height:100px;"></textarea>
+            <p v-if="errors.length" class="text-danger">        
+              {{errors[0]}}
+            </p>
             <button type="submit" class="btn btn-primary">送信</button>
           </form>
         </div>
@@ -45,6 +48,7 @@
     },
     data: function(){
       return {
+        errors: [],
         frecord: {},
         comment: {},
       }
@@ -60,6 +64,7 @@
       submitComment(){
         axios.post('/api/comment/post',this.comment)
         .then((res) => {
+          location.reload();
         });
       },
       getUser(){
@@ -67,6 +72,16 @@
         .then((res) => {
           this.comment.user_id = res.data.id;
         });
+      },
+      preparateForm(){
+        this.errors = [];
+        if(this.comment.text){
+          this.submitComment();
+        }
+
+        if(!this.comment.text){
+          this.errors.push('テキストを何も書かずにコメントすることはできません。')
+        }
       }
     },
     mounted() {
