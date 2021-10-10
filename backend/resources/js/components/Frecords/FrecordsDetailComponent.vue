@@ -24,9 +24,11 @@
 
         <!-- コメント -->
         <div class="mt-3 border p-3">
-          <p>コメントを書く:</p>
-          <textarea v-model="comment" placeholder="" style="resize:none;width:100%;height:100px;"></textarea>
-          <input type="submit" class="btn btn-primary">
+          <form @submit.prevent="submitComment">
+            <p>コメントを書く:</p>
+            <textarea v-model="comment.text" placeholder="" style="resize:none;width:100%;height:100px;"></textarea>
+            <button type="submit" class="btn btn-primary">送信</button>
+          </form>
         </div>
 
       </div>
@@ -44,6 +46,7 @@
     data: function(){
       return {
         frecord: {},
+        comment: {},
       }
     },
     methods: {
@@ -51,11 +54,25 @@
         axios.get('/api/frecord/'+this.frecordId)
           .then((res) => {
             this.frecord = res.data;
+            this.comment.frecord_id = this.frecordId;
           });
+      },
+      submitComment(){
+        axios.post('/api/comment/post',this.comment)
+        .then((res) => {
+        });
+      },
+      getUser(){
+        axios.get('/api/current_user')
+        .then((res) => {
+          this.comment.user_id = res.data.id;
+        });
       }
     },
     mounted() {
       this.getFrecord();
+      this.getUser();
+
     }
   }
 </script>
