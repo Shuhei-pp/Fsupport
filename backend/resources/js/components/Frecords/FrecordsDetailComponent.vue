@@ -21,7 +21,16 @@
             <p>{{ frecord.content }}</p>
           </div>
         </div>
+
+        <!-- コメント -->
+        <div class="mt-3">
+          <label>コメント</label>
+          <input v-model="comment" placeholder="コメント">
+        </div>
+
       </div>
+
+
     </div>
   </div>
 </template>
