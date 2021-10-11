@@ -35,7 +35,7 @@ class MyPageController extends Controller
         }
         $user = DB::table('users')
                 ->select('users.*','profiles.name','profiles.profile_image_name','profiles.profile_text',)
-                ->join('profiles','profiles.user_id','=','users.id')
+                ->leftjoin('profiles','profiles.user_id','=','users.id')
                 ->where('users.id',$user_id)
                 ->first();
 
