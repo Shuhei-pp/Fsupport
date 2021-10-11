@@ -61,7 +61,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
   $(document).on('click','.delete_button',function() {
-    if(window.confirm("{{ $fish->fish_name }}を削除しても大丈夫ですか？")){
+    if(window.confirm("本当に削除しても大丈夫ですか？")){
       $fish_id = "#"+this.value;
       $($fish_id).click();
     }

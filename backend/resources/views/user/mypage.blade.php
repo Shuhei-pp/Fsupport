@@ -16,7 +16,7 @@
           @csrf
 
             <div class="form-group row">
-              <label for="email" class="col-md-4 col-form-label text-md-right">釣果内容</label>
+              <label for="email" class="col-md-4 col-form-label text-md-right">ひとこと、メモ</label>
 
               <div class="col-md-6">
                 <input class="form-control" name="content">
@@ -116,10 +116,17 @@
         </div>
         <div class="card-body">
           <div class="media">
-            <div class="media-left">
-              <img class="media-object" width="150px" src="{{ asset('storage/profile_image/'.$user->profile_image_name) }}">
-            </div>
+            @if($user->profile_image_name)
+              <div class="media-left">
+                <img class="media-object" width="150px" src="{{ asset('storage/profile_image/'.$user->profile_image_name) }}">
+              </div>
+              <div class="media-body">
+            @else
             <div class="media-body">
+              <div class="mb-4">
+                プロフィール写真は設定されていません
+              </div>
+            @endif
               <div class="container">
                 <p>ニックネーム:</p>
                 @if($user->name)
