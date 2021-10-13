@@ -185,6 +185,29 @@ class FishingRecordController extends Controller
     }
 
     /**
+     * areaページで最近のそのエリアの釣果を一覧表示
+     * 
+     * @params integer area_id
+     * 
+     * return mix
+     */
+    public function areaFrecordList($area_id)
+    {
+        $frecords = DB::table('fishingrecords')
+                            ->join('users','users.id','=','fishingrecords.user_id')
+                            ->leftjoin('profiles','fishingrecords.user_id', '=','profiles.user_id')
+                            ->leftjoin('frecord_fishs', 'fishingrecords.id', '=','frecord_fishs.frecord_id')
+                            ->leftjoin('fish_kinds', 'frecord_fishs.fish_id', '=', 'fish_kinds.fish_id')
+                            ->where('fishingrecords.area_id','=',$area_id)
+                            ->orderBy('datetime','desc')
+                            ->limit(10)
+                            ->get();
+
+        return $frecords;
+    }
+     
+
+    /**
      * apiで1つの釣果を取得
      * 
      * int frecordid

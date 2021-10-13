@@ -30,6 +30,7 @@ Route::get('/area/{area_id}', 'App\Http\Controllers\AreaController@showArea');
 //釣果系APIルーティング
 Route::get('/home/frecord/list', 'App\Http\Controllers\FishingRecordController@frecordList');
 Route::get('/frecord/{frecord_id}', 'App\Http\Controllers\FishingRecordController@frecordApi');
+Route::get('/area/frecords/{area_id}', 'App\Http\Controllers\FishingRecordController@AreaFrecordList');
 
 //コメント系APIルーティング
 Route::post('/comment/post', 'App\Http\Controllers\CommentController@post');
