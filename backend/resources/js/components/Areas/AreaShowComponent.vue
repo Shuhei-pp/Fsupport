@@ -82,7 +82,7 @@
     <div class="container py-4">
       <div class="card">
         <div class="card-header">
-          このエリアの釣果投稿
+          このエリアの最新釣果投稿
         </div>
         <div class="card-body">
           <div class="" v-for="(frecord, index) in frecords" :key="index">
