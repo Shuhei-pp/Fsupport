@@ -13,7 +13,7 @@
           <div class="form-group row">
             <label class="col-md-4 col-form-label text-md-right">ニックネーム</label>
             <div class="col-md-6">
-              <input class="form-control" name='name' value={{ $profile->name }}>
+              <input class="form-control" name='name' @if($profile) value={{ $profile->name }} @endif>
               <?php if($errors->has('name')) {?>
                 <span class="text-danger" role="alert">
                   <strong>{{ $errors->first('name') }}</strong>
@@ -25,7 +25,7 @@
           <div class="form-group row">
             <label class="col-md-4 col-form-label text-md-right">ひとこと</label>
             <div class="col-md-6">
-              <input class="form-control" name='text' value={{ $profile->profile_text }}>
+              <input class="form-control" name='text' @if($profile) value={{ $profile->profile_text }} @endif>
               <?php if($errors->has('text')) {?>
                 <span class="text-danger" role="alert">
                   <strong>{{ $errors->first('text') }}</strong>
@@ -38,7 +38,7 @@
             <label class="col-md-4 col-form-label text-md-right">写真</label>
 
             <div class="col-md-6">
-              <input class="form-control-file" name="picture" type="file" value={{ $profile->profile_image_name }}>
+              <input class="form-control-file" name="picture" type="file" @if($profile) value={{ $profile->profile_image_name }} @endif>
               <?php if ($errors->has('picture')) {?>
                 <span class="text-danger" role="alert">
                   <strong>{{ $errors->first('picture') }}</strong>
