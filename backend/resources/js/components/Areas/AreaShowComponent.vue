@@ -78,13 +78,57 @@
       </div>
     </div>
 
+    <!-- エリアごとの釣果を表示 -->
+    <div class="container py-4">
+      <div class="card">
+        <div class="card-header">
+          このエリアの釣果投稿
+        </div>
+        <div class="card-body">
+          <div class="" v-for="(frecord, index) in frecords" :key="index">
+            <router-link v-bind:to="{name: 'frecord.detail', params: {frecordId: frecord.frecord_id}}">
+              <div class="row">
+                <div class="col-md-auto">
+                  <img class="media-object" width="150px" :src="'/storage/result_images/'+frecord.image_name">
+                </div>
+                <div class="col-md-auto">
+                  <p>エリア:{{ frecord.area_name }}</p>
+                  <p>日時:{{ frecord.datetime }}</p>
+                </div>
+                <div class="col-md-auto">
+                  <label>ひとこと</label>
+                  <p>{{ frecord.content }}</p>
+                </div>
+                <div class="col-md-auto">
+                  <p>魚種:{{ frecord.fish_name }}</p>
+                </div>
+                <div class="col-md-auto">
+                  <p>釣った数:{{ frecord.fish_amount }}</p>
+                </div>
+              </div>
+            </router-link>
+            <div class="row pt-2 ">
+              <div class="col-md-auto">
+                <img v-if="frecord.profile_image_name" class="media-object" width="50px" height="50px" :src="'/storage/profile_image/'+frecord.profile_image_name">
+                <img v-if="!frecord.profile_image_name" class="media-object" width="50px" height="50px" :src="'/storage/default_profile.jpg'">
+              </div>
+              <div class="col pt-2 col-md-auto">
+                <p v-if="frecord.name">ユーザー名:{{ frecord.name }}</p>
+                <p v-if="!frecord.name">ユーザー名: 匿名さん</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="card">
         <div class="card-header">釣果登録</div>
 
         <div class="card-body">
           <p>マイページで釣果を登録することができます。</p>
-          <!--<a :href="route('gotomypage')"> 本番用 -->
           <a href="/user/gotomypage">
             <button class ="btn btn-primary">マイページへ</button>
           </a>
@@ -106,7 +150,7 @@
         info: {},
         areas: [],
         chartdata: [],
-
+        frecords: []
       }
     },
     methods: {
@@ -174,6 +218,12 @@
           this.getChart();
         });
       },
+      getFrecords() {
+        axios.get('/api/area/frecords/'+this.areaId)
+        .then((res) => {
+          this.frecords = res.data;
+        });
+      },
       //グラフ作成
       getChart(){
         const labels = this.info.times;
@@ -194,6 +244,7 @@
     },
     mounted() {
       this.getArea();
+      this.getFrecords();
     }
   }
 </script>

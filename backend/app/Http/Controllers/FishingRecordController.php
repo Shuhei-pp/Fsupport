@@ -185,7 +185,7 @@ class FishingRecordController extends Controller
     }
 
     /**
-     * areaで最近の釣果を一覧表示
+     * areaページで最近のそのエリアの釣果を一覧表示
      * 
      * @params integer area_id
      * 
