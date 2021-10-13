@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">エリア追加</div>
                 <div class="card-body">
-                    <form method="POST" action="/area/edit" class="needs-validation" novalidate>
+                    <form method="post" action="{{route('post.area')}}" class="needs-validation">
                         @csrf
 
                         <div class="form-group row">

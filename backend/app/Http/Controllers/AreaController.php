@@ -29,7 +29,7 @@ class AreaController extends Controller
     public function addArea(Request $request)
     {
         $rules = [
-            'harbor_code' => 'required|integer|between:1:1000',
+            'harbor_code' => 'required|integer|between:0,1000',
             'area_name' => 'required|string|max:10',
             'area_zip' => 'required|string|max:8'
         ];
@@ -38,23 +38,24 @@ class AreaController extends Controller
         
         //天気Apiチェック
         $apiid = config('app.weather_app_id');
-        $url = "http://api.openweathermap.org/data/2.5/forecast?lang=ja&zip=".$request->area_zip."&units=metric&APPID=".$apiid;
-        if($data = GetApiContents::tryGetContents($url)){
-            if($data->cod != '200'){
-                return redirect('area/edit')->with('flash_message','住所がopenweatherapiに非対応のもの、または不正です。別の住所で試してください');
-            }
-        } else {
-            abort(404);
+        $url = "http://api.openweathermap.org/data/2.5/forecast?lang=ja&zip=".$request->area_zip.",jp&units=metric&APPID=".$apiid;
+        $data = GetApiContents::tryGetContents($url);
+        if(!$data){
+            return redirect( route('area_edit') )->with('flash_message','住所がopenweatherapiに非対応のもの、または不正です。別の住所で試してください');
+        }
+        $weather_status = $data->cod;
+        if($weather_status !== '200'){
+            return redirect( route('area_edit') )->with('flash_message','住所がopenweatherapiに非対応のもの、または不正です。別の住所で試してください');
         }
 
         //TideApiチェック
         $url = "https://api.tide736.net/get_tide.php?pc=".$request->prefecture."&hc=".$request->harbor_code."&yr=2021&mn=10&dy=10&rg=week";
-        if($data = GetApiContents::tryGetContents($url)){
-            if($data->status != '1'){
-                return redirect('area/edit')->with('flash_message','県、港コードが正しくありません。tide736で再確認してください');
-            }
-        } else {
-            abort(404);
+        $data = GetApiContents::tryGetContents($url);
+        if(!$data){
+            return redirect( route('area_edit') )->with('flash_message','県、港コードが正しくありません。tide736で再確認してください');
+        }
+        if($data->status != '1'){
+            return redirect( route('area_edit') )->with('flash_message','県、港コードが正しくありません。tide736で再確認してください');
         }
 
         $area = new Area;
@@ -66,7 +67,7 @@ class AreaController extends Controller
 
         $area->save();
 
-        return redirect('area/edit');
+        return redirect( route('area_edit') );
     }
 
     /**

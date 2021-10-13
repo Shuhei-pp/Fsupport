@@ -33,7 +33,7 @@
           </tr>
         </tbody>
       </table>
-    <a href="/area/new/edit"><button class="btn btn-primary">エリア追加を行う</button></a>
+      <a href="/area/new/edit"><button class="btn btn-primary">エリア追加を行う</button></a>
     </div>
     <div class="container mt-5">
       <div class="card">

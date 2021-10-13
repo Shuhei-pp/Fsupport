@@ -19,10 +19,6 @@ Route::get('/',function(){
 return view('vue.app');
 });
 
-Route::get('/area/{area_id}',function(){
-    return view('vue.app');
-});
-
 Route::get('/frecord/detail/{frecord_id}', function(){
     return view('vue.app');
 })->name('frecord.detail');
@@ -36,8 +32,10 @@ Route::post('/comment/post',function(){
 //エリア系ルーティング
 //Route::get('/', [App\Http\Controllers\AreaController::class,'index']);
 Route::get('/area/new/edit', [App\Http\Controllers\AreaController::class,'toEditAreaPage'])->name('area_edit');
-Route::post('/area/edit', [App\Http\Controllers\AreaController::class,'addArea']);
-//Route::get('/area/{area_id}', [App\Http\Controllers\AreaController::class,'showArea'])->name('area.show');
+Route::post('/area/post/new', [App\Http\Controllers\AreaController::class,'addArea'])->name('post.area');
+Route::get('/area/{area_id}',function(){
+    return view('vue.app');
+});
 
 //ユーザー系ルーティング
 Route::get('/user/list', [App\Http\Controllers\UsersController::class,'showListPage'])->name('user.list');
