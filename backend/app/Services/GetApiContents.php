@@ -17,7 +17,7 @@ class GetApiContents
       if($data = @file_get_contents($url))
         return self::decodeToArr($data);
       else{
-        throw new \Exception('ネットワーク環境を確認してください');
+        return 0;
       }
     }catch(\Exception $e){
       abort(404);
