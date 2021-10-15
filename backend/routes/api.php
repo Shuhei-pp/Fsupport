@@ -38,7 +38,7 @@ Route::get('/comment/{frecord_id}', 'App\Http\Controllers\CommentController@getC
 
 //検索ページAPIルーティング
 Route::get('/search/option', 'App\Http\Controllers\SearchController@getSearchOption');
-Route::get('/search/frecords', 'App\Http\Controllers\SearchController@frecordLists');
+Route::get('/search/frecords', 'App\Http\Controllers\SearchController@searchFrecordLists');
 
 //ログイン中のユーザーをAPIで取得
 Route::group(['middleware' => 'api'], function() {
