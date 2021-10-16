@@ -35,3 +35,22 @@ VALUES
   (0,'ユーザー'),
   (1,'サイト編集者'),
   (2,'サイト管理者');
+
+INSERT INTO
+  `disabled` (`disabled_id`,`disabled_status_name`)
+VALUES
+  (1,'利用停止中')
+
+INSERT INTO
+  `fish_kinds` (`fish_id`,`fish_name`,`create_user_id`)
+VALUES 
+  (2,'アナゴ',2)
+  (3,'キス',2)
+  (4,'アジ',2)
+  (5,'サンマ',2)
+  (6,'タコ',2)
+
+INSERT INTO
+  `users` (`id`,`email`,`password`,`y4ZYZzBzjHVNHGpNiHMMGJguT6CQJKOpTmGl7kDKEJn39mFx2oPUWNTkmjti`,`email_verify_token`,`auth_status`,`admin`)
+VALUES
+  (2,`testadmin@gmail.com`,`$2y$10$xMur5n5Ds8C/IbhIHzWkG.Jmy2CqWcZFhwJCcT/79GJAtLZ0lmF8.`,`dGVzdGFkbWluQGdtYWlsLmNvbQ==`,0,1)
