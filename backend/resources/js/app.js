@@ -11,6 +11,8 @@ import VueRouter from 'vue-router';
 import HomeComponent from './components/HomeComponent.vue';
 import AreaShowComponent from './components/Areas/AreaShowComponent.vue';
 import FrecordsDetailComponent from './components/Frecords/FrecordsDetailComponent.vue';
+import FrecordSearchComponent from './components/Frecords/FrecordSearchComponent.vue';
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -43,6 +45,12 @@ const router = new VueRouter({
             name: 'frecord.detail',
             component: FrecordsDetailComponent,
             props: true
+        },
+        //検索ページ
+        {
+            path: '/frecord/search',
+            name: 'frecord.search',
+            component: FrecordSearchComponent
         },
     ]
 });

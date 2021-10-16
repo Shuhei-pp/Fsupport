@@ -11,6 +11,13 @@
         </div>
       </div>
     </div>
+
+    <div class="container mt-4">
+      <router-link v-bind:to="{name: 'frecord.search'}">
+        <button class="btn btn-primary" style="width:100%">釣果検索ページへ</button>
+      </router-link>
+    </div>
+
     <div class="container mt-5">
       <h3 class="mb-2">エリア一覧</h3>
       <table class="mx-auto table table-info">
@@ -26,7 +33,7 @@
 
             <td v-if="area.bigarea_id == bigarea.bigarea_id">
               <router-link v-bind:to="{name: 'area.show', params: {areaId: area.id}}">
-              {{ area.area_name }}
+                {{ area.area_name }}
               </router-link>
             </td>
 

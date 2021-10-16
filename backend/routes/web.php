@@ -27,6 +27,10 @@ Route::post('/comment/post',function(){
     return view('vue.app');
 });
 
+Route::get('/frecord/search',function(){
+    return view('vue.app');
+});
+
 
 // check: routeは->name()で名前をつけられる！　viewのURL修正も楽になるから修正しよう
 //エリア系ルーティング
