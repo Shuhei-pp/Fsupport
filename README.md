@@ -2,7 +2,7 @@
   
 # アプリケーション概要　　
 釣果を釣り人同士で共有することができ、もう一つ上の釣りを楽しむためのアプリケーションです。  
-エリア詳細ページでは3時間ごとに釣果指数を見ることができ、この先24時間の海の様子を把握することが可能。    
+エリア詳細ページでは3時間ごとに釣果指数を見ることができ、この先24時間の海の様子を把握することが可能。  
   
 # 使用技術  
 > PHP  
@@ -11,14 +11,14 @@
 > Laravel  
 > version:8.51.0  
 
->Vue  
->version:2.6.12  
+> Vue  
+> version:2.6.12  
 
->Vue-router   
->version:3.5.2  
+> Vue-router   
+> version:3.5.2  
 
->docker  
->version:20.10.7
+> docker  
+> version:20.10.7
 
 # 環境構築手順
 
@@ -39,7 +39,7 @@ $ docker-compose run app npm run dev　# jsをコンパイル
 # テストアカウント
 
 mail: testadmin@gmail.com  
-Pass: 2LmyMXv42Uy4XNX
+Pass: zzzzzzzz
 
   
 # dbにデータをダンプ  
