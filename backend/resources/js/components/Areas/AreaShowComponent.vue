@@ -1,6 +1,17 @@
 <template>
   <div>
     <div class="container">
+      <div class="card">
+        <div class="card-header">FIとは</div>
+        <div class="card-body">
+          <p>FI(Fishing Index)とは釣果指数のことで風速、潮の動き、日の出、日没等のデータをもとに”釣れる”を指数化したものです。</p>
+          <p>管理人は東日本出身なのでこれからそこら辺を中心にエリアを広げていく予定です。</p>
+          <p>FIは季節、日の出没、風速、潮の満干、空全体の雲の割合の5つから100点満点で計算を行っています。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-3">
       <h3>{{ areaname }}エリア</h3>
       <div class="table-responsive">
         <table class="table table-bordered">

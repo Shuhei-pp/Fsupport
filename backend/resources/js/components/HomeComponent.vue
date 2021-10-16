@@ -3,11 +3,11 @@
   <div>
     <div class="container">
       <div class="card">
-        <div class="card-header">Fishing Indexとは</div>
+        <div class="card-header">Fsupportとは</div>
         <div class="card-body">
-          <p>Fishing Indexとは釣果指数のことで風速、潮の動き、日の出、日没等のデータをもとに”釣れる”を指数化したものです。</p>
-          <p>管理人は北陸地方出身なのでこれからそこら辺を中心にエリアを広げていく予定です。</p>
-          <p>FIは季節、日の出没、風速、潮の満干、空全体の雲の割合の5つから100点満点で計算を行っています。</p>
+          <p>Fsupportとは釣り人を環境、釣果の2つの面からの情報でサポートしていくというアプリケーションです。</p>
+          <p>エリアページでは多くの釣りに関する環境を指数化したFI(Fishing Index)、</p>
+          <p>釣果検索ページでは、これまでの釣れた魚の種類を見ることができ、コメントで詳しい釣り方を聞くこともできます。</p>
         </div>
       </div>
     </div>
