@@ -65,7 +65,7 @@
 <script>
   export default {
     props: {
-      frecordId: String
+      frecordId: Number
     },
     data: function(){
       return {
@@ -101,12 +101,14 @@
       },
       preparateForm(){
         this.errors = [];
-        if(this.comment.text){
-          this.submitComment();
-        }
+        if(!this.comment.user_id){
+          this.errors.push('コメントを書く場合はログインしてください。');
+        }else{
+          if(this.comment.text)
+            this.submitComment();
 
-        if(!this.comment.text){
-          this.errors.push('テキストを何も書かずにコメントすることはできません。')
+          if(!this.comment.text)
+            this.errors.push('テキストを何も書かずにコメントすることはできません。')
         }
       }
     },
