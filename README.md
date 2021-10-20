@@ -19,7 +19,11 @@
 > version:3.5.2  
 
 > docker  
-> version:20.10.7
+> version:20.10.7  
+
+# 環境開発構成図  
+
+![開発構成図](https://user-images.githubusercontent.com/83050295/138068232-188dd40e-1623-4fbb-9ec5-c2d9fb00c692.png)  
 
 # 環境構築手順
 
