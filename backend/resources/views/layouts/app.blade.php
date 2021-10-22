@@ -7,6 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- meta description -->
+    <meta content="Fsupportとは釣り人を環境、釣果の2つの面からの情報でサポートしていくというアプリケーションです。無料で利用することができます！" name="description">
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
