@@ -207,33 +207,34 @@
             }
           ); 
         }
-        
         this.getChart();
       },
       getArea() {
-        $.ajax({
-          type: 'get',
-          url: '/api/area/'+ this.areaId,
-          datatype: 'json'
-        })
-        .then((res) =>{
-          this.areaname = res.area_name;
-          this.info = res.info;
-          this.areas = res.areas;
-          this.chartdata.push({
-            label: 'FI(釣果指数)',
-            backgroundColor: 'rgba(255, 99, 132,0)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: this.info.fi
+        axios.get('/api/area/'+ this.areaId)
+          .then((res) =>{
+            this.areaname = res.data.area_name;
+            this.info = res.data.info;
+            this.areas = res.data.areas;
+            this.chartdata.push({
+              label: 'FI(釣果指数)',
+              backgroundColor: 'rgba(255, 99, 132,0)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: this.info.fi
+            });
+            this.getChart();
+          })
+          .catch((err) => {
+            console.error("エラー:", err.message);
           });
-          this.getChart();
-        });
       },
       getFrecords() {
         axios.get('/api/area/frecords/'+this.areaId)
-        .then((res) => {
-          this.frecords = res.data;
-        });
+          .then((res) => {
+            this.frecords = res.data;
+          })
+          .catch((err) => {
+            console.error("エラー:", err.message);
+          });
       },
       //グラフ作成
       getChart(){

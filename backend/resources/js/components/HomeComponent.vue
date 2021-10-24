@@ -100,20 +100,22 @@
     },
     methods: {
       getAreas() {
-        $.ajax({
-          type: 'get',
-          url: '/api',
-          datetype: 'json'
-        })
-        .then((res) => {
-          this.bigareas = res.bigareas;
-          this.areas = res.areas;
-        });
+        axios.get('/api')
+          .then((res) => {
+            this.bigareas = res.data.bigareas;
+            this.areas = res.data.areas;
+          })
+          .catch((err) => {
+            console.error('エラー:', err.message);
+          });
       },
       getFrecords() {
         axios.get('/api/home/frecord/list')
-        .then((res) => {
-          this.frecords = res.data;
+          .then((res) => {
+            this.frecords = res.data;
+          })
+          .catch ((err) => {
+          console.error('エラー:', err.message);
         });
       }
     },

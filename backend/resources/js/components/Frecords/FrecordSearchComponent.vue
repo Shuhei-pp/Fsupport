@@ -97,7 +97,10 @@
           .then((res) => {
             this.fishes = res.data.fish;
             this.areas = res.data.areas;
-          });
+          })
+          .catch((err) => {
+            console.error("エラー:", err.message);
+        });
       },
       searchFrecords(){
         var search_fish_ids = [];
@@ -133,7 +136,10 @@
         })
           .then((res) => {
             this.frecords = res.data;
-          });
+          })
+          .catch((err) => {
+            console.error("エラー:", err.message);
+        });
       }
     },
     mounted() {

@@ -81,22 +81,34 @@
           .then((res) => {
             this.frecord = res.data;
             this.comment.frecord_id = this.frecordId;
-          });
+          }).catch((err) => {
+            console.error("エラー:", err.message);
+        });
+
         axios.get('/api/comment/'+this.frecordId)
           .then((res) => {
             this.comments = res.data;
-          });
+          })
+          .catch((err) => {
+            console.error("エラー:", err.message);
+        });
       },
       submitComment(){
         axios.post('/api/comment/post',this.comment)
-        .then((res) => {
+        .then(() => {
           location.reload();
+        })
+        .catch((err) => {
+          console.error("エラー:", err.message);
         });
       },
       getUser(){
         axios.get('/api/current_user')
         .then((res) => {
           this.comment.user_id = res.data.id;
+        })
+        .catch((err) => {
+          console.error("エラー:", err.message);
         });
       },
       preparateForm(){
