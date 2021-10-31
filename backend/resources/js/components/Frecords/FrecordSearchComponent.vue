@@ -8,9 +8,9 @@
           <div class="col-md-auto p-3">
             <h4>魚種で絞り込み</h4>
             <div class="py-1">
-              <input type="checkbox" id="all-area">全エリア選択
+              <input type="checkbox" id="all-check-fish" @click="allCheckFish">全魚種選択
               <div class="py-1" v-for="fish in fishes" :key="fish.id">
-                <input type="checkbox" class="" v-bind:value="fish.fish_id" name="fish">{{ fish.fish_name }}
+                <input type="checkbox" class="checkbox-fish" v-bind:value="fish.fish_id" name="fish">{{ fish.fish_name }}
               </div>
             </div>
           </div>
@@ -18,9 +18,9 @@
           <div class="col-md-auto p-3">
             <h4>エリアで絞り込み</h4>
             <div class="py-1">
-              <input type="checkbox" id="all-area">全エリア選択
+              <input type="checkbox" id="all-check-area" @click="allCheckArea">全エリア選択
               <div v-for="area in areas" class="py-1" :key="area.id">
-                <input type="checkbox" v-bind:value="area.id" name="area">{{ area.area_name }}
+                <input type="checkbox" class="checkbox-area" v-bind:value="area.id" name="area">{{ area.area_name }}
               </div>
             </div>
           </div>
@@ -98,6 +98,18 @@
       }
     },
     methods: {
+      allCheckFish(){
+        if($('#all-check-fish').prop('checked'))
+          $('.checkbox-fish').prop('checked', true);
+        else
+          $('.checkbox-fish').prop('checked', false);
+      },
+      allCheckArea(){
+        if($('#all-check-area').prop('checked'))
+          $('.checkbox-area').prop('checked', true);
+        else
+          $('.checkbox-area').prop('checked', false);
+      },
       getOptions(){
         axios.get('/api/search/option')
           .then((res) => {
