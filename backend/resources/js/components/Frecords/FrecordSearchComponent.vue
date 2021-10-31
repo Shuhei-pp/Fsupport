@@ -7,15 +7,21 @@
         <div class="row">
           <div class="col-md-auto p-3">
             <h4>魚種で絞り込み</h4>
-            <div class="py-1" v-for="fish in fishes" :key="fish.id">
-              <input type="checkbox" class="" v-bind:value="fish.fish_id" name="fish">{{ fish.fish_name }}
+            <div class="py-1">
+              <input type="checkbox" id="all-area">全エリア選択
+              <div class="py-1" v-for="fish in fishes" :key="fish.id">
+                <input type="checkbox" class="" v-bind:value="fish.fish_id" name="fish">{{ fish.fish_name }}
+              </div>
             </div>
           </div>
 
           <div class="col-md-auto p-3">
             <h4>エリアで絞り込み</h4>
-            <div class="py-1" v-for="area in areas" :key="area.id">
-              <input type="checkbox" class="" v-bind:value="area.id" name="area">{{ area.area_name }}
+            <div class="py-1">
+              <input type="checkbox" id="all-area">全エリア選択
+              <div v-for="area in areas" class="py-1" :key="area.id">
+                <input type="checkbox" v-bind:value="area.id" name="area">{{ area.area_name }}
+              </div>
             </div>
           </div>
         </div>
