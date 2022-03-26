@@ -52,7 +52,7 @@ Pass: zzzzzzzz
 
   
 # dbにデータをダンプ  
-$ docker exec -it database_container bash  
+$ docker-compose exec db bash  
 ↓  
 $ mysql -u phper -ppassword laravel_local < /tmp/dmp.sql  
 ↓  
